@@ -23,7 +23,6 @@
       <div class="row">
         <%
         Path p = Path.of(getServletContext().getRealPath("/appid.secret"));
-        Formatter fmt = new Formatter();
         for (Time time : OpenWeatherApp.getForecast(p, "Toledo", "es")) {
         %>
         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex">
