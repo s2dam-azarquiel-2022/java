@@ -19,6 +19,7 @@ public class Infocar extends DefaultHandler {
   private ArrayList<Incidence> list;
   private Incidence current;
   private String currentTag;
+  private String link;
 
   public Infocar(ArrayList<Incidence> list) {
     this.list = list;
@@ -55,26 +56,30 @@ public class Infocar extends DefaultHandler {
     }
   }
 
-  private static String parse(char[] ch, int start, int length) {
-    return String.valueOf(ch).substring(start, start+length);
-  }
-
   @Override
   public void characters(
     char[] ch,
     int start,
     int length
   ) throws SAXException {
-    if (this.current == null) return;
+    if (this.current == null) {
+      if (this.currentTag.equals("link")) {
+        this.link = String.valueOf(ch, start, length);
+      }
+      return;
+    }
 
     if (this.currentTag.equals("title")) {
-      this.current.title += parse(ch, start, length);
+      this.current.title += String.valueOf(ch, start, length);
     } else if (this.currentTag.equals("link")) {
-      this.current.link += parse(ch, start, length);
+      this.current.link += String.valueOf(ch, start, length);
     } else if (this.currentTag.equals("pubDate")) {
-      this.current.pubDate += parse(ch, start, length);
+      this.current.pubDate += String.valueOf(ch, start, length);
     } else if (this.currentTag.equals("description")) {
-      this.current.description += parse(ch, start, length);
+      String val = String.valueOf(ch, start, length);
+      this.current.description += val.startsWith("img src") ?
+        val.substring(0, 9) + this.link + val.substring(9) :
+        val;
     }
   }
 
