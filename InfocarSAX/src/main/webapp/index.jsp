@@ -1,6 +1,5 @@
 <%@page import="dao.Infocar"%>
 <%@page import="model.Incidence"%>
-<%@page import="java.nio.file.Path"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,10 +16,30 @@
   </head>
   <body>
     <div class="container my-5">
-      <div class="row">
-        <%
-        for (Incidence incidence : Infocar.getIncidences("13")) {
-        %>
+      <%
+      String caId = request.getParameter("ca");
+      String ca = Infocar.getCAName(caId);
+      %>
+      <form method="get" action="index.jsp">
+        <div class="form-group">
+          <select class="form-control" name="ca" onchange="this.form.submit()">
+            <option selected class="d-none">
+              <%=ca%>
+            </option>
+            <% for (int i = 0; i < Infocar.CAS.length; i++) { %>
+              <% if (!Infocar.CAS[i].equals(ca)) { %>
+              <option value="<%=i+1%>"><%=Infocar.CAS[i]%></option>
+              <% } %>
+            <% } %>
+          </select>
+        </div>
+      </form>
+      <% if (caId != null) { %>
+      <h1 class="text-center text-primary mt-4">
+        Comunidad de <%=ca%>
+      </h1>
+      <div class="row mt-4">
+        <% for (Incidence incidence : Infocar.getIncidences(caId)) { %>
         <div class="col-12 d-flex">
           <div class="card mb-4 flex-fill">
             <div class="card-body">
@@ -35,6 +54,10 @@
           </div>
         </div>
         <% } %>
+      </div>
+      <% } %>
+      <div class="bg-primary p-3 text-center mt-4">
+        <h1>Alberto</h1>
       </div>
     </div>
 		<!-- Cosas a importar -->

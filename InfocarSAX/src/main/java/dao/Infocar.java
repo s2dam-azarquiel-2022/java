@@ -133,4 +133,19 @@ public class Infocar extends DefaultHandler {
 
     return result;
   }
+
+  public static final String[] CAS = {
+    "Andalucia", "Aragón", "Asturias", "Islas Baleares", "Islas Canarias",
+    "Cantabria","Castilla y León", "Castilla la Mancha", "Cataluña","Valencia",
+    "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", "Pais Vasco",
+    "La Rioja", "Ceuta", "Melilla"
+  };
+
+  public static String getCAName(String id) {
+    if (id == null) {
+      return "Select a CA";
+    } else {
+      return CAS[Integer.valueOf(id)-1];
+    }
+  }
 }
