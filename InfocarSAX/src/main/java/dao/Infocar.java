@@ -18,8 +18,8 @@ import model.Incidence;
 public class Infocar extends DefaultHandler {
   private ArrayList<Incidence> list;
   private Incidence current;
-  private String currentTag;
   private String link;
+  private String currentContent = "";
 
   public Infocar(ArrayList<Incidence> list) {
     this.list = list;
@@ -40,7 +40,6 @@ public class Infocar extends DefaultHandler {
     if (localName.equals("item")) {
       this.current = new Incidence();
     }
-    this.currentTag = localName;
   }
 
   @Override
@@ -50,10 +49,34 @@ public class Infocar extends DefaultHandler {
     String qName
   ) throws SAXException {
     super.endElement(uri, localName, qName);
-    if (localName.equals("item")) {
-      list.add(current);
-      this.current = null;
+    if (this.current == null) {
+      if (localName.equals("link")) {
+        this.link = this.currentContent;
+      }
+    } else {
+      switch (localName) {
+      case "item":
+        this.list.add(this.current);
+        this.current = null;
+        break;
+      case "title":
+        this.current.title = this.currentContent;
+        break;
+      case "link":
+        this.current.link = this.currentContent;
+        break;
+      case "pubDate":
+        this.current.pubDate = this.currentContent;
+        break;
+      case "description":
+        String val = this.currentContent;
+        this.current.description += val.startsWith("img src") ?
+          val.substring(0, 9) + this.link + val.substring(9) :
+          val;
+        break;
+      }
     }
+    this.currentContent = "";
   }
 
   @Override
@@ -62,25 +85,7 @@ public class Infocar extends DefaultHandler {
     int start,
     int length
   ) throws SAXException {
-    if (this.current == null) {
-      if (this.currentTag.equals("link")) {
-        this.link = String.valueOf(ch, start, length);
-      }
-      return;
-    }
-
-    if (this.currentTag.equals("title")) {
-      this.current.title += String.valueOf(ch, start, length);
-    } else if (this.currentTag.equals("link")) {
-      this.current.link += String.valueOf(ch, start, length);
-    } else if (this.currentTag.equals("pubDate")) {
-      this.current.pubDate += String.valueOf(ch, start, length);
-    } else if (this.currentTag.equals("description")) {
-      String val = String.valueOf(ch, start, length);
-      this.current.description += val.startsWith("img src") ?
-        val.substring(0, 9) + this.link + val.substring(9) :
-        val;
-    }
+    this.currentContent += String.valueOf(ch, start, length);
   }
 
   private static XMLReader getXMLReader() {
