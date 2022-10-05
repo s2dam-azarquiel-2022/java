@@ -44,12 +44,11 @@
           <div class="card mb-4 flex-fill">
             <div class="card-body">
               <h5 class="card-title">
-                <a href="<%=incidence.link%>">
-                  <%=incidence.title%>
-                </a>
+                <%=incidence.image%>
+                <a href="<%=incidence.link%>"><%=incidence.title%></a>
               </h5>
               <h6 class="card-title"><%=incidence.pubDate%></h6>
-              <p class="card-text"><%=incidence.description%></p>
+              <%=incidence.description%>
             </div>
           </div>
         </div>

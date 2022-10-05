@@ -69,12 +69,16 @@ public class Infocar extends DefaultHandler {
         this.current.pubDate = this.currentContent;
         break;
       case "description":
-        this.current.description = this.currentContent;
-        int pos = this.current.description.indexOf("src") + 5;
-        this.current.description =
-          this.current.description.substring(0, pos) +
+        int posImgStart = this.currentContent.indexOf("<img");
+        int posImgEnd = this.currentContent.indexOf(">", posImgStart) + 1;
+        int posImgSrc = this.currentContent.indexOf("src", posImgStart) + 5;
+        this.current.image =
+          this.currentContent.substring(posImgStart, posImgSrc) +
           this.link +
-          this.current.description.substring(pos);
+          this.currentContent.substring(posImgSrc, posImgEnd);
+        this.current.description =
+          this.currentContent.substring(0, posImgStart) +
+          this.currentContent.substring(posImgEnd);
         break;
       }
     }

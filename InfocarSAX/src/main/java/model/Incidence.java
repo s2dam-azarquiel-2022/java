@@ -5,6 +5,7 @@ public class Incidence {
   public String link;
   public String pubDate;
   public String description;
+  public String image;
 
   public Incidence() {
   }
@@ -17,10 +18,12 @@ public class Incidence {
         "Link: %s\n" +
         "Publication date: %s\n" +
         "Description: %s\n",
+        "Image: %s\n",
         title,
         link,
         pubDate,
-        description
+        description,
+        image
       );
   }
 }
