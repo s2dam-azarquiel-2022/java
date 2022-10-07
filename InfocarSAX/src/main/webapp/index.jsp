@@ -6,8 +6,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Infocar</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,7 +15,7 @@
       crossorigin="anonymous" />
   </head>
   <body>
-    <div class="container my-5">
+    <div class="container min-vh-100 py-5 d-flex flex-column">
       <%
       String caId = request.getParameter("ca");
       String ca = Infocar.getCAName(caId);
@@ -55,7 +55,7 @@
         <% } %>
       </div>
       <% } %>
-      <div class="bg-primary p-3 text-center mt-4">
+      <div class="bg-primary p-3 text-center mt-auto rounded">
         <h1>Alberto</h1>
       </div>
     </div>
