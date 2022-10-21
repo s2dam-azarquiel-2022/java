@@ -1,0 +1,68 @@
+[17:51:01.298] Global cache location '/home/aru/.cache/typescript/4.6', safe file path '/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/typingSafeList.json', types map path /nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/typesMap.json
+[17:51:01.299] Processing cache location '/home/aru/.cache/typescript/4.6'
+[17:51:01.299] Trying to find '/home/aru/.cache/typescript/4.6/package.json'...
+[17:51:01.300] Loaded content of '/home/aru/.cache/typescript/4.6/package.json': {"private":true,"dependencies":{"types-registry":"^0.1.614"},"devDependencies":{"@types/accepts":"^1.3.5","@types/bootstrap":"^5.1.12","@types/case-sensitive-paths-webpack-plugin":"^2.1.6","@types/cross-spawn":"^6.0.2","@types/d":"^1.0.1","@types/debug":"^4.1.7","@types/di":"0.0.1","@types/dot":"^1.1.5","@types/escape-html":"^1.0.2","@types/estree":"0.0.51","@types/express":"^4.17.13","@types/html-minifier-terser":"^6.1.0","@types/http-errors":"^1.8.2","@types/json-schema":"^7.0.11","@types/mime-types":"^2.1.1","@types/parseurl":"^1.3.1","@types/prompts":"^2.0.14","@types/react":"^18.0.14","@types/react-bootstrap":"^0.32.30","@types/react-dev-utils":"^9.0.11","@types/react-dom":"^18.0.5","@types/react-router-bootstrap":"^0.24.5","@types/resolve":"^1.20.2","@types/semver":"^7.3.9","@types/serve-index":"^1.9.1","@types/sockjs":"^0.3.33","@types/string":"0.0.31","@types/testing-library__jest-dom":"^5.14.3","@types/ws":"^8.5.3"}}
+[17:51:01.300] Loaded content of '/home/aru/.cache/typescript/4.6/package-lock.json'
+[17:51:01.306] Adding entry into typings cache: 'accepts' => '/home/aru/.cache/typescript/4.6/node_modules/@types/accepts/index.d.ts'
+[17:51:01.307] Adding entry into typings cache: 'bootstrap' => '/home/aru/.cache/typescript/4.6/node_modules/@types/bootstrap/index.d.ts'
+[17:51:01.309] Adding entry into typings cache: 'case-sensitive-paths-webpack-plugin' => '/home/aru/.cache/typescript/4.6/node_modules/@types/case-sensitive-paths-webpack-plugin/index.d.ts'
+[17:51:01.310] Adding entry into typings cache: 'cross-spawn' => '/home/aru/.cache/typescript/4.6/node_modules/@types/cross-spawn/index.d.ts'
+[17:51:01.312] Adding entry into typings cache: 'd' => '/home/aru/.cache/typescript/4.6/node_modules/@types/d/index.d.ts'
+[17:51:01.313] Adding entry into typings cache: 'debug' => '/home/aru/.cache/typescript/4.6/node_modules/@types/debug/index.d.ts'
+[17:51:01.314] Adding entry into typings cache: 'di' => '/home/aru/.cache/typescript/4.6/node_modules/@types/di/index.d.ts'
+[17:51:01.315] Adding entry into typings cache: 'dot' => '/home/aru/.cache/typescript/4.6/node_modules/@types/dot/index.d.ts'
+[17:51:01.316] Adding entry into typings cache: 'escape-html' => '/home/aru/.cache/typescript/4.6/node_modules/@types/escape-html/index.d.ts'
+[17:51:01.317] Adding entry into typings cache: 'estree' => '/home/aru/.cache/typescript/4.6/node_modules/@types/estree/index.d.ts'
+[17:51:01.320] Adding entry into typings cache: 'express' => '/home/aru/.cache/typescript/4.6/node_modules/@types/express/index.d.ts'
+[17:51:01.321] Adding entry into typings cache: 'html-minifier-terser' => '/home/aru/.cache/typescript/4.6/node_modules/@types/html-minifier-terser/index.d.ts'
+[17:51:01.322] Adding entry into typings cache: 'http-errors' => '/home/aru/.cache/typescript/4.6/node_modules/@types/http-errors/index.d.ts'
+[17:51:01.323] Adding entry into typings cache: 'json-schema' => '/home/aru/.cache/typescript/4.6/node_modules/@types/json-schema/index.d.ts'
+[17:51:01.324] Adding entry into typings cache: 'mime-types' => '/home/aru/.cache/typescript/4.6/node_modules/@types/mime-types/index.d.ts'
+[17:51:01.325] Adding entry into typings cache: 'parseurl' => '/home/aru/.cache/typescript/4.6/node_modules/@types/parseurl/index.d.ts'
+[17:51:01.326] Adding entry into typings cache: 'prompts' => '/home/aru/.cache/typescript/4.6/node_modules/@types/prompts/index.d.ts'
+[17:51:01.328] Adding entry into typings cache: 'react' => '/home/aru/.cache/typescript/4.6/node_modules/@types/react/index.d.ts'
+[17:51:01.330] Adding entry into typings cache: 'react-bootstrap' => '/home/aru/.cache/typescript/4.6/node_modules/@types/react-bootstrap/index.d.ts'
+[17:51:01.331] Adding entry into typings cache: 'react-dev-utils' => '/home/aru/.cache/typescript/4.6/node_modules/@types/react-dev-utils/index.d.ts'
+[17:51:01.332] Adding entry into typings cache: 'react-dom' => '/home/aru/.cache/typescript/4.6/node_modules/@types/react-dom/index.d.ts'
+[17:51:01.333] Adding entry into typings cache: 'react-router-bootstrap' => '/home/aru/.cache/typescript/4.6/node_modules/@types/react-router-bootstrap/index.d.ts'
+[17:51:01.334] Adding entry into typings cache: 'resolve' => '/home/aru/.cache/typescript/4.6/node_modules/@types/resolve/index.d.ts'
+[17:51:01.335] Adding entry into typings cache: 'semver' => '/home/aru/.cache/typescript/4.6/node_modules/@types/semver/index.d.ts'
+[17:51:01.336] Adding entry into typings cache: 'serve-index' => '/home/aru/.cache/typescript/4.6/node_modules/@types/serve-index/index.d.ts'
+[17:51:01.337] Adding entry into typings cache: 'sockjs' => '/home/aru/.cache/typescript/4.6/node_modules/@types/sockjs/index.d.ts'
+[17:51:01.338] Adding entry into typings cache: 'string' => '/home/aru/.cache/typescript/4.6/node_modules/@types/string/index.d.ts'
+[17:51:01.338] Adding entry into typings cache: 'testing-library__jest-dom' => '/home/aru/.cache/typescript/4.6/node_modules/@types/testing-library__jest-dom/index.d.ts'
+[17:51:01.340] Adding entry into typings cache: 'ws' => '/home/aru/.cache/typescript/4.6/node_modules/@types/ws/index.d.ts'
+[17:51:01.340] Finished processing cache location '/home/aru/.cache/typescript/4.6'
+[17:51:01.340] Process id: 20335
+[17:51:01.340] NPM location: /nix/store/ixpw1vwqmkdwwbms9573rqlb1ahr4941-nodejs-14.19.1/bin/npm (explicit '--npmLocation' not  provided)
+[17:51:01.340] validateDefaultNpmLocation: false
+[17:51:01.340] Npm config file: /home/aru/.cache/typescript/4.6/package.json
+[17:51:01.340] Updating types-registry npm package...
+[17:51:01.340] Exec: /nix/store/ixpw1vwqmkdwwbms9573rqlb1ahr4941-nodejs-14.19.1/bin/npm install --ignore-scripts types-registry@latest
+[17:51:02.200]     Succeeded. stdout:
+    + types-registry@0.1.614
+    updated 1 package and audited 92 packages in 0.592s
+
+7 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+
+[17:51:02.201] Updated types-registry npm package
+[17:51:02.217] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":["/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es5.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2016.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.dom.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.dom.iterable.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.scripthost.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.core.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.generator.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.iterable.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.promise.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.proxy.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.reflect.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.symbol.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2016.array.include.d.ts","/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/lib.es2016.full.d.ts","/GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/main.js"],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp","kind":"discover"}
+[17:51:02.229] Loaded safelist from types map file '/nix/store/0zkvmib827livkrpfygcgmwcf8rga4cz-typescript-4.6.3/lib/node_modules/typescript/lib/typesMap.json'
+[17:51:02.229] Explicitly included types: []
+[17:51:02.229] Inferred typings from unresolved imports: []
+[17:51:02.229] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/bower_components","/GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/node_modules"]}
+[17:51:02.229] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/bower_components","/GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/node_modules"]}
+[17:51:02.230] DirectoryWatcher:: Added:: WatchInfo: /GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/bower_components
+[17:51:02.230] DirectoryWatcher:: Added:: WatchInfo: /GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[17:51:02.231] Elapsed:: 0.8503029998391867ms DirectoryWatcher:: Added:: WatchInfo: /GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[17:51:02.231] DirectoryWatcher:: Added:: WatchInfo: /GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/node_modules
+[17:51:02.231] DirectoryWatcher:: Added:: WatchInfo: /GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[17:51:02.231] Elapsed:: 0.06684600003063679ms DirectoryWatcher:: Added:: WatchInfo: /GitRepos/s2dam-azarquiel-2022/aru-java/SteamGson/src/main/webapp/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[17:51:02.231] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[17:51:02.231] Response has been sent.
+[17:51:02.231] No new typings were requested as a result of typings discovery
