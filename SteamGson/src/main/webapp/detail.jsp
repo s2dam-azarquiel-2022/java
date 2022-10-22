@@ -86,8 +86,28 @@
                   </div>
                 </div>
               <% } %>
-              <% if (platforms.isLinux()) { %> <img src="<%=iconUrl%>linux.png" /> <% } %>
-              <% if (platforms.isMac()) { %> <img src="<%=iconUrl%>mac.png" /> <% } %>
+              <% if (platforms.isLinux()) { %>
+                <div class="dropdown d-inline">
+                  <img src="<%=iconUrl%>linux.png"
+                    class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" />
+                  <div class="dropdown-menu p-2">
+                    <% Requirements linuxRequirements = data.getLinux_requirements(); %>
+                    <%=linuxRequirements.getMinimum()!=null ? linuxRequirements.getMinimum() : ""%>
+                    <%=linuxRequirements.getRecommended()!=null ? linuxRequirements.getRecommended() : ""%>
+                  </div>
+                </div>
+              <% } %>
+              <% if (platforms.isMac()) { %>
+                <div class="dropdown d-inline">
+                  <img src="<%=iconUrl%>mac.png"
+                    class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" />
+                  <div class="dropdown-menu p-2">
+                    <% Requirements macRequirements = data.getMac_requirements(); %>
+                    <%=macRequirements.getMinimum()!=null ? macRequirements.getMinimum() : ""%>
+                    <%=macRequirements.getRecommended()!=null ? macRequirements.getRecommended() : ""%>
+                  </div>
+                </div>
+              <% } %>
             </div>
           </div>
         </div>

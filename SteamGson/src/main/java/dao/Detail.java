@@ -23,7 +23,7 @@ public class Detail {
     String json = IOUtils.toString(
       new URL("https://store.steampowered.com/api/appdetails/?appids=" + appID),
       "utf-8"
-    );
+    ).replaceAll("\\[\\]", "NULL");
     return new Gson().fromJson(
       json.substring(json.indexOf('{', 1), json.length()-1),
       Detail.class

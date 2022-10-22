@@ -13,8 +13,8 @@ public class Data {
   private String header_image;
   private String website;
   private Requirements pc_requirements;
-  //private Requirements mac_requirements;
-  //private Requirements linux_requirements;
+  private Requirements mac_requirements;
+  private Requirements linux_requirements;
   private List<String> developers;
   private List<String> publishers;
   private Price price_overview;
@@ -83,18 +83,18 @@ public class Data {
   public void setPc_requirements(Requirements pc_requirements) {
     this.pc_requirements = pc_requirements;
   }
-//  public Requirements getMac_requirements() {
-//    return mac_requirements;
-//  }
-//  public void setMac_requirements(Requirements mac_requirements) {
-//    this.mac_requirements = mac_requirements;
-//  }
-//  public Requirements getLinux_requirements() {
-//    return linux_requirements;
-//  }
-//  public void setLinux_requirements(Requirements linux_requirements) {
-//    this.linux_requirements = linux_requirements;
-//  }
+  public Requirements getMac_requirements() {
+    return mac_requirements;
+  }
+  public void setMac_requirements(Requirements mac_requirements) {
+    this.mac_requirements = mac_requirements;
+  }
+  public Requirements getLinux_requirements() {
+    return linux_requirements;
+  }
+  public void setLinux_requirements(Requirements linux_requirements) {
+    this.linux_requirements = linux_requirements;
+  }
   public List<String> getDevelopers() {
     return developers;
   }
