@@ -8,13 +8,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Steam Games</title>
   </head>
   <body onload="setup()">
     <%
@@ -22,7 +22,7 @@
     %>
     <div class="container my-5">
       <div class="mt-5">
-        <h1 class="text-center color-primary">Juegos de Steam</h1>
+        <h1 class="text-center color-primary">Steam Games</h1>
         <hr />
         <div class="row">
           <% for (Game game : main.getApplist().getApps()) { %>
@@ -38,6 +38,9 @@
           </div>
           <% } %>
         </div>
+      </div>
+      <div class="bg-primary p-3 mb-0 text-center mt-auto rounded">
+        <h1 class="m-0">Alberto</h1>
       </div>
     </div>
     <div id="detail-container"></div>
