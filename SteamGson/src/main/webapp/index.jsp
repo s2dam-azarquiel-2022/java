@@ -30,9 +30,9 @@
             <div class="card mb-4 flex-fill">
               <div class="card-body text-center d-flex flex-column">
                 <h5 class="card-title mb-3"><%=game.getName()%></h5>
-                <a onClick="getDetail('<%=game.getAppid()%>')" class="d-block mt-auto">
-                  Ver juego
-                </a>
+                <button onClick="getDetail('<%=game.getAppid()%>')" class="d-block mt-auto btn btn-primary">
+                  Checkout game
+                </button>
               </div>
             </div>
           </div>
