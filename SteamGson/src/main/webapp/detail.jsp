@@ -113,9 +113,25 @@
         </div>
         <div class="mt-5">
           <p><%=data.getDetailed_description()%></p>
-          <% for (Screenshot screenshot : data.getScreenshots()) { %>
-            <img class="w-100 my-3" src="<%=screenshot.getPath_full()%>" />
-          <% } %>
+          <% String carouselID = "carousel-" + appID; %>
+          <div id="<%=carouselID%>" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% boolean isFirst = true; %>
+              <% for (Screenshot screenshot : data.getScreenshots()) { %>
+                <div class="carousel-item<%=isFirst ? " active" : ""%>">
+                  <img class="w-100 my-3" src="<%=screenshot.getPath_full()%>" />
+                </div>
+              <% isFirst = false; } %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#<%=carouselID%>" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#<%=carouselID%>" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
           <h5>Developers: <%=data.getDevelopers()%></h5>
           <h5>Publishers: <%=data.getPublishers()%></h5>
           <h5><a href="<%=data.getWebsite()%>">Website</a></h5>
