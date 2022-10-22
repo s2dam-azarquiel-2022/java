@@ -29,6 +29,9 @@ const getDetail = (appID) => {
         detailContainer.innerHTML += await res.text();
         details[appID] = new bootstrap.Modal(`#detail-${appID}`, {});
         details[appID].show();
+        $(`#detail-${appID} .dropdown`).hover(function(){
+          $('.dropdown-toggle', this).trigger('click');
+        });
       } else {
         new bootstrap.Toast(errToast).show();
       }

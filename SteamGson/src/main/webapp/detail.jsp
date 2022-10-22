@@ -81,8 +81,8 @@
                     class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" />
                   <div class="dropdown-menu p-2">
                     <% Requirements winRequirements = data.getPc_requirements(); %>
-                    <%=winRequirements.getMinimum()%>
-                    <%=winRequirements.getRecommended()%>
+                    <%=winRequirements.getMinimum()!=null ? winRequirements.getMinimum() : ""%>
+                    <%=winRequirements.getRecommended()!=null ? winRequirements.getRecommended() : ""%>
                   </div>
                 </div>
               <% } %>
