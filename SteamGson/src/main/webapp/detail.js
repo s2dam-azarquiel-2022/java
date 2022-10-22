@@ -1,7 +1,15 @@
 // Note: eclipse shows some nonexistent errors idk why
 
-// Detail cache so not to fetch the same detail twice
-var details = {};
+var details;
+var detailContainer;
+var errToast;
+
+const setup = () => {
+  // Detail cache so not to fetch the same detail twice
+  details = {};
+  detailContainer = document.getElementById("detail-container");
+  errToast = document.getElementById("err-toast");
+}
 
 const getDetail = (appID) => {
   if (appID in details) {
@@ -17,9 +25,13 @@ const getDetail = (appID) => {
         method: 'POST',
         body: params,
     }).then(async res => {
-      document.getElementById("detail-container").innerHTML += await res.text();
-      details[appID] = new bootstrap.Modal(`#detail-${appID}`, {});
-      details[appID].show();
-    });
+      if (res.ok) {
+        detailContainer.innerHTML += await res.text();
+        details[appID] = new bootstrap.Modal(`#detail-${appID}`, {});
+        details[appID].show();
+      } else {
+        new bootstrap.Toast(errToast).show();
+      }
+    })
   }
 }

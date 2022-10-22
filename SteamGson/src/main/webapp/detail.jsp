@@ -1,3 +1,4 @@
+<%@page import="java.io.IOException"%>
 <%@page import="model.Requirements"%>
 <%@page import="model.Platforms"%>
 <%@page import="model.Price"%>
@@ -11,7 +12,9 @@
     pageEncoding="UTF-8"%>
 <%
   String appID = request.getParameter("appID");
-  Data data = Detail.getDetail(appID).getData();
+  Data data = null;
+  try { data = Detail.getDetail(appID).getData(); }
+  catch (IOException e) { response.sendError(404); }
 %>
 <div class="modal" id="detail-<%=appID%>" tabindex="-1">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
@@ -21,15 +24,15 @@
         <h5 class="modal-title text-center w-100"><%=data.getName()%></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body mb-2">
         <div class="row">
-          <div class="col-12 col-md-6 col-xl-4">
+          <div class="col-12 col-lg-6 col-xl-4">
             <img class="w-100" src="<%=data.getHeader_image()%>" />
           </div>
-          <div class="col-12 col-md-6 col-xl-8">
+          <div class="col-12 col-lg-6 col-xl-8">
             <p><%=data.getShort_description()%></p>
           </div>
-          <div class="col-12 col-md-6 col-xl-4">
+          <div class="col-12 col-lg-6 col-xl-4">
             <p class="mt-2 mb-0">
               Genres:
               <% for (Category genre : data.getGenres()) { %>
@@ -47,11 +50,11 @@
               <% } %>
             </p>
           </div>
-          <div class="col-12 col-md-6 col-xl-8">
+          <div class="col-12 col-lg-6 col-xl-8">
             <p class="mt-2 mb-0">Required age: <%=data.getRequired_age()%></p>
             <p class="mt-1 mb-3">Supported languages: <%=data.getSupported_languages()%></p>
           </div>
-          <div class="col-12 col-md-6 col-xl-4">
+          <div class="col-12 col-lg-6 col-xl-4">
             <p class="mb-0">
               <% if (data.getIs_free()) { %>
                 Free!
@@ -65,7 +68,7 @@
               <% } %>
             </p>
           </div>
-          <div class="col-12 col-md-6 col-xl-8">
+          <div class="col-12 col-lg-6 col-xl-8">
             <div class="badge rounded-pill text-bg-secondary px-2 mb-0">
               <span class="align-middle">Supported platforms:</span>
               <%
@@ -97,9 +100,6 @@
           <h5>Publishers: <%=data.getPublishers()%></h5>
           <h5><a href="<%=data.getWebsite()%>">Website</a></h5>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

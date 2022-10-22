@@ -19,19 +19,14 @@ public class Detail {
     this.data = data;
   }
 
-  public static Detail getDetail(String appID) {
-    try {
-      String json = IOUtils.toString(
-        new URL("https://store.steampowered.com/api/appdetails/?appids=" + appID),
-        "utf-8"
-      );
-      return new Gson().fromJson(
-        json.substring(json.indexOf('{', 1), json.length()-1),
-        Detail.class
-      );
-    } catch (IOException e) {
-      e.printStackTrace();
-      return null;
-    }
+  public static Detail getDetail(String appID) throws IOException {
+    String json = IOUtils.toString(
+      new URL("https://store.steampowered.com/api/appdetails/?appids=" + appID),
+      "utf-8"
+    );
+    return new Gson().fromJson(
+      json.substring(json.indexOf('{', 1), json.length()-1),
+      Detail.class
+    );
   }
 }
