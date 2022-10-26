@@ -11,7 +11,8 @@ const setup = () => {
   errToast = document.getElementById("err-toast");
 }
 
-const getDetail = (appID) => {
+const getDetail = (elem) => {
+  const appID = elem.getAttribute('appID');
   if (appID in details) {
     // If appID detail was already fetched, show it's modal.
     details[appID].show();
