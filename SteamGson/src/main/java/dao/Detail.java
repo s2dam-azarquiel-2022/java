@@ -19,11 +19,17 @@ public class Detail {
     this.data = data;
   }
 
-  public static Detail getDetail(String appID) throws IOException {
-    String json = IOUtils.toString(
-      new URL("https://store.steampowered.com/api/appdetails/?appids=" + appID),
-      "utf-8"
-    ).replaceAll("\\[\\]", "NULL");
+  public static Detail getDetail(String appID) {
+    String json;
+    try {
+      json = IOUtils.toString(
+        new URL("https://store.steampowered.com/api/appdetails/?appids=" + appID),
+        "utf-8"
+      ).replaceAll("\\[\\]", "NULL");
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
     return new Gson().fromJson(
       json.substring(json.indexOf('{', 1), json.length()-1),
       Detail.class

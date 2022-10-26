@@ -13,8 +13,9 @@
 <%
   String appID = request.getParameter("appID");
   Data data = null;
-  try { data = Detail.getDetail(appID).getData(); }
-  catch (IOException e) { response.sendError(404); }
+  data = Detail.getDetail(appID).getData();
+  if ( data == null ) response.sendError(404);
+  else {
 %>
 <div class="modal" id="detail-<%=appID%>" tabindex="-1">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
@@ -140,3 +141,4 @@
     </div>
   </div>
 </div>
+<% } %>
