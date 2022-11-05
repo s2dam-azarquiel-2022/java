@@ -28,7 +28,6 @@ public class Brand {
       e.printStackTrace();
     }
 
-  	result.forEach(brand -> System.out.println(brand.getName()));
     return result;
   }
 }

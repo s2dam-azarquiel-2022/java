@@ -30,10 +30,10 @@
           <form action="Controller?option=brand" method="post">
             <div class="form-group">
               <select class="form-control" name="brand" id="" onchange="this.form.submit()">
-                <option value="" disabled selected>Elija marca</option>
+                <option class="d-none" value="" disabled selected>Elija marca</option>
                 <option value="%">Todas</option>
                 <% for (Brand brand : brands) { %>
-                  <option value="<%=idToBrandMap.get(brand.getId()).getName()%>">
+                  <option value="<%=brand.getId()%>">
                     <%=brand.getName()%>
                   </option>
                 <% } %>
@@ -42,13 +42,15 @@
           </form>
         </div>
         <div class="col-lg-4 pt-3">
-          <form action="Controller?op=order" method="post">
+          <form action="Controller?option=order" method="post">
             <div class="form-group">
               <select class="form-control" name="order" id="" onchange="this.form.submit()">
-                <option value="" disabled selected>Ordenada por</option>
-                <option value="price->asc">Precio ascendente</option>
-                <option value="price->desc">Precio descendente</option>
-                <option value="brand">Marca</option>
+                <option class="d-none" value="" disabled selected>Ordenada por</option>
+                <option value="reset">Por defecto</option>
+                <option value="precio->asc">Precio ascendente</option>
+                <option value="precio->desc">Precio descendente</option>
+                <option value="marca->asc">Marca ascendente</option>
+                <option value="marca->desc">Marca desscendente</option>
               </select>
             </div>
           </form>

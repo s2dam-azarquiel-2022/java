@@ -37,30 +37,31 @@ public class Controller extends HttpServlet {
     }
 
     RequestDispatcher dispatcher;
+
     String option = request.getParameter("option");
-    if (option.equals("home")) {
-      ArrayList<Bike> bikes = model.dao.Bike.getBikes("%", connection);
+    if (option.equals("home") || session.getAttribute("brands") == null) {
       ArrayList<Brand> brands = model.dao.Brand.getBrands(connection);
-
       session.setAttribute("brands", brands);
-      request.setAttribute("bikes", bikes);
-
-      dispatcher = request.getRequestDispatcher("home.jsp");
-      dispatcher.forward(request, response);
     } else if (option.equals("brand")) {
-      String brand = request.getParameter("brand");
-      ArrayList<Bike> bikes = model.dao.Bike.getBikes(brand, connection);
-
-      request.setAttribute("bikes", bikes);
-
-      dispatcher = request.getRequestDispatcher("home.jsp");
-      dispatcher.forward(request, response);
+      session.setAttribute("currentBrand", request.getParameter("brand"));
     } else if (option.equals("order")) {
-      String order = request.getParameter("order");
-
-      dispatcher = request.getRequestDispatcher("home.jsp");
-      dispatcher.forward(request, response);
+      session.setAttribute("currentOrder", request.getParameter("order"));
     }
+
+    String brand = (String) session.getAttribute("currentBrand");
+    String orderRaw = (String) session.getAttribute("currentOrder");
+    String[] orderArr = orderRaw == null ? new String[0] : orderRaw.split("->");
+    ArrayList<Bike> bikes = model.dao.Bike.getBikes(
+        brand == null ? "%" : brand,
+        connection,
+        orderArr.length > 0 ? orderArr[0] : "",
+        orderArr.length > 1 ? orderArr[1] : ""
+    );
+
+    request.setAttribute("bikes", bikes);
+
+    dispatcher = request.getRequestDispatcher("home.jsp");
+    dispatcher.forward(request, response);
   }
 
   @Override
