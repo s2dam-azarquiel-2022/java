@@ -154,7 +154,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
         
         <Context docBase="OpenWeatherMap" path="/OpenWeatherMap" reloadable="true" source="org.eclipse.jst.jee.server:OpenWeatherMap"/>
-      <Context docBase="OpenWeatherMapSax" path="/OpenWeatherMapSax" reloadable="true" source="org.eclipse.jst.jee.server:OpenWeatherMapSax"/><Context docBase="InfocarSAX" path="/InfocarSAX" reloadable="true" source="org.eclipse.jst.jee.server:InfocarSAX"/><Context docBase="DarkSkyGson" path="/DarkSkyGson" reloadable="true" source="org.eclipse.jst.jee.server:DarkSkyGson"/><Context docBase="SteamGson" path="/SteamGson" reloadable="true" source="org.eclipse.jst.jee.server:SteamGson"/></Host>
+      <Context docBase="OpenWeatherMapSax" path="/OpenWeatherMapSax" reloadable="true" source="org.eclipse.jst.jee.server:OpenWeatherMapSax"/><Context docBase="InfocarSAX" path="/InfocarSAX" reloadable="true" source="org.eclipse.jst.jee.server:InfocarSAX"/><Context docBase="DarkSkyGson" path="/DarkSkyGson" reloadable="true" source="org.eclipse.jst.jee.server:DarkSkyGson"/><Context docBase="SteamGson" path="/SteamGson" reloadable="true" source="org.eclipse.jst.jee.server:SteamGson"/><Context docBase="Alltricks" path="/Alltricks" reloadable="true" source="org.eclipse.jst.jee.server:Alltricks"/></Host>
     </Engine>
   </Service>
 </Server>
