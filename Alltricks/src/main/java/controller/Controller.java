@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import connection.ConnectionHandler;
 import model.entity.Bike;
 import model.entity.Brand;
+import utils.Utils;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
@@ -48,14 +49,24 @@ public class Controller extends HttpServlet {
       session.setAttribute("currentOrder", request.getParameter("order"));
     }
 
-    String brand = (String) session.getAttribute("currentBrand");
+    String brandRaw = (String) session.getAttribute("currentBrand");
     String orderRaw = (String) session.getAttribute("currentOrder");
     String[] orderArr = orderRaw == null ? new String[0] : orderRaw.split("->");
+    String fieldToOrder = orderArr.length > 0 ? orderArr[0] : null;
+    String order = orderArr.length > 1 ? orderArr[1] : null;
+
+    if (!(
+      Utils.includes(model.dao.Bike.allowedOrderFields, fieldToOrder)
+      && Utils.includes(model.dao.Bike.allowedOrders, order)
+    )) {
+      session.setAttribute("currentOrder", null);
+    }
+
     ArrayList<Bike> bikes = model.dao.Bike.getBikes(
-        brand == null ? "%" : brand,
         connection,
-        orderArr.length > 0 ? orderArr[0] : "",
-        orderArr.length > 1 ? orderArr[1] : ""
+        brandRaw,
+        fieldToOrder,
+        order
     );
 
     request.setAttribute("bikes", bikes);

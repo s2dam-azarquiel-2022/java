@@ -6,15 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import utils.Utils;
-
 public class Bike {
-  private final static String[] allowedOrderFields =  { "precio", "marca" };
-  private final static String[] allowedOrders = { "asc", "desc" };
+  public final static String[] allowedOrderFields =  { "Precio", "Marca" };
+  public final static String[] allowedOrders = { "asc", "desc" };
+  public final static String[] allowedOrdersLongNames = {
+    "ascendente", "descendente"
+  };
 
   public static ArrayList<model.entity.Bike> getBikes(
-    String brand,
     Connection connection,
+    String brand,
     String fieldToOrder,
     String order
   ) {
@@ -23,13 +24,12 @@ public class Bike {
       PreparedStatement stmt = connection.prepareStatement(
         "SELECT * FROM bici WHERE marca LIKE ?" +
         (
-          ( Utils.includes(allowedOrderFields, fieldToOrder)
-            && Utils.includes(allowedOrders, order) )
+          ( fieldToOrder != null && order != null )
           ? String.format(" ORDER BY %s %s", fieldToOrder, order)
           : ""
         )
       );
-      stmt.setString(1, brand);
+      stmt.setString(1, brand == null ? "%" : brand);
       ResultSet resultSet = stmt.executeQuery();
       while (resultSet.next()) {
         result.add(new model.entity.Bike(

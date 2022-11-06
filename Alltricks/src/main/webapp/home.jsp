@@ -22,6 +22,13 @@
   	ArrayList<Bike> bikes = (ArrayList<Bike>)request.getAttribute("bikes");
   	HashMap<Integer, Brand> idToBrandMap = new HashMap<>();
   	brands.forEach(brand -> idToBrandMap.put(brand.getId(), brand));
+    int selectedBrand = -1;
+    try {
+      selectedBrand = Integer.valueOf((String) session.getAttribute("currentBrand"));
+    } catch (NumberFormatException e) {
+      selectedBrand = -1;
+    }
+    String selectedOrder = (String) session.getAttribute("currentOrder");
   	%>
     <div class="container shadow p-0">
       <header class="bg-primary p-3"><img src="img/logo.png" alt=""></header>
@@ -30,12 +37,21 @@
           <form action="Controller?option=brand" method="post">
             <div class="form-group">
               <select class="form-control" name="brand" id="" onchange="this.form.submit()">
-                <option class="d-none" value="" disabled selected>Elija marca</option>
-                <option value="%">Todas</option>
+                <% if (selectedBrand == -1) { %>
+                  <option class="d-none" value="" selected>Elija marca</option>
+                <% } else { %>
+                  <option value="%">Todas</option>
+                <% } %>
                 <% for (Brand brand : brands) { %>
-                  <option value="<%=brand.getId()%>">
-                    <%=brand.getName()%>
-                  </option>
+                  <% if (brand.getId() == selectedBrand) { %>
+                    <option value="<%=brand.getId()%>" selected>
+                      <%=brand.getName()%>
+                    </option>
+                  <% } else { %>
+                    <option value="<%=brand.getId()%>">
+                      <%=brand.getName()%>
+                    </option>
+                  <% } %>
                 <% } %>
               </select>
             </div>
@@ -44,13 +60,26 @@
         <div class="col-lg-4 pt-3">
           <form action="Controller?option=order" method="post">
             <div class="form-group">
-              <select class="form-control" name="order" id="" onchange="this.form.submit()">
-                <option class="d-none" value="" disabled selected>Ordenada por</option>
-                <option value="reset">Por defecto</option>
-                <option value="precio->asc">Precio ascendente</option>
-                <option value="precio->desc">Precio descendente</option>
-                <option value="marca->asc">Marca ascendente</option>
-                <option value="marca->desc">Marca desscendente</option>
+              <select class="form-control" name="order" id="order" onchange="this.form.submit()">
+                <% if (selectedOrder == null) { %>
+                  <option class="d-none" value="" selected>Ordenada por</option>
+                <% } else { %>
+                  <option value="reset">Por defecto</option>
+                <% } %>
+                <% for (String orderField : model.dao.Bike.allowedOrderFields) { %>
+                  <% for (int i = 0; i < model.dao.Bike.allowedOrders.length; i++) { %>
+                    <% String value = orderField + "->" + model.dao.Bike.allowedOrders[i]; %>
+                    <% if (value.equals(selectedOrder)) { %>
+                      <option value="<%=value%>" selected>
+                        <%=orderField%> <%=model.dao.Bike.allowedOrdersLongNames[i]%>
+                      </option>
+                    <% } else { %>
+                      <option value="<%=value%>">
+                        <%=orderField%> <%=model.dao.Bike.allowedOrdersLongNames[i]%>
+                      </option>
+                    <% } %>
+                  <% } %>
+                <% } %>
               </select>
             </div>
           </form>
