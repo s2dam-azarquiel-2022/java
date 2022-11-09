@@ -36,22 +36,16 @@
         <div class="col-lg-4 pt-3">
           <form action="Controller?option=brand" method="post">
             <div class="form-group">
-              <select class="form-control" name="brand" id="" onchange="this.form.submit()">
+              <select class="form-control" name="brand" id="brand" onchange="this.form.submit()">
                 <% if (selectedBrand == -1) { %>
                   <option class="d-none" value="" selected>Elija marca</option>
                 <% } else { %>
                   <option value="%">Todas</option>
                 <% } %>
                 <% for (Brand brand : brands) { %>
-                  <% if (brand.getId() == selectedBrand) { %>
-                    <option value="<%=brand.getId()%>" selected>
-                      <%=brand.getName()%>
-                    </option>
-                  <% } else { %>
-                    <option value="<%=brand.getId()%>">
-                      <%=brand.getName()%>
-                    </option>
-                  <% } %>
+                  <option value="<%=brand.getId()%>">
+                    <%=brand.getName()%>
+                  </option>
                 <% } %>
               </select>
             </div>
@@ -68,16 +62,9 @@
                 <% } %>
                 <% for (String orderField : model.dao.Bike.allowedOrderFields) { %>
                   <% for (int i = 0; i < model.dao.Bike.allowedOrders.length; i++) { %>
-                    <% String value = orderField + "->" + model.dao.Bike.allowedOrders[i]; %>
-                    <% if (value.equals(selectedOrder)) { %>
-                      <option value="<%=value%>" selected>
-                        <%=orderField%> <%=model.dao.Bike.allowedOrdersLongNames[i]%>
-                      </option>
-                    <% } else { %>
-                      <option value="<%=value%>">
-                        <%=orderField%> <%=model.dao.Bike.allowedOrdersLongNames[i]%>
-                      </option>
-                    <% } %>
+                    <option value="<%=orderField + "->" + model.dao.Bike.allowedOrders[i]%>">
+                      <%=orderField%> <%=model.dao.Bike.allowedOrdersLongNames[i]%>
+                    </option>
                   <% } %>
                 <% } %>
               </select>
@@ -111,5 +98,20 @@
       crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      for (option of document.getElementById("brand").children) {
+    	  if (option.value == "<%=selectedBrand%>") {
+    		  option.selected = true;
+    		  break;
+    	  }
+    	}
+
+      for (option of document.getElementById("order").children) {
+    	  if (option.value == "<%=selectedOrder%>") {
+    		  option.selected = true;
+    		  break;
+    	  }
+    	}
+    </script>
   </body>
 </html>
