@@ -78,9 +78,9 @@
             <span class="visually-hidden">Next</span>
           </button>
 			  </div>
-			  <div class="row mt-5">
+			  <div class="row mt-5 justify-content-center">
 				  <% for (Product product : products) { %>
-						<div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex flex-fill">
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
 							<div class="card flex-fill mb-4 text-center">
 								<img class="card-img-top" alt="Imagen de <%=product.title%>" src="<%=product.image%>" />
 								<div class="card-body d-flex flex-column">
