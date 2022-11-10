@@ -15,9 +15,16 @@ public class ProductDAO {
   ) {
     ArrayList<Product> result = new ArrayList<>();
     try {
-      PreparedStatement stmt = connection.prepareStatement(
-        "SELECT * FROM producto WHERE categoriaid LIKE ?"
-      );
+      PreparedStatement stmt = connection.prepareStatement("""
+        SELECT *
+        FROM producto
+        WHERE categoriaid LIKE ?
+        ORDER BY(
+          SELECT SUM(puntos)
+          FROM punto
+          WHERE idproducto = producto.id
+        ) DESC
+      """);
       stmt.setString(1, category);
       ResultSet resultSet = stmt.executeQuery();
       while (resultSet.next()) {
