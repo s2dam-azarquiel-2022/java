@@ -16,26 +16,34 @@ public class ProductDAO {
     ArrayList<Product> result = new ArrayList<>();
     try {
       PreparedStatement stmt = connection.prepareStatement("""
-        SELECT *
-        FROM producto
-        WHERE categoriaid LIKE ?
-        ORDER BY(
-          SELECT SUM(puntos)
+        SELECT p.id,
+               p.titulo,
+               p.imagen,
+               p.body,
+               pt.stars,
+               pt.reviews
+        FROM producto p
+        LEFT JOIN (
+          SELECT ROUND(AVG(puntos), 0) as stars,
+                 COUNT(puntos) as reviews,
+                 idproducto
           FROM punto
-          WHERE idproducto = producto.id
-        ) DESC
+          GROUP BY idproducto
+        ) pt ON p.id = pt.idproducto
+        WHERE categoriaid LIKE ?
+        ORDER BY COALESCE(pt.stars, 0) DESC,
+                 COALESCE(pt.reviews, 0) DESC
       """);
       stmt.setString(1, category);
       ResultSet resultSet = stmt.executeQuery();
       while (resultSet.next()) {
         result.add(new Product(
           resultSet.getInt("id"),
-          resultSet.getInt("categoriaid"),
-          resultSet.getString("body"),
           resultSet.getString("titulo"),
-          resultSet.getString("sumario"),
-          resultSet.getString("fondo"),
-          resultSet.getString("imagen")
+          resultSet.getString("imagen"),
+          resultSet.getString("body"),
+          resultSet.getInt("stars"),
+          resultSet.getInt("reviews")
         ));
       }
       resultSet.close();

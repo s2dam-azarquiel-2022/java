@@ -2,28 +2,26 @@ package model.entity;
 
 public class Product {
   public int id;
-  public int category;
-  public String body;
   public String title;
-  public String summary;
-  public String background;
   public String image;
+  public String body;
+  public int stars;
+  public int reviews;
 
   public Product(
     int id,
-    int category,
-    String body,
     String title,
-    String summary,
-    String background,
-    String image
+    String image,
+    String body,
+    int stars,
+    int reviews
   ) {
+    super();
     this.id = id;
-    this.category = category;
-    this.body = body;
     this.title = title;
-    this.summary = summary;
-    this.background = background;
     this.image = image;
+    this.body = body;
+    this.stars = stars;
+    this.reviews = reviews;
   }
 }

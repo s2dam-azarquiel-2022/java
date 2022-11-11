@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import connection.ConnectionHandler;
 import model.dao.CategoryDAO;
+import model.dao.PointDAO;
 import model.dao.ProductDAO;
 import model.entity.Category;
 import model.entity.Product;
@@ -48,6 +49,13 @@ public class Controller extends HttpServlet {
       session.setAttribute("categories", categories);
     } if (option.equals("category")) {
       session.setAttribute("currentCategory", categoryID);
+    } else if (option.equals("addReview")) {
+      PointDAO.addReview(
+        connection,
+        Integer.valueOf(request.getParameter("productID")),
+        Integer.valueOf(request.getParameter("stars"))
+      );
+      return;
     }
 
     ArrayList<Product> products = ProductDAO.getProducts(

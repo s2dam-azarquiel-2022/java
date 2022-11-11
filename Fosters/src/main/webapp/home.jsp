@@ -87,19 +87,58 @@
 									<h3 class="card-title fg-3">
                     <%=product.title%>
 									</h3>
-                  <%=product.body%>
+                  <div class="mb-3"><%=product.body%></div>
+                  <p class="mt-auto mb-1">
+                    <% for (int i = 0; i < 5; i++) { %>
+                      <% String color = i < product.stars ? "text-warning" : "text-muted"; %>
+                      <span class="<%=color%>">★</span>
+                    <% } %>
+                  </p>
+                  <p class="mb-1"><small>(<%=product.reviews%> reseñas)</small></p>
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning p-1 openReviewModal"
+                    data-bs-title="<%=product.title%>"
+                    data-bs-id="<%=product.id%>">
+                    Añadir
+                  </button>
 								</div>
 							</div>
 						</div>
 				  <% } %>
 			  </div>
 			  <div class="w-100 bg-red-footer">
-				  <h1 class="text-light text-center py-2">LA CARTA DE FOSTER'S
-					  HOLLYWOOD
-					</h1>
+				  <h1 class="text-light text-center py-2">LA CARTA DE FOSTER'S HOLLYWOOD</h1>
 			  </div>
 		  </div>
 	  </div>
+    <div
+      class="modal fade"
+      id="addReview"
+      tabindex="-1"
+      aria-labelledby="add-review-label"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 text-center" id="add-review-label">
+              Añadir una reseña
+            </h1>
+          </div>
+          <h2 id="addReviewProductName" class="text-center mt-2 mb-2"></h2>
+          <form class="modal-body justify-content-center d-flex pt-0" id="reviewForm">
+            <% for (int i = 1; i <= 5; i++) { %>
+              <input class="btn-check" id="star-<%=i%>" type="radio" name="stars" value="<%=i%>" />
+              <label class="d-block star-review star-review-<%=i%>" for="star-<%=i%>">★</label>
+            <% } %>
+          </form>
+          <div class="modal-footer">
+            <button type="button" id="closeReviewModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="acceptReviewModal" class="btn btn-success">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 	  <!-- Cosas a importar -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
@@ -107,5 +146,6 @@
       crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./foster.js"></script>
   </body>
 </html>
