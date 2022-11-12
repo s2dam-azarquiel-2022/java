@@ -26,7 +26,7 @@
     %>
     <a name="top"></a>
     <div class="container-fluid p-0">
-      <ul class="navbar m-0 navbar-expand-xl navbar-light bg-blue-dark">
+      <ul class="navbar fixed-top m-0 navbar-expand-xl navbar-light bg-blue-dark">
         <a class="navbar-brand" href="Controller?option=home">
           <img alt="LOGO" src="./img/logo.png" />
         </a>
