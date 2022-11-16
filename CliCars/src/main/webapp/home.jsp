@@ -21,8 +21,6 @@
   	<% 
   	ArrayList<Brand> brands = (ArrayList<Brand>)session.getAttribute("brands");
   	ArrayList<Car> cars = (ArrayList<Car>)request.getAttribute("cars");
-  	HashMap<Integer, Brand> idToBrandMap = new HashMap<>();
-  	brands.forEach(brand -> idToBrandMap.put(brand.id, brand));
     int selectedBrand = -1;
     try {
       selectedBrand = Integer.valueOf((String) session.getAttribute("currentBrand"));
@@ -72,18 +70,23 @@
             </div>
           </form>
         </div>
-        <div class="col-lg-2 text-right">
-          <span class="display-4">&#9733;</span>
-        </div>
       </div>
       <div class="row p-3">
         <% for (Car car : cars) { %>
 	        <div class="col-md-6 col-lg-4">
 	          <div class="card">
 	            <img class="card-img-top" src="<%=car.photo%>" alt="" />
-	            <div class="card-body">
-	                <h5 class="card-title"><%=car.model%></h5>
-	                <h6 class="card-text"><%=idToBrandMap.get(car.brand).name%></h6>
+	            <div class="card-body row">
+                <div class="col-12">
+                  <h3 class="text-end">&#9733;</h3>
+                </div>
+                <div class="col-12 col-md-8">
+	                <h5 class="card-title"><%=car.name%></h5>
+	                <h6 class="card-text"><%=car.model%></h6>
+	                <p><%=car.year%> | <%=car.km%>km | <%=car.cv%>CV
+                </div>
+                <div class="col-12 col-md-4">
+                </div>
 	            </div>
 	          </div>
 	        </div>

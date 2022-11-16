@@ -44,9 +44,9 @@ public class Controller extends HttpServlet {
 
     if (option.equals("home") || session.getAttribute("brands") == null) {
       ArrayList<Brand> brands = BrandDAO.getBrands(connection);
-      session.setAttribute("categories", brands);
+      session.setAttribute("brands", brands);
     } else if (option.equals("brand")) {
-      session.setAttribute("currentBrand", request.getParameter("id"));
+      session.setAttribute("currentBrand", request.getParameter("brand"));
     } else if (option.equals("order")) {
       session.setAttribute("currentOrder", request.getParameter("order"));
     } else if (option.equals("setFavorite")) {
@@ -62,7 +62,9 @@ public class Controller extends HttpServlet {
 
     ArrayList<Car> cars = CarDAO.getCars(
       connection,
-      brandID == null ? "%" : brandID
+      brandID == null ? "%" : brandID,
+      fieldToOrder,
+      order
     );
     request.setAttribute("cars", cars);
 

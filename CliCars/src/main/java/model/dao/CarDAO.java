@@ -19,12 +19,15 @@ public class CarDAO {
 
   public static ArrayList<Car> getCars(
     Connection connection,
-    String brand
+    String brand,
+    String fieldToOrder,
+    String order
   ) {
     ArrayList<Car> result = new ArrayList<>();
     try {
       PreparedStatement stmt = connection.prepareStatement("""
-        SELECT c.modelo,
+        SELECT c.nombre,
+               c.modelo,
                c.marca,
                c.id,
                c.precio,
@@ -36,11 +39,16 @@ public class CarDAO {
                c.foto
         FROM coche c
         WHERE c.marca LIKE ?
-      """);
+      """ + (
+        ( fieldToOrder != null && order != null )
+        ? String.format(" ORDER BY %s %s", fieldToOrder, order)
+        : ""
+      ));
       stmt.setString(1, brand);
       ResultSet resultSet = stmt.executeQuery();
       while (resultSet.next()) {
         result.add(new Car(
+          resultSet.getString("nombre"),
           resultSet.getString("modelo"),
           resultSet.getInt("marca"),
           resultSet.getInt("id"),

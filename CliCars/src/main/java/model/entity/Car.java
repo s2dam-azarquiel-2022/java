@@ -1,6 +1,7 @@
 package model.entity;
 
 public class Car {
+  public String name;
   public String model;
   public int brand;
   public int id;
@@ -13,6 +14,7 @@ public class Car {
   public String photo;
 
   public Car(
+    String name,
     String model,
     int brand,
     int id,
@@ -24,6 +26,7 @@ public class Car {
     boolean favorite,
     String photo
   ) {
+    this.name = name;
     this.model = model;
     this.brand = brand;
     this.id = id;
