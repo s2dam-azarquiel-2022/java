@@ -50,11 +50,21 @@ public class Controller extends HttpServlet {
     } else if (option.equals("order")) {
       session.setAttribute("currentOrder", request.getParameter("order"));
     } else if (option.equals("setFavorite")) {
+      CarDAO.toggleFavorite(connection, Integer.valueOf(request.getParameter("carID")));
       return;
+    } else if (option.equals("search")) {
+      String currentSearch = request.getParameter("search");
+      session.setAttribute(
+        "currentSearch",
+        (currentSearch != null && currentSearch.isBlank())
+          ? null
+          : currentSearch
+      );
     }
 
     String brandID = (String) session.getAttribute("currentBrand");
     String orderRaw = (String) session.getAttribute("currentOrder");
+    String search = (String) session.getAttribute("currentSearch");
 
     String[] orderArr = orderRaw == null ? new String[0] : orderRaw.split("->");
     String fieldToOrder = orderArr.length > 0 ? orderArr[0] : null;
@@ -64,7 +74,8 @@ public class Controller extends HttpServlet {
       connection,
       brandID == null ? "%" : brandID,
       fieldToOrder,
-      order
+      order,
+      search
     );
     request.setAttribute("cars", cars);
 

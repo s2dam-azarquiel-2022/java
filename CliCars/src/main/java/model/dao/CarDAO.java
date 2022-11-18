@@ -12,6 +12,9 @@ public class CarDAO {
   public final static String[] allowedOrderFields =  {
     "nombre", "modelo", "anio", "km", "cv"
   };
+  public final static String[] allowedOrderFieldsLongName =  {
+    "Nombre", "Modelo", "Año", "Kilometros", "Caballos"
+  };
   public final static String[] allowedOrders = { "asc", "desc" };
   public final static String[] allowedOrdersLongNames = {
     "ascendente", "descendente"
@@ -21,7 +24,8 @@ public class CarDAO {
     Connection connection,
     String brand,
     String fieldToOrder,
-    String order
+    String order,
+    String search
   ) {
     ArrayList<Car> result = new ArrayList<>();
     try {
@@ -39,12 +43,19 @@ public class CarDAO {
                c.foto
         FROM coche c
         WHERE c.marca LIKE ?
+          AND (
+               c.nombre LIKE ?
+            OR c.modelo LIKE ?
+          )
       """ + (
         ( fieldToOrder != null && order != null )
         ? String.format(" ORDER BY %s %s", fieldToOrder, order)
         : ""
       ));
       stmt.setString(1, brand);
+      String searchVal = search == null ? "%" : "%" + search + "%";
+      stmt.setString(2, searchVal);
+      stmt.setString(3, searchVal);
       ResultSet resultSet = stmt.executeQuery();
       while (resultSet.next()) {
         result.add(new Car(
@@ -64,9 +75,33 @@ public class CarDAO {
       resultSet.close();
       stmt.close();
     } catch (SQLException e) {
-      System.out.println("getCategories() error");
+      System.out.println("getCars() error");
       e.printStackTrace();
     }
     return result;
+  }
+
+  public static void toggleFavorite(Connection connection, int carID) {
+    try {
+      PreparedStatement stmt = connection.prepareStatement("""
+        UPDATE coche c
+        SET    fav = (
+          SELECT
+            CASE WHEN fav > 0
+            THEN 0
+            ELSE 1
+            END AS toggledFav
+          FROM coche
+          WHERE id = ?
+        )
+        WHERE  c.id = ?
+      """);
+      stmt.setInt(1, carID);
+      stmt.setInt(2, carID);
+      stmt.execute();
+    } catch (SQLException e) {
+      System.out.println("toggleFavorite() error");
+      e.printStackTrace();
+    }
   }
 }

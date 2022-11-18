@@ -28,7 +28,7 @@ public class BrandDAO {
       resultSet.close();
       stmt.close();
     } catch (SQLException e) {
-      System.out.println("getCategories() error");
+      System.out.println("getBrands() error");
       e.printStackTrace();
     }
     return result;
