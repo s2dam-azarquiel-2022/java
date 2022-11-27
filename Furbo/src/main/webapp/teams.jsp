@@ -40,6 +40,7 @@ ArrayList<DivisionTeams> divisionTeams = (ArrayList<DivisionTeams>)
 	                  <img style="height: 1.5em" src="img/shield_<%=team.id%>.png" />
 	                  <%=team.name%>
 	                </p>
+	                <h5>Puntos: <%=team.points%></h5>
 	              </div>
 	            </div>
 	          </div>

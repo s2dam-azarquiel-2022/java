@@ -8,6 +8,7 @@ public class Team {
   public int creationYear;
   public String stadium;
   public String web;
+  public int points;
 
   public Team(
     int id,
@@ -16,7 +17,8 @@ public class Team {
     String trainer,
     int creationYear,
     String stadium,
-    String web
+    String web,
+    int puntos
   ) {
     this.id = id;
     this.name = name;
@@ -25,5 +27,6 @@ public class Team {
     this.creationYear = creationYear;
     this.stadium = stadium;
     this.web = web;
+    this.points = puntos;
   }
 }
