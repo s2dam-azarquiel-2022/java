@@ -1,3 +1,4 @@
+<%@page import="view.PageUtils"%>
 <%@page import="model.entity.Page"%>
 <%@page import="controller.ServletConfig"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,9 +9,9 @@
     <jsp:include page="utils/setupTop.html"></jsp:include>
     <title>Furbo</title>
   </head>
-  <body>
+  <body <%=PageUtils.mainBodySetup%>>
     <jsp:include page="utils/navbar.jsp"></jsp:include>
-    <div class="container-fluid bg-dark">
+    <div <%=PageUtils.mainDivSetup%>>
     </div>
     <jsp:include page="utils/setupBottom.html"></jsp:include>
   </body>

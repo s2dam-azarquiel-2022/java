@@ -13,12 +13,12 @@ public class Util {
   private static <T> T checkNull(
     HttpSession session,
     sessionVars var,
-    Supplier<T> f
+    Supplier<T> fDefaultVal
   ) {
     @SuppressWarnings("unchecked")
     T val = (T) session.getAttribute(var.name());
     if (val == null) {
-      val = f.get();
+      val = fDefaultVal.get();
       session.setAttribute(var.name(), val);
     }
     return val;

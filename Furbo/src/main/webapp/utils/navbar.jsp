@@ -2,7 +2,7 @@
 <%@page import="model.entity.Page"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<nav class="navbar navbar-dark bg-secondary text-white navbar-expand-lg sticky-top">
+<nav class="navbar navbar-dark bg-dark text-white navbar-expand-lg sticky-top">
   <div class="container-fluid">
     <button
       class="navbar-toggler"
@@ -16,7 +16,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
-      <a class="navbar-brand" aria-current="page" href="#">
+      <a class="navbar-brand" aria-current="page" href="/Furbo">
         <img style="height: 2em;" src="img/logo.png" />
       </a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">

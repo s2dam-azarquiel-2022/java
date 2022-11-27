@@ -6,34 +6,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.entity.DivisionTeams;
 import model.entity.Team;
 
 public class TeamDAO {
-  public static ArrayList<Team> getAll(
+  public static ArrayList<DivisionTeams> getAll(
     Connection connection,
     String season
-  ) {
-    ArrayList<Team> result = new ArrayList<>();
-    try {
-      PreparedStatement stmt = connection.prepareStatement("""
-        SELECT e.codequipo,
-               e.nombre,
-               e.presidente,
-               e.entrenador,
-               e.añofundacion,
-               e.estadio,
-               e.sitioweb
-        FROM equipo e
-        WHERE e.codequipo IN (
-          SELECT t.equipo
-          FROM equipotemporada t
-          WHERE t.temporada = ?
-        )
-      """);
+  ) throws SQLException {
+    ArrayList<DivisionTeams> result = new ArrayList<>();
+    String query = """
+      SELECT e.codequipo,
+             e.nombre,
+             e.presidente,
+             e.entrenador,
+             e.añofundacion,
+             e.estadio,
+             e.sitioweb
+      FROM equipo e
+      WHERE e.codequipo IN (
+        SELECT t.equipo
+        FROM equipotemporada t
+        WHERE t.temporada = ?
+          AND t.division = %d
+      )
+    """;
+    for (int i = 1; i <= 3; i++) {
+      PreparedStatement stmt = connection.prepareStatement(
+        String.format(query, i)
+      );
       stmt.setString(1, season);
       ResultSet rs = stmt.executeQuery();
+      ArrayList<Team> teams = new ArrayList<>();
       while (rs.next()) {
-        result.add(new Team(
+        teams.add(new Team(
           rs.getInt("codequipo"),
           rs.getString("nombre"),
           rs.getString("presidente"),
@@ -43,9 +49,10 @@ public class TeamDAO {
           rs.getString("sitioweb")
         ));
       }
+      result.add(new DivisionTeams(i, teams));
       rs.close();
       stmt.close();
-    } catch (SQLException e) { e.printStackTrace(); }
+    }
     return result;
   }
 }

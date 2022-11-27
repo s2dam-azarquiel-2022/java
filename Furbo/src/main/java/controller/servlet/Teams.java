@@ -2,6 +2,7 @@ package controller.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,10 +32,15 @@ public class Teams extends HttpServlet {
     HttpSession session = request.getSession();
     Connection connection = Util.checkConnection(session);
     String currentSeason = Util.checkCurrentSeason(session, connection);
-    request.setAttribute(
-      sessionVars.TEAMS.name(),
-      TeamDAO.getAll(connection, currentSeason)
-    );
+    try {
+      request.setAttribute(
+        sessionVars.TEAMS.name(),
+        TeamDAO.getAll(connection, currentSeason)
+      );
+    } catch (SQLException e) {
+      // TODO: 500 page
+      e.printStackTrace();
+    }
 
     RequestDispatcher dispatcher = request.getRequestDispatcher("teams.jsp");
     dispatcher.forward(request, response);
