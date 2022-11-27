@@ -5,8 +5,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.entity.Page"%>
 <%@page import="controller.ServletConfig"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
+<%@page
+     language="java"
+     contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"
+%>
+
 <!DOCTYPE html>
 <%
 @SuppressWarnings("unchecked")
@@ -19,7 +24,9 @@ ArrayList<DivisionTeams> divisionTeams = (ArrayList<DivisionTeams>)
     <title>Furbo</title>
   </head>
   <body <%=PageUtils.mainBodySetup%>>
-    <jsp:include page="utils/navbar.jsp"></jsp:include>
+    <jsp:include page="utils/navbar/navbar.jsp">
+      <jsp:param name="additionalItemsFile" value="teams.jsp"/>
+    </jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
       <% for (DivisionTeams d : divisionTeams) { %>
         <h1 class="text-center"><%=d.division%>&#170; division</h1>
