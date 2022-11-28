@@ -5,7 +5,7 @@
 %>
 
 <form action="." method="post">
-  <select class="form-control" name="order" id="order" onchange="this.form.submit()">
+  <select class="form-control bg-dark text-white" name="order" id="order" onchange="this.form.submit()">
     <option value="" selected>Ordenar por</option>
   </select>
 </form>
