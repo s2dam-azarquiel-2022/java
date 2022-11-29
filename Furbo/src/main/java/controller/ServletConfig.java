@@ -14,7 +14,9 @@ public class ServletConfig {
     CONNECTION,
 
     CURRENT_SEASON,
-
-    TEAMS,
   };
+
+  public static enum requestVars {
+    TEAMS,
+  }
 }

@@ -1,3 +1,4 @@
+<%@page import="controller.ServletConfig.requestVars"%>
 <%@page import="view.PageUtils"%>
 <%@page import="model.entity.DivisionTeams"%>
 <%@page import="controller.ServletConfig.sessionVars"%>
@@ -16,7 +17,7 @@
 <%
 @SuppressWarnings("unchecked")
 ArrayList<DivisionTeams> divisionTeams = (ArrayList<DivisionTeams>)
-  request.getAttribute(sessionVars.TEAMS.name());
+  request.getAttribute(requestVars.TEAMS.name());
 %>
 <html>
   <head>

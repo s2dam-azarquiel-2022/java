@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.ServletConfig.sessionVars;
+import controller.ServletConfig.requestVars;
 import controller.Util;
 import model.dao.TeamDAO;
 
@@ -34,7 +34,7 @@ public class Teams extends HttpServlet {
     String currentSeason = Util.checkCurrentSeason(session, connection);
     try {
       request.setAttribute(
-        sessionVars.TEAMS.name(),
+        requestVars.PLAYERS.name(),
         TeamDAO.getAll(connection, currentSeason)
       );
     } catch (SQLException e) {
