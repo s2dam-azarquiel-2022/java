@@ -18,5 +18,6 @@ public class ServletConfig {
 
   public static enum requestVars {
     TEAMS,
+    PLAYERS,
   }
 }

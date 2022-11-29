@@ -1,6 +1,8 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.ServletConfig.requestVars;
 import controller.Util;
+import model.dao.PlayerDAO;
 
 @WebServlet("/players")
 public class Players extends HttpServlet {
@@ -26,7 +30,17 @@ public class Players extends HttpServlet {
     HttpServletResponse response
   ) throws ServletException, IOException {
     HttpSession session = request.getSession();
-    Util.checkConnection(session);
+    Connection connection = Util.checkConnection(session);
+    //String currentSeason = Util.checkCurrentSeason(session, connection);
+    try {
+      request.setAttribute(
+        requestVars.PLAYERS.name(),
+        PlayerDAO.getAll(connection)
+      );
+    } catch (SQLException e) {
+      // TODO: 500 page
+      e.printStackTrace();
+    }
 
     RequestDispatcher dispatcher = request.getRequestDispatcher("players.jsp");
     dispatcher.forward(request, response);

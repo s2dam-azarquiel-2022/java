@@ -34,7 +34,7 @@ public class Teams extends HttpServlet {
     String currentSeason = Util.checkCurrentSeason(session, connection);
     try {
       request.setAttribute(
-        requestVars.PLAYERS.name(),
+        requestVars.TEAMS.name(),
         TeamDAO.getAll(connection, currentSeason)
       );
     } catch (SQLException e) {
