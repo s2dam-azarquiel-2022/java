@@ -1,3 +1,4 @@
+<%@page import="model.entity.PositionPlayers"%>
 <%@page import="controller.ServletConfig.requestVars"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.entity.Player"%>
@@ -14,7 +15,7 @@
 <!DOCTYPE html>
 <%
 @SuppressWarnings("unchecked")
-ArrayList<Player> players = (ArrayList<Player>)
+ArrayList<PositionPlayers> positionPlayers = (ArrayList<PositionPlayers>)
   request.getAttribute(requestVars.PLAYERS.name());
 %>
 <html>
@@ -25,19 +26,24 @@ ArrayList<Player> players = (ArrayList<Player>)
   <body <%=PageUtils.mainBodySetup%>>
     <jsp:include page="utils/navbar/navbar.jsp"></jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
-      <div class="row">
-        <% for (Player p : players) { %>
-	        <div class="col-12 col-lg-6 col-xl-4 mb-4">
-	          <div class="card h-100 text-bg-dark" >
-	            <div class="card-body">
-	              <p class="fs-2">
-                  <h1 class="text-center"><%=p.name%></h1>
-	              </p>
+      <% for (PositionPlayers p : positionPlayers) { %>
+        <h1 class="text-center"><%=p.position.desc%></h1>
+        <% if (p.players.size() > 0) { %>
+        <div class="row">
+          <% for (Player player : p.players) { %>
+	          <div class="col-12 col-lg-6 col-xl-4 mb-4">
+	            <div class="card h-100 text-bg-dark" >
+	              <div class="card-body">
+                  <h1 class="text-center"><%=player.name%></h1>
+	              </div>
 	            </div>
 	          </div>
-	        </div>
-	      <% } %>
-      </div>
+	        <% } %>
+        </div>
+        <% } else { %>
+          <h4 class="text-center">No hay equipos registrados</h4>
+        <% } %>
+      <% } %>
     </div>
     <jsp:include page="utils/setupBottom.html"></jsp:include>
   </body>
