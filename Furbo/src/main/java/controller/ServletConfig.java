@@ -12,7 +12,6 @@ public class ServletConfig {
 
   public static enum sessionVars {
     CONNECTION,
-
     CURRENT_SEASON,
   };
 

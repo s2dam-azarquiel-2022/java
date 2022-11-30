@@ -1,7 +1,7 @@
 package controller;
 
 import java.sql.Connection;
-import java.util.function.Supplier;
+import java.util.concurrent.Callable;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,24 +13,27 @@ public class Util {
   private static <T> T checkNull(
     HttpSession session,
     sessionVars var,
-    Supplier<T> fDefaultVal
-  ) {
+    Callable<T> fDefaultVal
+  ) throws Exception {
     @SuppressWarnings("unchecked")
     T val = (T) session.getAttribute(var.name());
     if (val == null) {
-      val = fDefaultVal.get();
+      val = fDefaultVal.call();
       session.setAttribute(var.name(), val);
     }
     return val;
   }
 
-  public static Connection checkConnection(HttpSession s) {
+  public static Connection checkConnection(HttpSession s) throws Exception {
     return checkNull(s, sessionVars.CONNECTION, () -> {
       return ConnectionHandler.connect();
     });
   }
 
-  public static String checkCurrentSeason(HttpSession s, Connection c) {
+  public static String checkCurrentSeason(
+    HttpSession s,
+    Connection c
+  ) throws Exception {
     return checkNull(s, sessionVars.CURRENT_SEASON, () -> {
       return SeasonDAO.getMostRecent(c);
     });

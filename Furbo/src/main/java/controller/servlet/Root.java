@@ -24,7 +24,12 @@ public class Root extends HttpServlet {
     HttpServletResponse response
   ) throws ServletException, IOException {
     HttpSession session = request.getSession();
-    Util.checkConnection(session);
+    try {
+      Util.checkConnection(session);
+    } catch (Exception e) {
+      // TODO: 500 page
+      e.printStackTrace();
+    }
 
     RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
     dispatcher.forward(request, response);
