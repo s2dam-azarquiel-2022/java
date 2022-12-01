@@ -23,6 +23,7 @@ public class Root extends HttpServlet {
     HttpServletRequest request,
     HttpServletResponse response
   ) throws ServletException, IOException {
+    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
     HttpSession session = request.getSession();
     Connection connection;
     try {
@@ -32,8 +33,17 @@ public class Root extends HttpServlet {
         JokeDAO.get(connection)
       );
     } catch (Exception e) {
-      // TODO: 500 page
-      e.printStackTrace();
+      request.setAttribute(
+        requestVars.ERR_TITLE.name(),
+        e.toString()
+      );
+      request.setAttribute(
+        requestVars.ERR_MESSAGE.name(),
+        e.getMessage()
+      );
+      dispatcher = request.getRequestDispatcher("err/500.jsp");
+    } finally {
+      dispatcher.forward(request, response);
     }
   }
 
