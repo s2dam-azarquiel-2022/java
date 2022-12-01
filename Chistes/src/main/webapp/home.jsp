@@ -28,7 +28,7 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)
     <div <%=PageUtils.mainDivSetup%>>
       <div class="d-grid gap-3">
         <% for (Joke joke : jokes) { %>
-          <div class="border rounded">
+          <div class="p-2 border border-3 rounded bg-dark">
             <h1><%=joke.title%></h1>
             <p><%=joke.description%></p>
           </div>

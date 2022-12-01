@@ -2,7 +2,8 @@ package view;
 
 public class PageUtils {
   public static final String mainDivSetup = """
-   class="container-fluid flex-grow-1 p-4"
+   class="container-fluid flex-grow-1 bg-dark text-white p-4"
+   style="--bs-bg-opacity: .9"
   """;
 
   public static final String mainBodySetup = """
@@ -10,7 +11,7 @@ public class PageUtils {
   """;
 
   public static final String mainNavSetup = """
-    class="navbar navbar-dark bg-primary navbar-expand-lg sticky-top"
+    class="navbar navbar-dark bg-dark text-white navbar-expand-lg sticky-top"
   """;
 
   public static final String mainNavbarSetup = """
