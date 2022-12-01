@@ -11,7 +11,7 @@
 <nav <%=PageUtils.mainNavSetup%>>
   <div class="container-fluid">
     <!-- Home link -->
-    <a class="navbar-brand p-0 m-0" aria-current="page" href="/Furbo">
+    <a class="navbar-brand p-0 m-0" aria-current="page" href="/CHANGE_ROOT_DIR">
       <img class="d-block" style="height: 2em;" src="img/logo.png" />
     </a>
 
