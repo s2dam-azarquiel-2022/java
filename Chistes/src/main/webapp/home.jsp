@@ -21,7 +21,7 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)
 <html>
   <head>
     <jsp:include page="utils/setupHead.html"></jsp:include>
-    <title>Furbo</title>
+    <title>Chistes</title>
   </head>
   <body <%=PageUtils.mainBodySetup%>>
     <jsp:include page="utils/navbar/navbar.jsp"></jsp:include>

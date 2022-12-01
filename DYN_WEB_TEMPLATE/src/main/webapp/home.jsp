@@ -12,7 +12,7 @@
 <html>
   <head>
     <jsp:include page="utils/setupHead.html"></jsp:include>
-    <title>Furbo</title>
+    <title>CHANGE TITLE</title>
   </head>
   <body <%=PageUtils.mainBodySetup%>>
     <jsp:include page="utils/navbar/navbar.jsp"></jsp:include>
