@@ -11,5 +11,10 @@ public class ServletConfig {
   };
 
   public static enum requestVars {
+    // ...
+
+    // Errors
+    ERR_TITLE,
+    ERR_MESSAGE,
   };
 }

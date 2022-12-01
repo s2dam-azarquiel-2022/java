@@ -6,27 +6,18 @@ import java.sql.SQLException;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
 public class ConnectionHandler {
-  public static Connection connect() {
+  public static Connection connect() throws SQLException {
     OracleConnectionPoolDataSource pool = null;
     Connection connection = null;
-    try {
-      pool = new OracleConnectionPoolDataSource();
-      // TODO change db url
-      pool.setURL(System.getenv("CHANGEME_DB_URL"));
-      connection = pool.getConnection();
-    } catch (SQLException e) {
-      System.out.println("Connection start error");
-      e.printStackTrace();
-    }
+    pool = new OracleConnectionPoolDataSource();
+    // TODO change db url
+    pool.setURL(System.getenv("CHANGEME_DB_URL"));
+    connection = pool.getConnection();
 
     return connection;
   }
 
-  public static void close(Connection connection) {
-    try { connection.close(); }
-    catch (SQLException e) {
-      System.out.println("Connection close error");
-      e.printStackTrace();
-    }
+  public static void close(Connection connection) throws SQLException {
+    connection.close();
   }
 }
