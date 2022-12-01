@@ -15,11 +15,11 @@ public class JokeDAO {
     ArrayList<Joke> result = new ArrayList<>();
     PreparedStatement stmt = connection.prepareStatement("""
       SELECT
-        id id,
-        idcategoria categoryID,
-        titulo title,
-        descripcion desc,
-        apodo nickname
+        id as id,
+        idcategoria as categoryID,
+        titulo as title,
+        descripcion as description,
+        apodo as nickname
       FROM chiste c
       WHERE c.idcategoria LIKE '%'
     """);
@@ -29,7 +29,7 @@ public class JokeDAO {
         rs.getInt("id"),
         rs.getInt("categoryID"),
         rs.getString("title"),
-        rs.getString("desc"),
+        rs.getString("description"),
         rs.getString("nickname")
       ));
     }

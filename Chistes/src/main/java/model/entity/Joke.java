@@ -4,16 +4,16 @@ public class Joke {
   public int id;
   public int categoryID;
   public String title;
-  public String desc;
+  public String description;
   public String nickname;
 
   public Joke(
-    int id, int categoryID, String title, String desc, String nickname
+    int id, int categoryID, String title, String description, String nickname
   ) {
     this.id = id;
     this.categoryID = categoryID;
     this.title = title;
-    this.desc = desc;
+    this.description = description;
     this.nickname = nickname;
   }
 }

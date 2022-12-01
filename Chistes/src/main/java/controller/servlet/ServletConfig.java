@@ -11,5 +11,6 @@ public class ServletConfig {
   };
 
   public static enum requestVars {
+    JOKES,
   };
 }
