@@ -10,19 +10,21 @@ import model.entity.Joke;
 
 public class JokeDAO {
   public static ArrayList<Joke> get(
-    Connection connection
+    Connection connection,
+    int category
   ) throws SQLException {
     ArrayList<Joke> result = new ArrayList<>();
     PreparedStatement stmt = connection.prepareStatement("""
       SELECT
-        id as id,
-        idcategoria as categoryID,
-        titulo as title,
-        descripcion as description,
-        apodo as nickname
+        c.id as id,
+        c.idcategoria as categoryID,
+        c.titulo as title,
+        c.descripcion as description,
+        c.apodo as nickname
       FROM chiste c
-      WHERE c.idcategoria LIKE '%'
+      WHERE c.idcategoria LIKE ?
     """);
+    stmt.setString(1, category == -1 ? "%" : String.valueOf(category));
     ResultSet rs = stmt.executeQuery();
     while (rs.next()) {
       result.add(new Joke(

@@ -6,11 +6,13 @@ public class ServletConfig {
   public static Page[] pages = {
   };
 
-  public static enum sessionVars {
+  public static enum SessVars {
     CONNECTION,
+    CATEGORIES,
+    SELECTED_CATEGORY,
   };
 
-  public static enum requestVars {
+  public static enum ReqVars {
     JOKES,
 
     // Errors

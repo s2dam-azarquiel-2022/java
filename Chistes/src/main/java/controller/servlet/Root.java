@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.servlet.ServletConfig.requestVars;
+import controller.servlet.ServletConfig.ReqVars;
 import model.dao.JokeDAO;
 
 public class Root extends HttpServlet {
@@ -20,30 +20,23 @@ public class Root extends HttpServlet {
 
   @Override
   protected void doGet(
-    HttpServletRequest request,
+    HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
-    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-    HttpSession session = request.getSession();
-    Connection connection;
+    RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
+    HttpSession sess = req.getSession();
     try {
-      connection = ServletUtils.checkConnection(session);
-      request.setAttribute(
-        requestVars.JOKES.name(),
-        JokeDAO.get(connection)
-      );
+      Connection con = ServletUtils.checkConnection(sess);
+      ServletUtils.setCategoriesIfNull(sess, req, con);
+      int selectedCategory = ServletUtils.updateSelectedCategory(sess, req);
+      req.setAttribute(ReqVars.JOKES.name(), JokeDAO.get(con, selectedCategory));
     } catch (Exception e) {
-      request.setAttribute(
-        requestVars.ERR_TITLE.name(),
-        e.toString()
-      );
-      request.setAttribute(
-        requestVars.ERR_MESSAGE.name(),
-        e.getMessage()
-      );
-      dispatcher = request.getRequestDispatcher("err/500.jsp");
+      req.setAttribute(ReqVars.ERR_TITLE.name(), e.toString());
+      req.setAttribute(ReqVars.ERR_MESSAGE.name(), e.getMessage());
+      dispatcher = req.getRequestDispatcher("err/500.jsp");
+      e.printStackTrace();
     } finally {
-      dispatcher.forward(request, response);
+      dispatcher.forward(req, response);
     }
   }
 

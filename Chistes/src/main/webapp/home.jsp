@@ -1,4 +1,4 @@
-<%@page import="controller.servlet.ServletConfig.requestVars"%>
+<%@page import="controller.servlet.ServletConfig.ReqVars"%>
 <%@page import="model.entity.Joke"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="view.PageUtils"%>
@@ -14,7 +14,7 @@
 <%
 @SuppressWarnings("unchecked")
 ArrayList<Joke> jokes = (ArrayList<Joke>)
-  request.getAttribute(requestVars.JOKES.name());
+  request.getAttribute(ReqVars.JOKES.name());
 %>
 
 <!DOCTYPE html>
@@ -24,7 +24,9 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)
     <title>Chistes</title>
   </head>
   <body <%=PageUtils.mainBodySetup%>>
-    <jsp:include page="utils/navbar/navbar.jsp"></jsp:include>
+    <jsp:include page="utils/navbar/navbar.jsp">
+      <jsp:param name="additionalItemsFile" value="root.jsp" />
+    </jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
       <div class="d-grid gap-3">
         <% for (Joke joke : jokes) { %>
