@@ -1,4 +1,4 @@
-<%@page import="controller.servlet.ReqVars"%>
+<%@page import="controller.servlet.ServletConfig.ReqVars"%>
 <%@page import="view.PageUtils"%>
 
 <%@page
@@ -8,10 +8,8 @@
 %>
 
 <%
-p
-
 String errTitle = (String) request.getAttribute(ReqVars.ERR_TITLE.name());
-String errMsg = (String) request.getAttribute(ReqVars.ERR_MESSAGE.name())
+String errMsg = (String) request.getAttribute(ReqVars.ERR_MESSAGE.name());
 %>
 
 <!DOCTYPE html>

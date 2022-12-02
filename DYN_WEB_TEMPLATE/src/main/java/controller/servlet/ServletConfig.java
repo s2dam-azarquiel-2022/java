@@ -6,11 +6,11 @@ public class ServletConfig {
   public static Page[] pages = {
   };
 
-  public static enum sessionVars {
+  public static enum SessVars {
     CONNECTION,
   };
 
-  public static enum requestVars {
+  public static enum ReqVars {
     // ...
 
     // Errors

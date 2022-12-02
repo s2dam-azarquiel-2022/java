@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.servlet.ServletConfig.requestVars;
+import controller.servlet.ServletConfig.ReqVars;
 
 public class Root extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -18,25 +19,19 @@ public class Root extends HttpServlet {
 
   @Override
   protected void doGet(
-    HttpServletRequest request,
+    HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
-    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-    HttpSession session = request.getSession();
+    RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
+    HttpSession sess = req.getSession();
     try {
-      ServletUtils.checkConnection(session);
+      Connection con = ServletUtils.checkConnection(sess);
     } catch (Exception e) {
-      request.setAttribute(
-        requestVars.ERR_TITLE.name(),
-        e.toString()
-      );
-      request.setAttribute(
-        requestVars.ERR_MESSAGE.name(),
-        e.getMessage()
-      );
-      dispatcher = request.getRequestDispatcher("err/500.jsp");
+      req.setAttribute(ReqVars.ERR_TITLE.name(), e.toString());
+      req.setAttribute(ReqVars.ERR_MESSAGE.name(), e.getMessage());
+      dispatcher = req.getRequestDispatcher("err/500.jsp");
     } finally {
-      dispatcher.forward(request, response);
+      dispatcher.forward(req, response);
     }
   }
 
