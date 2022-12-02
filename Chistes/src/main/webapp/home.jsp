@@ -38,5 +38,6 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)
       </div>
     </div>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
+    <script src="./js/index.js"></script>
   </body>
 </html>

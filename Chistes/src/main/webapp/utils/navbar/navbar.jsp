@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.ServletConfig.SessVars"%>
 <%@page import="view.PageUtils"%>
 <%@page import="controller.servlet.ServletConfig"%>
 <%@page import="model.entity.Page"%>
@@ -11,9 +12,16 @@
 <nav <%=PageUtils.mainNavSetup%>>
   <div class="container-fluid">
     <!-- Home link -->
-    <a class="navbar-brand p-0 m-0" aria-current="page" href="/Chistes">
-      <img class="d-block" style="height: 2em;" src="img/logo.png" />
-    </a>
+    <form
+      action="/Chistes/"
+      method="post"
+      class="navbar-brand p-0 m-0"
+      aria-current="page"
+      id="logo-form"
+    >
+      <input name="<%=SessVars.SELECTED_CATEGORY%>" value="-1" class="d-none" />
+      <img class="d-block" style="height: 2em;" src="img/logo.png" id="logo" />
+    </form>
 
     <!-- Toggler -->
     <button <%=PageUtils.mainNavbarTogglerButtonSetup%>>
