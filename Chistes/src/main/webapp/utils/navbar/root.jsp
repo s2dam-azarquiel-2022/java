@@ -32,11 +32,18 @@ try {
   >
     <% if (selectedCategory == -1) { %>
       <option value="" selected class="d-none">Elije categoria</option>
+      <% for (Category category : categories) { %>
+        <option value="<%=category.id%>"><%=category.name%></option>
+      <% } %>
     <% } else { %>
       <option value="-1">Todas</option>
-    <% } %>
-    <% for (Category category : categories) { %>
-      <option value="<%=category.id%>"><%=category.name%></option>
+      <% for (Category category : categories) { %>
+        <% if (category.id == selectedCategory) { %>
+          <option value="<%=category.id%>" selected><%=category.name%></option>
+        <% } else { %>
+          <option value="<%=category.id%>"><%=category.name%></option>
+        <% } %>
+      <% } %>
     <% } %>
   </select>
 </form>
