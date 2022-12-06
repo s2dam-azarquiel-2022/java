@@ -1,9 +1,7 @@
+<%@page import="view.PageUtils"%>
 <%@page import="controller.servlet.ServletConfig.ReqVars"%>
 <%@page import="model.entity.Joke"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="view.PageUtils"%>
-<%@page import="model.entity.Page"%>
-<%@page import="controller.servlet.ServletConfig"%>
 
 <%@page
      language="java"
@@ -47,6 +45,7 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)
         <% } %>
       </div>
     </div>
+    <jsp:include page="utils/modals/addJoke.jsp"></jsp:include>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
     <script src="./js/index.js"></script>
   </body>

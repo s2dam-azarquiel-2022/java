@@ -27,4 +27,33 @@ public class PageUtils {
     aria-expanded="false"
     aria-label="Toggle navigation"
   """;
+
+  public static final String mainFormControlSetup = """
+    class="form-control bg-dark text-white"
+  """;
+
+  public static final String mainModalCloseBtnSetup = """
+    class="btn btn-secondary"
+    type="button"
+    data-bs-dismiss="modal"
+  """;
+
+  public static String mainModalSetup(String modalName) {
+    return String.format("""
+      class="modal fade"
+      tabindex="-1"
+      aria-hidden="true"
+      id="%s"
+      aria-labelledby="%s"
+    """, modalName, modalName);
+  }
+
+  public static String mainModalButtonSetup(String modalName) {
+    return String.format("""
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#%s"
+    """, modalName);
+  }
 }

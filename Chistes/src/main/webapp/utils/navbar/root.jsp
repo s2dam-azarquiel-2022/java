@@ -1,3 +1,4 @@
+<%@page import="view.PageUtils"%>
 <%@page import="controller.servlet.ServletConfig.SessVars"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.entity.Category"%>
@@ -23,9 +24,9 @@ try {
 }
 %>
 
-<form action="." method="post">
+<form action="." method="post" class="me-3">
   <select
-    class="form-control bg-dark text-white"
+    <%=PageUtils.mainFormControlSetup%>
     name="<%=SessVars.SELECTED_CATEGORY.name()%>"
     id="category"
     onchange="this.form.submit()"
@@ -47,3 +48,7 @@ try {
     <% } %>
   </select>
 </form>
+
+<button <%=PageUtils.mainModalButtonSetup("addJokeModal")%>>
+  Nueva broma
+</button>
