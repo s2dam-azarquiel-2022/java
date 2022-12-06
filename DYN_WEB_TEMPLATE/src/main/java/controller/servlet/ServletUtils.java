@@ -1,13 +1,19 @@
 package controller.servlet;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.concurrent.Callable;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.connection.ConnectionHandler;
+import controller.servlet.ServletConfig.ReqVars;
 import controller.servlet.ServletConfig.SessVars;
+import model.utils.ServletTryFunction;
 
 public class ServletUtils {
   private static <T> T checkNull(
@@ -62,5 +68,23 @@ public class ServletUtils {
     return checkNull(sess, SessVars.CONNECTION, () -> {
       return ConnectionHandler.connect();
     });
+  }
+
+  public static void servletTry(
+    HttpServletRequest req,
+    HttpServletResponse response,
+    String defaultDispatchedFile,
+    ServletTryFunction f
+  ) throws ServletException, IOException {
+    HttpSession sess = req.getSession();
+    RequestDispatcher dispatcher = req.getRequestDispatcher(defaultDispatchedFile);
+    try { f.run(sess, dispatcher); }
+    catch (Exception e) {
+      req.setAttribute(ReqVars.ERR_TITLE.name(), e.toString());
+      req.setAttribute(ReqVars.ERR_MESSAGE.name(), e.getMessage());
+      dispatcher = req.getRequestDispatcher("/err/500.jsp");
+    } finally {
+      dispatcher.forward(req, response);
+    }
   }
 }

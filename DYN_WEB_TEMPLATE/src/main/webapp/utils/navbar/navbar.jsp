@@ -11,9 +11,17 @@
 <nav <%=PageUtils.mainNavSetup%>>
   <div class="container-fluid">
     <!-- Home link -->
-    <a class="navbar-brand p-0 m-0" aria-current="page" href="/CHANGE_ROOT_DIR">
-      <img class="d-block" style="height: 2em;" src="img/logo.png" />
-    </a>
+    <form
+      action="/<%=PageUtils.pageName%>/"
+      method="post"
+      class="navbar-brand p-0 m-0"
+      aria-current="page"
+      id="logo-form"
+    >
+      <!-- Here reset session vars like this: -->
+      <!-- <input name="SESS_VAR name here" value="-1" class="d-none" /> -->
+      <img class="d-block" style="height: 2em;" src="img/logo.png" id="logo" />
+    </form>
 
     <!-- Toggler -->
     <button <%=PageUtils.mainNavbarTogglerButtonSetup%>>

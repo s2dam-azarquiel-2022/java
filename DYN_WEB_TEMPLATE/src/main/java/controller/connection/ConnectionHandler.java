@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
+import view.PageUtils;
 
 public class ConnectionHandler {
   public static Connection connect() throws SQLException {
@@ -11,7 +12,7 @@ public class ConnectionHandler {
     Connection connection = null;
     pool = new OracleConnectionPoolDataSource();
     // TODO change db url
-    pool.setURL(System.getenv("CHANGEME_DB_URL"));
+    pool.setURL(System.getenv(String.format("%s_DB_URL", PageUtils.pageName)));
     connection = pool.getConnection();
 
     return connection;
