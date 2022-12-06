@@ -53,4 +53,21 @@ public class JokeDAO {
     stmt.close();
     return result;
   }
+
+  public static void add(
+    Connection con,
+    Joke joke
+  ) throws SQLException {
+    PreparedStatement stmt = con.prepareStatement("""
+      INSERT INTO chiste
+      (idcategoria, titulo, descripcion, apodo)
+      VALUES (?, ?, ?, ?)
+    """);
+    stmt.setInt(1, joke.categoryID);
+    stmt.setString(2, joke.title);
+    stmt.setString(3, joke.description);
+    stmt.setString(4, joke.nickname);
+    stmt.execute();
+    stmt.close();
+  }
 }

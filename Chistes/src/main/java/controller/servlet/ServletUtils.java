@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import controller.connection.ConnectionHandler;
+import controller.servlet.ServletConfig.ReqVars;
 import controller.servlet.ServletConfig.SessVars;
 import model.dao.CategoryDAO;
+import model.entity.Joke;
 
 public class ServletUtils {
   private static <T> T checkNull(
@@ -84,5 +86,24 @@ public class ServletUtils {
     setIfNull(sess, req, SessVars.CATEGORIES, () -> {
       return CategoryDAO.get(con);
     });
+  }
+
+  public static Joke getAddedJokeAndSetIt(
+    HttpServletRequest req
+  ) throws Exception {
+    System.out.println(req.getParameter(ReqVars.TITLE.name()));
+    System.out.println(req.getParameter(ReqVars.DESCRIPTION.name()));
+    System.out.println(req.getParameter(ReqVars.NICKNAME.name()));
+    Joke addedJoke = new Joke(
+      0,
+      Integer.valueOf(req.getParameter(ReqVars.CATEGORY.name())),
+      req.getParameter(ReqVars.TITLE.name()),
+      req.getParameter(ReqVars.DESCRIPTION.name()),
+      req.getParameter(ReqVars.NICKNAME.name()),
+      0,
+      0
+    );
+    req.setAttribute(ReqVars.ADDED_JOKE.name(), addedJoke);
+    return addedJoke;
   }
 }

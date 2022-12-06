@@ -47,6 +47,5 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)
     </div>
     <jsp:include page="utils/modals/addJoke.jsp"></jsp:include>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
-    <script src="./js/index.js"></script>
   </body>
 </html>

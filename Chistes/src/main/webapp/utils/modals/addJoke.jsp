@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.ServletConfig.ReqVars"%>
 <%@page import="model.entity.Category"%>
 <%@page import="view.PageUtils"%>
 <%@page import="controller.servlet.ServletConfig.SessVars"%>
@@ -33,12 +34,12 @@ try {
       <div class="modal-body">
         <form action="/Chistes/AddJoke" method="post" class="d-grid gap-3">
           <div>
-            <label for="nickname" class="form-label">Apodo</label>
-            <input id="nickname" type="text" <%=PageUtils.mainFormControlSetup%> />
+            <label for="<%=ReqVars.NICKNAME.name()%>" class="form-label">Apodo</label>
+            <input name="<%=ReqVars.NICKNAME.name()%>" type="text" <%=PageUtils.mainFormControlSetup%> />
           </div>
           <div>
-            <label for="categoryID" class="form-label">Categoria</label>
-            <select id="categoryID" <%=PageUtils.mainFormControlSetup%>>
+            <label for="<%=ReqVars.CATEGORY.name()%>" class="form-label">Categoria</label>
+            <select name="<%=ReqVars.CATEGORY.name()%>" <%=PageUtils.mainFormControlSetup%>>
               <option value="" selected class="d-none">Elije categoria</option>
               <% for (Category category : categories) { %>
                 <option value="<%=category.id%>"><%=category.name%></option>
@@ -46,12 +47,12 @@ try {
             </select>
           </div>
           <div>
-            <label for="title" class="form-label">Titulo</label>
-            <input id="title" type="text" <%=PageUtils.mainFormControlSetup%> />
+            <label for="<%=ReqVars.TITLE.name()%>" class="form-label">Titulo</label>
+            <input name="<%=ReqVars.TITLE.name()%>" type="text" <%=PageUtils.mainFormControlSetup%> />
           </div>
           <div>
-            <label for="description" class="form-label">Descripcion</label>
-            <input id="description" type="text" <%=PageUtils.mainFormControlSetup%> />
+            <label for="<%=ReqVars.DESCRIPTION.name()%>" class="form-label">Descripcion</label>
+            <input name="<%=ReqVars.DESCRIPTION.name()%>" type="text" <%=PageUtils.mainFormControlSetup%> />
           </div>
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary" type="submit">Aceptar</button>

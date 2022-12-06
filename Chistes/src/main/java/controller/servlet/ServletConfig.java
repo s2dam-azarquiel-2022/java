@@ -14,6 +14,13 @@ public class ServletConfig {
 
   public static enum ReqVars {
     JOKES,
+    ADDED_JOKE,
+
+    // Modals
+    NICKNAME,
+    CATEGORY,
+    TITLE,
+    DESCRIPTION,
 
     // Errors
     ERR_TITLE,
