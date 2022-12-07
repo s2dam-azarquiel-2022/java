@@ -15,7 +15,8 @@
 %>
 
 <%
-RootOptions option = RootOptions.valueOf((String) session.getAttribute(SessVars.ROOT_OPTION.name()));
+String option = (String) session.getAttribute(SessVars.ROOT_OPTION.name());
+String fileEnd = ".jsp";
 %>
 
 <!DOCTYPE html>
@@ -29,13 +30,7 @@ RootOptions option = RootOptions.valueOf((String) session.getAttribute(SessVars.
       <jsp:param name="additionalItemsFile" value="root.jsp" />
     </jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
-      <% if (option == RootOptions.CITIES) { %>
-        <jsp:include page="cities.jsp"></jsp:include>
-      <% } else if (option == RootOptions.ROUTES) { %>
-        <jsp:include page="routes.jsp"></jsp:include>
-      <% } else { %>
-        <p>Error</p>
-      <% } %>
+      <jsp:include page="<%=option.toLowerCase() + fileEnd%>"></jsp:include>
     </div>
     <jsp:include page="utils/footer.html"></jsp:include>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
