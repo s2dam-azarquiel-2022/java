@@ -1,0 +1,9 @@
+.star {
+	background: none;
+	border: none;
+	color: gold !important;
+}
+
+.star:hover ~ .star {
+	color: #6c757d !important;
+}
