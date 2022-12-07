@@ -1,9 +1,16 @@
-.star {
+.stars > .star {
+	color: #6c757d !important;
 	background: none;
 	border: none;
+}
+
+.star {
+}
+
+.stars:hover > .star {
 	color: gold !important;
 }
 
-.star:hover ~ .star {
+.stars .star:hover ~ .star {
 	color: #6c757d !important;
 }
