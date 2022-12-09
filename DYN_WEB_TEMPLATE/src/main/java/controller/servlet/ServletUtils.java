@@ -16,7 +16,7 @@ import controller.servlet.ServletConfig.SessVars;
 import model.utils.ServletTryFunction;
 
 public class ServletUtils {
-  private static <T> T checkNull(
+  public static <T> T getCheckingNull(
     HttpSession sess,
     SessVars var,
     Callable<T> fDefaultVal
@@ -30,7 +30,17 @@ public class ServletUtils {
     return val;
   }
 
-  private static <T> T updateIfNotNull(
+  public static <T> void setIfNull(
+    HttpSession sess,
+    SessVars var,
+    Callable<T> fDefaultVal
+  ) throws Exception {
+    if (sess.getAttribute(var.name()) == null) {
+      sess.setAttribute(var.name(), fDefaultVal.call());
+    }
+  }
+
+  public static <T> T updateIfNotNullAndGet(
     HttpSession sess,
     HttpServletRequest req,
     SessVars var,
@@ -51,21 +61,10 @@ public class ServletUtils {
     return val;
   }
 
-  private static <T> void setIfNull(
-    HttpSession sess,
-    HttpServletRequest req,
-    SessVars var,
-    Callable<T> fDefaultVal
-  ) throws Exception {
-    if (sess.getAttribute(var.name()) == null) {
-      sess.setAttribute(var.name(), fDefaultVal.call());
-    }
-  }
-
   public static Connection checkConnection(
     HttpSession sess
   ) throws Exception {
-    return checkNull(sess, SessVars.CONNECTION, () -> {
+    return getCheckingNull(sess, SessVars.CONNECTION, () -> {
       return ConnectionHandler.connect();
     });
   }
@@ -83,8 +82,9 @@ public class ServletUtils {
       req.setAttribute(ReqVars.ERR_TITLE.name(), e.toString());
       req.setAttribute(ReqVars.ERR_MESSAGE.name(), e.getMessage());
       dispatcher = req.getRequestDispatcher("/err/500.jsp");
+      e.printStackTrace();
     } finally {
-      dispatcher.forward(req, response);
+      if (dispatcher != null) dispatcher.forward(req, response);
     }
   }
 }
