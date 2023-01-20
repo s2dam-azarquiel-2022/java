@@ -6,3 +6,5 @@ node_modules/
 generated.css*
 reduced.css
 
+/FurboPorra/nbproject/private/
+/FurboPorra/build/
