@@ -1,7 +1,7 @@
 package view;
 
 public class PageUtils {
-  public static final String pageName = "DYN_WEB_TEMPLATE";
+  public static final String pageName = "Furbo Porra";
 
   public static final String mainDivSetup =
    "class='container-fluid flex-grow-1 bg-dark text-white p-4' " +

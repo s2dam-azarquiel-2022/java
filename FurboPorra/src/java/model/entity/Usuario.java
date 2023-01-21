@@ -27,76 +27,76 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "USUARIO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByDni", query = "SELECT u FROM Usuario u WHERE u.dni = :dni")
-    , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")})
+  @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+  , @NamedQuery(name = "Usuario.findByDni", query = "SELECT u FROM Usuario u WHERE u.dni = :dni")
+  , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")})
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "DNI")
-    private String dni;
-    @Column(name = "NOMBRE")
-    private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Porra> porraList;
+  private static final long serialVersionUID = 1L;
+  @Id
+  @Basic(optional = false)
+  @Column(name = "DNI")
+  private String dni;
+  @Column(name = "NOMBRE")
+  private String nombre;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+  private List<Porra> porraList;
 
-    public Usuario() {
-    }
+  public Usuario() {
+  }
 
-    public Usuario(String dni) {
-        this.dni = dni;
-    }
+  public Usuario(String dni) {
+    this.dni = dni;
+  }
 
-    public String getDni() {
-        return dni;
-    }
+  public String getDni() {
+    return dni;
+  }
 
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
+  public void setDni(String dni) {
+    this.dni = dni;
+  }
 
-    public String getNombre() {
-        return nombre;
-    }
+  public String getNombre() {
+    return nombre;
+  }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-    @XmlTransient
-    public List<Porra> getPorraList() {
-        return porraList;
-    }
+  @XmlTransient
+  public List<Porra> getPorraList() {
+    return porraList;
+  }
 
-    public void setPorraList(List<Porra> porraList) {
-        this.porraList = porraList;
-    }
+  public void setPorraList(List<Porra> porraList) {
+    this.porraList = porraList;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (dni != null ? dni.hashCode() : 0);
-        return hash;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    hash += (dni != null ? dni.hashCode() : 0);
+    return hash;
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.dni == null && other.dni != null) || (this.dni != null && !this.dni.equals(other.dni))) {
-            return false;
-        }
-        return true;
+  @Override
+  public boolean equals(Object object) {
+    // TODO: Warning - this method won't work in the case the id fields are not set
+    if (!(object instanceof Usuario)) {
+      return false;
     }
+    Usuario other = (Usuario) object;
+    if ((this.dni == null && other.dni != null) || (this.dni != null && !this.dni.equals(other.dni))) {
+      return false;
+    }
+    return true;
+  }
 
-    @Override
-    public String toString() {
-        return "entities.Usuario[ dni=" + dni + " ]";
-    }
-    
+  @Override
+  public String toString() {
+    return "model.entity.Usuario[ dni=" + dni + " ]";
+  }
+  
 }

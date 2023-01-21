@@ -7,6 +7,11 @@
     <class>model.entity.Porra</class>
     <class>model.entity.Partido</class>
     <class>model.entity.Usuario</class>
+    <class>model.utils.Equipo</class>
+    <class>model.utils.Jornada</class>
+    <class>model.utils.Porra</class>
+    <class>model.utils.Partido</class>
+    <class>model.utils.Usuario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@80.28.158.14:1521:oradai"/>
