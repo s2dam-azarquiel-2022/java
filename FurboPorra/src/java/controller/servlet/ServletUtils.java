@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.servlet.ServletConfig.ReqVars;
 import controller.servlet.ServletConfig.SessVars;
+import javax.persistence.EntityManager;
 import model.utils.ServletTryFunction;
 
 public class ServletUtils {
@@ -60,14 +61,6 @@ public class ServletUtils {
     return val;
   }
 
-//  public static Connection checkConnection(
-//    HttpSession sess
-//  ) throws Exception {
-//    return getCheckingNull(sess, SessVars.CONNECTION, () -> {
-//      return ConnectionHandler.connect();
-//    });
-//  }
-
   @SuppressWarnings("CallToPrintStackTrace")
   public static void servletTry(
     HttpServletRequest req,
@@ -75,10 +68,14 @@ public class ServletUtils {
     String defaultDispatchedFile,
     ServletTryFunction f
   ) throws ServletException, IOException {
-    HttpSession sess = req.getSession();
     RequestDispatcher dispatcher = req.getRequestDispatcher(defaultDispatchedFile);
-    try { f.run(sess, dispatcher); }
-    catch (Exception e) {
+    try {
+      HttpSession sess = req.getSession();
+      EntityManager entityManager = getCheckingNull(sess, SessVars.ENTITY_MANAGER, () -> {
+        return JPAUtil.getEntityManagerFactory().createEntityManager();
+      });
+      f.run(sess, entityManager, dispatcher);
+    } catch (Exception e) {
       req.setAttribute(ReqVars.ERR_TITLE.name(), e.toString());
       req.setAttribute(ReqVars.ERR_MESSAGE.name(), e.getMessage());
       dispatcher = req.getRequestDispatcher("/err/500.jsp");

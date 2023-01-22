@@ -8,6 +8,7 @@ public class ServletConfig {
 
   public static enum SessVars {
     CONNECTION,
+    ENTITY_MANAGER,
     LOGIN,
   };
 

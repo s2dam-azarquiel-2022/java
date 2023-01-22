@@ -14,7 +14,7 @@
         <h5 class="modal-title">Login | Register</h5>
       </div>
       <div class="modal-body">
-        <form id="loginForm" action="/<%=PageUtils.pageName%>/login" method="post" class="d-grid gap-3">
+        <form id="loginForm" action="/<%=PageUtils.pageName%>/Login" method="post" class="d-grid gap-3">
           <div>
             <label <%=PageUtils.mainLabelSetup(ReqVars.USERNAME)%>>DNI</label>
             <input <%=PageUtils.mainInputSetup(ReqVars.USERNAME)%> />

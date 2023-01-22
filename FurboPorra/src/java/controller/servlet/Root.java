@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,7 @@ public class Root extends HttpServlet {
     HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
-    ServletUtils.servletTry(req, response, "/home.jsp", (sess, dispatcher) -> {
-//      Connection con = ServletUtils.checkConnection(sess);
+    ServletUtils.servletTry(req, response, "/home.jsp", (sess, entityManager, dispatcher) -> {
     });
   }
 
