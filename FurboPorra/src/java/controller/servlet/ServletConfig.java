@@ -13,8 +13,8 @@ public class ServletConfig {
   };
 
   public static enum ReqVars {
+    DNI,
     USERNAME,
-    PASSWORD,
 
     // Errors
     ERR_TITLE,

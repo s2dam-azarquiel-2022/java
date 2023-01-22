@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.servlet.ServletConfig.ReqVars;
-import controller.servlet.ServletConfig.SessVars;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import view.PageUtils;
@@ -43,12 +42,11 @@ public class Login extends HttpServlet {
     HttpServletResponse response
   ) throws ServletException, IOException {
     ServletUtils.servletTry(req, response, null, (sess, entityManager, dispatcher) -> {
-      String username = (String) req.getAttribute(ReqVars.USERNAME.name());
-      String hashedPassword = new String(MessageDigest.getInstance("SHA-256").digest(req.getParameter(ReqVars.PASSWORD.name()).getBytes(StandardCharsets.UTF_8)));
-      System.out.println(req.getParameter(ReqVars.PASSWORD.name()));
-      System.out.println(hashedPassword);
+      String dni = (String) req.getParameter(ReqVars.DNI.name());
+      String username = (String) req.getParameter(ReqVars.USERNAME.name());
+      System.out.println(dni + ' ' + username);
       response.sendRedirect("/" + PageUtils.pageName);
-    });    
+    });
   }
 
   @Override
