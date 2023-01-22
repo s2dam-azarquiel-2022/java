@@ -1,3 +1,4 @@
+<%@page import="model.entity.Usuario"%>
 <%@page import="controller.servlet.ServletConfig.SessVars"%>
 <%@page import="view.PageUtils"%>
 
@@ -8,11 +9,11 @@
 %>
 
 <div>
-  <% String login = request.getParameter(SessVars.LOGIN.name()); %>
-  <% if (login == null) { %>
+  <% Usuario user = (Usuario) session.getAttribute(SessVars.LOGIN.name()); %>
+  <% if (user == null) { %>
     <button <%=PageUtils.mainModalButtonSetup("loginModal")%>>Login</button>
   <% } else { %>
-    <span>Welcome <%=login%></span>
-    <button <%=PageUtils.mainModalButtonSetup("logoutModal")%>>Logout</button>
+    <span>Welcome <%=user.getNombre()%></span>
+    <a href="/<%=PageUtils.pageName%>/Logout" class="btn btn-danger">Logout</a>
   <% } %>
 </div>

@@ -16,15 +16,18 @@
  */
 package controller.servlet;
 
+import java.util.concurrent.Callable;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import view.PageUtils;
 
 /**
  *
  * @author aru
  */
-public class JPAUtil {
+public class JPAUtils {
   private static final EntityManagerFactory entityManager;
   
   static {
@@ -40,4 +43,22 @@ public class JPAUtil {
   public static EntityManagerFactory getEntityManagerFactory() {
     return entityManager;
   }
+  
+  public static <T> T getCheckingNull(
+    Object pk,
+    Class<T> c,
+    EntityManager entityManager,
+    Callable<T> fDefaultVal
+  ) throws Exception {
+    T val = entityManager.find(c, pk);
+    if (val == null) {
+      val = fDefaultVal.call();
+      EntityTransaction t = entityManager.getTransaction();
+      t.begin();
+      entityManager.persist(val);
+      t.commit();
+    }
+    return val;
+  }
+
 }

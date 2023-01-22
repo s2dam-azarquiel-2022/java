@@ -22,35 +22,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import controller.servlet.ServletConfig.ReqVars;
 import controller.servlet.ServletConfig.SessVars;
-import model.entity.Usuario;
 import view.PageUtils;
 
 /**
  *
  * @author aru
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Logout")
+public class Logout extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
-  public Login() { super(); };
+  public Logout() { super(); };
   
   protected void doGet(
     HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
     ServletUtils.servletTry(req, response, null, (sess, entityManager, dispatcher) -> {
-      String dni = (String) req.getParameter(ReqVars.DNI.name());
-      sess.setAttribute(
-        SessVars.LOGIN.name(),
-        JPAUtils.getCheckingNull(dni, Usuario.class, entityManager, () -> {
-          Usuario user = new Usuario(dni);
-          user.setNombre((String) req.getParameter(ReqVars.USERNAME.name()));
-          return user;
-        })
-      );
+      sess.setAttribute(SessVars.LOGIN.name(), null);
       response.sendRedirect("/" + PageUtils.pageName);
     });
   }

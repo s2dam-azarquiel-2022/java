@@ -1,7 +1,6 @@
 package controller.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.concurrent.Callable;
 
 import javax.servlet.RequestDispatcher;
@@ -72,7 +71,7 @@ public class ServletUtils {
     try {
       HttpSession sess = req.getSession();
       EntityManager entityManager = getCheckingNull(sess, SessVars.ENTITY_MANAGER, () -> {
-        return JPAUtil.getEntityManagerFactory().createEntityManager();
+        return JPAUtils.getEntityManagerFactory().createEntityManager();
       });
       f.run(sess, entityManager, dispatcher);
     } catch (Exception e) {
