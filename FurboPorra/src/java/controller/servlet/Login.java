@@ -43,14 +43,11 @@ public class Login extends HttpServlet {
   ) throws ServletException, IOException {
     ServletUtils.servletTry(req, response, null, (sess, entityManager, dispatcher) -> {
       String dni = (String) req.getParameter(ReqVars.DNI.name());
-      sess.setAttribute(
-        SessVars.LOGIN.name(),
-        JPAUtils.getCheckingNull(dni, Usuario.class, entityManager, () -> {
-          Usuario user = new Usuario(dni);
-          user.setNombre((String) req.getParameter(ReqVars.USERNAME.name()));
-          return user;
-        })
-      );
+      ServletUtils.setCheckingNull(sess, SessVars.LOGIN, dni, Usuario.class, entityManager, () -> {
+        Usuario user = new Usuario(dni);
+        user.setNombre((String) req.getParameter(ReqVars.USERNAME.name()));
+        return user;
+      });
       response.sendRedirect("/" + PageUtils.pageName);
     });
   }

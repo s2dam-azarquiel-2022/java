@@ -60,6 +60,17 @@ public class ServletUtils {
     return val;
   }
 
+  public static <T> void setCheckingNull(
+    HttpSession sess,
+    SessVars var,
+    Object pk,
+    Class<T> c,
+    EntityManager entityManager,
+    Callable<T> fDefaultVal
+  ) throws Exception {
+    sess.setAttribute(var.name(), JPAUtils.getCheckingNull(pk, c, entityManager, fDefaultVal));
+  }
+
   @SuppressWarnings("CallToPrintStackTrace")
   public static void servletTry(
     HttpServletRequest req,
