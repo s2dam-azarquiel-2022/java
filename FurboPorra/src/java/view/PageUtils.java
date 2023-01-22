@@ -1,7 +1,9 @@
 package view;
 
+import controller.servlet.ServletConfig;
+
 public class PageUtils {
-  public static final String pageName = "Furbo Porra";
+  public static final String pageName = "FurboPorra";
 
   public static final String mainDivSetup =
    "class='container-fluid flex-grow-1 bg-dark text-white p-4' " +
@@ -27,14 +29,42 @@ public class PageUtils {
     "data-bs-target='#navbarToggler' " +
     "aria-controls='navbarToggler' " +
     "aria-expanded='false' " +
-    "aria-label='Toggle navigation'" 
+    "aria-label='Toggle navigation'"
   ;
 
-  public static final String mainFormControlSetup = 
+  public static final String mainModalContentSetup =
+    "class='modal-content bg-dark text-white'"
+  ;
+
+  public static final String mainFormControlSetup =
     "class='form-control bg-dark text-white'"
   ;
 
-  public static final String mainModalCloseBtnSetup = 
+  public static String mainInputSetup(ServletConfig.ReqVars var) {
+    return String.format(
+      "name='%s' type='text' %s",
+      var.name(),
+      mainFormControlSetup
+    );
+  }
+
+  public static String mainInputSetup(ServletConfig.ReqVars var, String type) {
+    return String.format(
+      "name='%s' type='%s' %s",
+      var.name(),
+      type,
+      mainFormControlSetup
+    );
+  }
+
+  public static String mainLabelSetup(ServletConfig.ReqVars var) {
+    return String.format(
+      "for='%s' class='form-label'",
+      var.name()
+    );
+  }
+
+  public static final String mainModalCloseBtnSetup =
     "class='btn btn-secondary' " +
     "type='button' " +
     "data-bs-dismiss='modal'"

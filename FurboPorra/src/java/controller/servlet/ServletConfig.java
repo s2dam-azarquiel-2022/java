@@ -8,10 +8,12 @@ public class ServletConfig {
 
   public static enum SessVars {
     CONNECTION,
+    LOGIN,
   };
 
   public static enum ReqVars {
-    // ...
+    USERNAME,
+    PASSWORD,
 
     // Errors
     ERR_TITLE,

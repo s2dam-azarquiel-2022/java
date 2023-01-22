@@ -15,9 +15,12 @@
     <title><%=PageUtils.pageName%></title>
   </head>
   <body <%=PageUtils.mainBodySetup%>>
-    <jsp:include page="utils/navbar/navbar.jsp"></jsp:include>
+    <jsp:include page="utils/navbar/navbar.jsp">
+      <jsp:param name="additionalItemsFile" value="root.jsp" />
+    </jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
     </div>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
+    <jsp:include page="utils/modals/login.jsp"></jsp:include>
   </body>
 </html>
