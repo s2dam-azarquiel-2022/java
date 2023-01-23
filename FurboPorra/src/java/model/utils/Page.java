@@ -1,4 +1,4 @@
-package model.entity;
+package model.utils;
 
 public class Page {
   public String name;

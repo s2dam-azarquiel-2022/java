@@ -1,6 +1,6 @@
 package controller.servlet;
 
-import model.entity.Page;
+import model.utils.Page;
 
 public class ServletConfig {
   public static Page[] pages = {

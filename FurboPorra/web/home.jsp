@@ -3,7 +3,7 @@
 <%@page import="controller.servlet.ServletUtils"%>
 <%@page import="model.entity.RoundSelectView"%>
 <%@page import="view.PageUtils"%>
-<%@page import="model.entity.Page"%>
+<%@page import="model.utils.Page"%>
 <%@page import="controller.servlet.ServletConfig.ReqVars"%>
 <%@page import="controller.servlet.ServletConfig.SessVars"%>
 

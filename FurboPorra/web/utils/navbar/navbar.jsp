@@ -3,7 +3,7 @@
 <%@page import="controller.servlet.ServletConfig"%>
 <%@page import="controller.servlet.ServletConfig.ReqVars"%>
 <%@page import="controller.servlet.ServletConfig.SessVars"%>
-<%@page import="model.entity.Page"%>
+<%@page import="model.utils.Page"%>
 
 <%@page
      language="java"
