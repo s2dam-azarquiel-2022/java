@@ -83,6 +83,13 @@ public class PageUtils {
     );
   }
 
+  public static String resetInputSetup(ServletConfig.SessVars var) {
+    return String.format(
+      "name='%s' value='-1' class='d-none'",
+      var.name()
+    );
+  }
+
   public static String mainLabelSetup(ServletConfig.ReqVars var) {
     return String.format(
       "for='%s' class='form-label'",

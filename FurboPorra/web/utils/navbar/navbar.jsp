@@ -1,5 +1,8 @@
+<%@page import="controller.servlet.ServletUtils"%>
 <%@page import="view.PageUtils"%>
 <%@page import="controller.servlet.ServletConfig"%>
+<%@page import="controller.servlet.ServletConfig.ReqVars"%>
+<%@page import="controller.servlet.ServletConfig.SessVars"%>
 <%@page import="model.entity.Page"%>
 
 <%@page
@@ -20,6 +23,7 @@
     >
       <!-- Here reset session vars like this: -->
       <!-- <input name="SESS_VAR name here" value="-1" class="d-none" /> -->
+      <input <%=PageUtils.resetInputSetup(SessVars.SELECTED_ROUND)%> />
       <img class="d-block" style="height: 2em;" src="img/logo.png" id="logo" />
     </form>
 
