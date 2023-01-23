@@ -19,6 +19,7 @@
   try { selectedRound = Integer.valueOf(ServletUtils.getSess(session, SessVars.SELECTED_ROUND)); }
   catch (Exception e) { selectedRound = -1; }
   List<Partido> matches = ServletUtils.getReq(request, ReqVars.MATCH_LIST);
+  boolean logedIn = ServletUtils.getSess(session, SessVars.LOGIN) != null;
 %>
 
 <!DOCTYPE html>
@@ -54,13 +55,21 @@
       <div class="d-grid gap-3 mt-4">
         <% for (Partido match : matches) { %>
           <div class="p-2 bg-dark row text-center align-items-center gap-3 gap-md-0 py-4 py-md-0">
-            <div class="col-md-2 col-12"><button role="button" class="btn btn-success">Info</button></div>
+            <div class="col-md-2 col-12">
+              <% if (logedIn) { %>
+                <button role="button" class="btn btn-success">Info</button>
+              <% } %>
+            </div>
             <div class="col-md-1 d-none d-md-block"><img class="img-fluid" src="<%=match.getLocal().getEscudo()%>" /></div>
             <div class="col-md-2"><%=match.getLocal().getNombre()%></div>
             <div class="col-md-2"><%=match.getGoleslocal()%> - <%=match.getGolesvisitante()%></div>
             <div class="col-md-2"><%=match.getVisitante().getNombre()%></div>
             <div class="col-md-1 d-none d-md-block"><img class="img-fluid" src="<%=match.getVisitante().getEscudo()%>" /></div>
-            <div class="col-md-2 col-12"><button role="button" class="btn btn-success">Apostar</button></div>
+            <div class="col-md-2 col-12">
+              <% if (logedIn) { %>
+                <button role="button" class="btn btn-success">Apostar</button>
+              <% } %>
+            </div>
           </div>
         <% } %>
       </div>
