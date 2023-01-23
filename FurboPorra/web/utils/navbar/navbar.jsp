@@ -40,7 +40,7 @@
         <% } %>
       </ul>
 
-      <% String includeFile = request.getParameter("additionalItemsFile"); %>
+      <% String includeFile = (String) request.getParameter("ADDITIONAL_ITEMS_FILE"); %>
       <% if (includeFile != null) { %>
         <!-- Included items -->
         <jsp:include page="<%=includeFile%>"></jsp:include>

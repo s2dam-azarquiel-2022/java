@@ -29,7 +29,7 @@
   </head>
   <body <%=PageUtils.mainBodySetup%>>
     <jsp:include page="utils/navbar/navbar.jsp">
-      <jsp:param name="additionalItemsFile" value="root.jsp" />
+      <jsp:param name="ADDITIONAL_ITEMS_FILE" value="root.jsp" />
     </jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
       <form <%=PageUtils.mainFormSetup("")%>>

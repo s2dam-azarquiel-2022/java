@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.ServletUtils"%>
 <%@page import="model.entity.Usuario"%>
 <%@page import="controller.servlet.ServletConfig.SessVars"%>
 <%@page import="view.PageUtils"%>
@@ -9,7 +10,7 @@
 %>
 
 <div>
-  <% Usuario user = (Usuario) session.getAttribute(SessVars.LOGIN.name()); %>
+  <% Usuario user = ServletUtils.getSess(session, SessVars.LOGIN); %>
   <% if (user == null) { %>
     <button <%=PageUtils.mainModalButtonSetup("loginModal")%>>Login</button>
   <% } else { %>
