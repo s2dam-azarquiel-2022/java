@@ -71,6 +71,16 @@ public class ServletUtils {
     sess.setAttribute(var.name(), JPAUtils.getCheckingNull(pk, c, entityManager, fDefaultVal));
   }
 
+  public static <T> T getSess(
+    HttpSession sess,
+    SessVars var
+  ) { return (T) sess.getAttribute(var.name()); }
+
+  public static <T> T getReq(
+    HttpServletRequest req,
+    ReqVars var
+  ) { return (T) req.getAttribute(var.name()); }
+
   @SuppressWarnings("CallToPrintStackTrace")
   public static void servletTry(
     HttpServletRequest req,
