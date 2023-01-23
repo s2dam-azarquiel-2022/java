@@ -1,6 +1,8 @@
 package view;
 
 import controller.servlet.ServletConfig;
+import controller.servlet.ServletConfig.ReqVars;
+import controller.servlet.ServletConfig.SessVars;
 
 public class PageUtils {
   public static final String pageName = "FurboPorra";
@@ -38,6 +40,22 @@ public class PageUtils {
       PageUtils.pageName,
       action
     );
+  }
+
+  private static String mainSelectOnlySetup(String s) {
+    return String.format(
+      "name='%s' onchange='this.form.submit()' %s",
+      s,
+      mainFormControlSetup
+    );
+  }
+
+  public static String mainSelectOnlySetup(ReqVars var) {
+    return mainSelectOnlySetup(var.name());
+  }
+
+  public static String mainSelectOnlySetup(SessVars var) {
+    return mainSelectOnlySetup(var.name());
   }
 
   public static final String mainModalContentSetup =
