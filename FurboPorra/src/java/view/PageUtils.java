@@ -32,6 +32,14 @@ public class PageUtils {
     "aria-label='Toggle navigation'"
   ;
 
+  public static String mainFormSetup(String action) {
+    return String.format(
+      "action='/%s/%s' method='post' class='d-grid gap-3'",
+      PageUtils.pageName,
+      action
+    );
+  }
+
   public static final String mainModalContentSetup =
     "class='modal-content bg-dark text-white'"
   ;
