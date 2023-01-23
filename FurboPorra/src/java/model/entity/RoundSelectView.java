@@ -16,11 +16,13 @@
  */
 package model.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author aru
  */
-public class RoundSelectView {
+public class RoundSelectView implements Serializable {
   public short id;
   public String name;
 
