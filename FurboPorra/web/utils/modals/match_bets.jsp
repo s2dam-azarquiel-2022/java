@@ -29,11 +29,11 @@
     <div <%=PageUtils.mainModalContentSetup%>>
       <div class="modal-header">
         <h5 class="modal-title">Apuestas del <%=match.getLocal().getNombre()%> - <%=match.getVisitante().getNombre()%></h5>
-        <button <%=PageUtils.mainModalCloseBtnSetup%>></button>
+        <button <%=PageUtils.mainModalCloseBtnXSetup%>></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-center">
         <% for (final Entry<String, Integer> bet : bets.entrySet()) { %>
-          <p><%=bet.getKey()%> -> <%=bet.getValue()%> apuestas</p>
+          <h6><%=bet.getKey()%> -> <%=bet.getValue()%> apuestas</h6>
         <% } %>
       </div>
     </div>

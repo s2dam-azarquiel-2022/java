@@ -103,6 +103,13 @@ public class PageUtils {
     "data-bs-dismiss='modal'"
   ;
 
+  public static final String mainModalCloseBtnXSetup =
+    "type='button' " +
+    "class='btn-close btn-close-white' " +
+    "aria-label='Close' " +
+    "data-bs-dismiss='modal'"
+  ;
+
   public static String mainModalSetup(String modalName) {
     return String.format(
       "class='modal fade' " +

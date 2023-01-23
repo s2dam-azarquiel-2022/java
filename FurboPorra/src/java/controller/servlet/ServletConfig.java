@@ -19,6 +19,8 @@ public class ServletConfig {
     USERNAME,
     MATCH_LIST,
 
+    SELECTED_MATCH,
+
     // Errors
     ERR_TITLE,
     ERR_MESSAGE,

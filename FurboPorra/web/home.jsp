@@ -57,7 +57,7 @@
           <div class="p-2 bg-dark row text-center align-items-center gap-3 gap-md-0 py-4 py-md-0">
             <div class="col-md-2 col-12">
               <% if (logedIn) { %>
-                <button role="button" class="btn btn-success">Info</button>
+                <button role="button" matchID="<%=match.getIdpartido()%>" class="btn btn-success matchBets">Info</button>
               <% } %>
             </div>
             <div class="col-md-1 d-none d-md-block"><img class="img-fluid" src="<%=match.getLocal().getEscudo()%>" /></div>
@@ -74,7 +74,23 @@
         <% } %>
       </div>
     </div>
+    <div id="matchBetsCache"></div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="errToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-danger">
+          <svg class="err-icon me-2 text-danger" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+          </svg>
+          <strong class="me-auto"><%=PageUtils.pageName%></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          There was an error when fetching this matches' bets.
+        </div>
+      </div>
+    </div>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
     <jsp:include page="utils/modals/login.jsp"></jsp:include>
+    <script src="js/match_bets.js"></script>
   </body>
 </html>
