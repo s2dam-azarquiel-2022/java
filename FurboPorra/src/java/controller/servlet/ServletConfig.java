@@ -12,6 +12,8 @@ public class ServletConfig {
     LOGIN,
     ROUND_SELECT_VIEWS,
     SELECTED_ROUND,
+
+    STATUS,
   };
 
   public static enum ReqVars {
@@ -20,6 +22,9 @@ public class ServletConfig {
     MATCH_LIST,
 
     SELECTED_MATCH,
+
+    SCORE_LOCAL,
+    SCORE_VISITANT,
 
     // Errors
     ERR_TITLE,

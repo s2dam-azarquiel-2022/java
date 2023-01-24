@@ -1,6 +1,5 @@
 package view;
 
-import controller.servlet.ServletConfig;
 import controller.servlet.ServletConfig.ReqVars;
 import controller.servlet.ServletConfig.SessVars;
 
@@ -66,7 +65,7 @@ public class PageUtils {
     "class='form-control bg-dark text-white'"
   ;
 
-  public static String mainInputSetup(ServletConfig.ReqVars var) {
+  public static String mainInputSetup(ReqVars var) {
     return String.format(
       "name='%s' type='text' %s",
       var.name(),
@@ -74,7 +73,7 @@ public class PageUtils {
     );
   }
 
-  public static String mainInputSetup(ServletConfig.ReqVars var, String type) {
+  public static String mainInputSetup(ReqVars var, String type) {
     return String.format(
       "name='%s' type='%s' %s",
       var.name(),
@@ -83,14 +82,24 @@ public class PageUtils {
     );
   }
 
-  public static String resetInputSetup(ServletConfig.SessVars var) {
+  private static String hiddenInputSetup(String var, String val) {
     return String.format(
-      "name='%s' value='-1' class='d-none'",
-      var.name()
+      "name='%s' value='%s' class='d-none'",
+      var,
+      val
     );
   }
 
-  public static String mainLabelSetup(ServletConfig.ReqVars var) {
+  public static String hiddenInputSetup(SessVars var, String val) {
+    return hiddenInputSetup(var.name(), val);
+  }
+
+  public static String hiddenInputSetup(ReqVars var, String val) {
+    return hiddenInputSetup(var.name(), val);
+  }
+
+
+  public static String mainLabelSetup(ReqVars var) {
     return String.format(
       "for='%s' class='form-label'",
       var.name()

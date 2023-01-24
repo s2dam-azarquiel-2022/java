@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.servlet.ServletConfig.ReqVars;
 import controller.servlet.ServletConfig.SessVars;
+import model.entity.Porra;
 import model.entity.Usuario;
 import view.PageUtils;
 
@@ -31,23 +32,25 @@ import view.PageUtils;
  *
  * @author aru
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/AddBet")
+public class AddBet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  public Login() { super(); };
+  public AddBet() { super(); };
 
   protected void doGet(
     HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
     ServletUtils.servletTry(req, response, null, (sess, entityManager, dispatcher) -> {
-      String dni = req.getParameter(ReqVars.DNI.name());
-      ServletUtils.setCheckingNull(sess, SessVars.LOGIN, dni, Usuario.class, entityManager, () -> {
-        Usuario user = new Usuario(dni);
-        user.setNombre((String) req.getParameter(ReqVars.USERNAME.name()));
-        return user;
-      });
+      Porra bet = new Porra(
+        ServletUtils.<Usuario>getSess(sess, SessVars.LOGIN).getDni(),
+        Integer.valueOf(req.getParameter(ReqVars.SELECTED_MATCH.name()))
+      );
+      bet.setGoleslocal(Short.valueOf(req.getParameter(ReqVars.SCORE_LOCAL.name())));
+      bet.setGolesvisitante(Short.valueOf(req.getParameter(ReqVars.SCORE_VISITANT.name())));
+      try { JPAUtils.add(Porra.class, entityManager, bet); }
+      catch (Exception e) { sess.setAttribute(SessVars.STATUS.name(), Root.Status.DUPLICATE_BET); }
       response.sendRedirect("/" + PageUtils.pageName);
     });
   }

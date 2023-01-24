@@ -67,7 +67,13 @@
             <div class="col-md-1 d-none d-md-block"><img class="img-fluid" src="<%=match.getVisitante().getEscudo()%>" /></div>
             <div class="col-md-2 col-12">
               <% if (logedIn) { %>
-                <button role="button" class="btn btn-success">Apostar</button>
+                <button
+                  role="button"
+                  matchID="<%=match.getIdpartido()%>"
+                  local="<%=match.getLocal().getNombre()%>"
+                  visitant="<%=match.getVisitante().getNombre()%>"
+                  class="btn btn-success addBet"
+                >Apostar</button>
               <% } %>
             </div>
           </div>
@@ -91,6 +97,8 @@
     </div>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
     <jsp:include page="utils/modals/login.jsp"></jsp:include>
+    <jsp:include page="utils/modals/add_bet.jsp"></jsp:include>
     <script src="js/match_bets.js"></script>
+    <script src="js/add_bet.js"></script>
   </body>
 </html>

@@ -17,6 +17,11 @@ public class Root extends HttpServlet {
 
   public Root() { super(); }
 
+  public static enum Status {
+    OK,
+    DUPLICATE_BET,
+  }
+
   @Override
   protected void doGet(
     HttpServletRequest req,

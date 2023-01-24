@@ -23,7 +23,7 @@
     >
       <!-- Here reset session vars like this: -->
       <!-- <input name="SESS_VAR name here" value="-1" class="d-none" /> -->
-      <input <%=PageUtils.resetInputSetup(SessVars.SELECTED_ROUND)%> />
+      <input <%=PageUtils.hiddenInputSetup(SessVars.SELECTED_ROUND, "-1")%> />
       <img class="d-block" style="height: 2em;" src="img/logo.png" id="logo" />
     </form>
 

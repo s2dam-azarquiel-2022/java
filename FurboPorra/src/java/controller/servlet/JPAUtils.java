@@ -21,6 +21,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.RollbackException;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import view.PageUtils;
 
 /**
@@ -29,7 +31,7 @@ import view.PageUtils;
  */
 public class JPAUtils {
   private static final EntityManagerFactory entityManager;
-  
+
   static {
     try {
       entityManager = Persistence.createEntityManagerFactory(PageUtils.pageName + "PU");
@@ -39,11 +41,11 @@ public class JPAUtils {
       throw new ExceptionInInitializerError(e);
     }
   }
-  
+
   public static EntityManagerFactory getEntityManagerFactory() {
     return entityManager;
   }
-  
+
   public static <T> T getCheckingNull(
     Object pk,
     Class<T> c,
@@ -53,12 +55,19 @@ public class JPAUtils {
     T val = entityManager.find(c, pk);
     if (val == null) {
       val = fDefaultVal.call();
-      EntityTransaction t = entityManager.getTransaction();
-      t.begin();
-      entityManager.persist(val);
-      t.commit();
+      add(c, entityManager, val);
     }
     return val;
   }
 
+  public static <T> void add(
+    Class<T> c,
+    EntityManager entityManager,
+    T val
+  ) throws DatabaseException, RollbackException {
+    EntityTransaction t = entityManager.getTransaction();
+    t.begin();
+    entityManager.persist(val);
+    t.commit();
+  }
 }
