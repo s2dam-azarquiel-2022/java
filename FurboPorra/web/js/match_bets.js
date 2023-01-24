@@ -17,39 +17,29 @@
 
 /* global fetch, bootstrap */
 
-var cache;
-var cacheContainer;
-var errToast;
+var matchBetsModal;
+var matchBetsModalTitle;
+var matchBetsContent;
 
 $(document).ready(function() {
-  // Cache so not to fetch the same thing twice
-  cache = {};
-  cacheContainer = document.getElementById("matchBetsCache");
-  errToast = document.getElementById("errToast");
+  const addBetModalSelector = $('#matchBetsModal');
+  matchBetsModalTitle = $('.modal-title', addBetModalSelector);
+  matchBetsModal = new bootstrap.Modal('#matchBetsModal', {});
+  matchBetsContent = $('.modal-body', addBetModalSelector);
 });
 
+
 $('.matchBets').click(function() {
-  const id = this.getAttribute('matchID');
-  if (id in cache) {
-    // If that id was already fetched, show it's modal.
-    cache[id].show();
-  } else {
-    // Else fetch it, add the resulting HTML to `cacheContainer`,
-    // create a new bootsrap modal object of it
-    // and add it to the cache for later use.
-    const params = new URLSearchParams();
-    params.append("SELECTED_MATCH", id);
-    fetch("/FurboPorra/MatchBets", {
-        method: 'POST',
-        body: params
-    }).then(async res => {
-      if (res.ok) {
-        cacheContainer.innerHTML += await res.text();
-        cache[id] = new bootstrap.Modal(`#matchBetsModal-${id}`, {});
-        cache[id].show();
-      } else {
-        new bootstrap.Toast(errToast).show();
-      }
-    });
-  }
+  matchBetsModalTitle.text(`Apuestas para el ${this.getAttribute('local')} - ${this.getAttribute('visitant')}`);
+  const params = new URLSearchParams();
+  params.append("SELECTED_MATCH", this.getAttribute('matchID'));
+  fetch('/FurboPorra/MatchBets', {
+    method: 'POST',
+    body: params
+  }).then(async res => {
+    if (res.ok) {
+      matchBetsContent.html(await res.text());
+    }
+  });
+  matchBetsModal.show();
 });

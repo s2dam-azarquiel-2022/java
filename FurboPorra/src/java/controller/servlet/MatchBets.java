@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.servlet.ServletConfig.ReqVars;
 import model.entity.Partido;
-import model.entity.Porra;
 
 /**
  *
@@ -40,7 +39,7 @@ public class MatchBets extends HttpServlet {
     HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
-    ServletUtils.servletTry(req, response, "/utils/modals/match_bets.jsp", (sess, entityManager, dispatcher) -> {
+    ServletUtils.servletTry(req, response, "/utils/modals/match_bets_result.jsp", (sess, entityManager, dispatcher) -> {
       req.setAttribute(
         ReqVars.SELECTED_MATCH.name(),
         entityManager.find(
