@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.RootPGR"%>
 <%@page import="model.entity.Porra"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="java.util.HashMap"%>
@@ -19,7 +20,8 @@
         <h5 class="modal-title">Apuesta para el x - y</h5>
       </div>
       <div class="modal-body">
-        <form <%=PageUtils.mainFormSetup("AddBet")%>>
+        <form <%=PageUtils.mainFormSetup("RootPGR")%>>
+          <input <%=PageUtils.hiddenInputSetup(ReqVars.OPTION, RootPGR.Option.ADD_BET.name())%> />
           <input <%=PageUtils.hiddenInputSetup(ReqVars.SELECTED_MATCH, "-1")%> />
           <div>
             <label <%=PageUtils.mainLabelSetup(ReqVars.SCORE_LOCAL)%>>Goles local</label>

@@ -29,5 +29,8 @@ public class ServletConfig {
     // Errors
     ERR_TITLE,
     ERR_MESSAGE,
+
+    // PGR
+    OPTION,
   };
 }

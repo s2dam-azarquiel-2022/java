@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.RootPGR"%>
 <%@page import="model.entity.Partido"%>
 <%@page import="java.util.List"%>
 <%@page import="controller.utils.ServletUtils"%>
@@ -33,7 +34,8 @@
       <jsp:param name="ADDITIONAL_ITEMS_FILE" value="root.jsp" />
     </jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
-      <form <%=PageUtils.mainFormSetup("")%>>
+      <form <%=PageUtils.mainFormSetup("RootPGR")%>>
+        <input <%=PageUtils.hiddenInputSetup(ReqVars.OPTION, RootPGR.Option.SET_CURRENT_ROUND.name())%> />
         <select <%=PageUtils.mainSelectOnlySetup(SessVars.SELECTED_ROUND)%>>
           <% if (selectedRound == -1) { %>
             <option value="" selected class="d-none">Elije jornada</option>

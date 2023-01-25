@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.RootPGR"%>
 <%@page import="view.PageUtils"%>
 <%@page import="controller.utils.ServletConfig.ReqVars"%>
 
@@ -14,7 +15,8 @@
         <h5 class="modal-title">Login | Register</h5>
       </div>
       <div class="modal-body">
-        <form <%=PageUtils.mainFormSetup("Login")%>>
+        <form <%=PageUtils.mainFormSetup("RootPGR")%>>
+          <input <%=PageUtils.hiddenInputSetup(ReqVars.OPTION, RootPGR.Option.LOGIN.name())%> />
           <div>
             <label <%=PageUtils.mainLabelSetup(ReqVars.DNI)%>>DNI</label>
             <input <%=PageUtils.mainInputSetup(ReqVars.DNI)%> />

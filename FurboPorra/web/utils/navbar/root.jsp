@@ -15,6 +15,6 @@
     <button <%=PageUtils.mainModalButtonSetup("loginModal")%>>Login</button>
   <% } else { %>
     <span>Welcome <%=user.getNombre()%></span>
-    <a href="/<%=PageUtils.pageName%>/Logout" class="btn btn-danger">Logout</a>
+    <a href="/<%=PageUtils.pageName%>/RootPGR?OPTION=LOGOUT" class="btn btn-danger">Logout</a>
   <% } %>
 </div>
