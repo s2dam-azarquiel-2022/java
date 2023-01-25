@@ -1,7 +1,7 @@
 package view;
 
-import controller.servlet.ServletConfig.ReqVars;
-import controller.servlet.ServletConfig.SessVars;
+import controller.utils.ServletConfig.ReqVars;
+import controller.utils.ServletConfig.SessVars;
 
 public class PageUtils {
   public static final String pageName = "FurboPorra";

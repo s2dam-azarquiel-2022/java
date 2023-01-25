@@ -1,5 +1,5 @@
 <%@page import="view.PageUtils"%>
-<%@page import="controller.servlet.ServletConfig.ReqVars"%>
+<%@page import="controller.utils.ServletConfig.ReqVars"%>
 
 <%@page
      language="java"

@@ -1,4 +1,4 @@
-package controller.servlet;
+package controller.utils;
 
 import model.utils.Page;
 

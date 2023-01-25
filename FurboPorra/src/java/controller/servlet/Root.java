@@ -1,5 +1,7 @@
 package controller.servlet;
 
+import controller.utils.ServletUtils;
+import controller.utils.ServletConfig;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.entity.Jornada;
 import model.entity.RoundSelectView;
-import controller.servlet.ServletConfig.ReqVars;
+import controller.utils.ServletConfig.ReqVars;
 import java.util.Collections;
 
 public class Root extends HttpServlet {

@@ -1,11 +1,11 @@
 <%@page import="model.entity.Partido"%>
 <%@page import="java.util.List"%>
-<%@page import="controller.servlet.ServletUtils"%>
+<%@page import="controller.utils.ServletUtils"%>
 <%@page import="model.entity.RoundSelectView"%>
 <%@page import="view.PageUtils"%>
 <%@page import="model.utils.Page"%>
-<%@page import="controller.servlet.ServletConfig.ReqVars"%>
-<%@page import="controller.servlet.ServletConfig.SessVars"%>
+<%@page import="controller.utils.ServletConfig.ReqVars"%>
+<%@page import="controller.utils.ServletConfig.SessVars"%>
 
 <%@page
      language="java"
@@ -54,7 +54,7 @@
       </form>
       <div class="d-grid gap-3 mt-4">
         <% for (Partido match : matches) { %>
-          <div class="p-2 bg-dark row text-center align-items-center gap-3 gap-md-0 py-4 py-md-0">
+          <div class="p-2 bg-dark row text-center align-items-center gap-3 gap-md-0 py-4 py-md-1">
             <div class="col-md-2 col-12">
               <% if (logedIn) { %>
                 <button

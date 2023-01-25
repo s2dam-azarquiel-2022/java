@@ -1,6 +1,6 @@
-<%@page import="controller.servlet.ServletUtils"%>
+<%@page import="controller.utils.ServletUtils"%>
 <%@page import="model.entity.Usuario"%>
-<%@page import="controller.servlet.ServletConfig.SessVars"%>
+<%@page import="controller.utils.ServletConfig.SessVars"%>
 <%@page import="view.PageUtils"%>
 
 <%@page

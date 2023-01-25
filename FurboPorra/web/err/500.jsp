@@ -1,4 +1,4 @@
-<%@page import="controller.servlet.ServletConfig.ReqVars"%>
+<%@page import="controller.utils.ServletConfig.ReqVars"%>
 <%@page import="view.PageUtils"%>
 
 <%@page

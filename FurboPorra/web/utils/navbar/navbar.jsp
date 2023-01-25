@@ -1,8 +1,8 @@
-<%@page import="controller.servlet.ServletUtils"%>
+<%@page import="controller.utils.ServletUtils"%>
 <%@page import="view.PageUtils"%>
-<%@page import="controller.servlet.ServletConfig"%>
-<%@page import="controller.servlet.ServletConfig.ReqVars"%>
-<%@page import="controller.servlet.ServletConfig.SessVars"%>
+<%@page import="controller.utils.ServletConfig"%>
+<%@page import="controller.utils.ServletConfig.ReqVars"%>
+<%@page import="controller.utils.ServletConfig.SessVars"%>
 <%@page import="model.utils.Page"%>
 
 <%@page

@@ -1,10 +1,10 @@
 <%@page import="model.entity.Porra"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="controller.servlet.ServletUtils"%>
+<%@page import="controller.utils.ServletUtils"%>
 <%@page import="model.entity.Partido"%>
 <%@page import="view.PageUtils"%>
-<%@page import="controller.servlet.ServletConfig.ReqVars"%>
+<%@page import="controller.utils.ServletConfig.ReqVars"%>
 
 <%@page
      language="java"

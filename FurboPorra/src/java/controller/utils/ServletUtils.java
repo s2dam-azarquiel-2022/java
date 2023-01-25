@@ -1,4 +1,4 @@
-package controller.servlet;
+package controller.utils;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.servlet.ServletConfig.ReqVars;
-import controller.servlet.ServletConfig.SessVars;
+import controller.utils.ServletConfig.ReqVars;
+import controller.utils.ServletConfig.SessVars;
 import javax.persistence.EntityManager;
 import model.utils.ServletTryFunction;
 
