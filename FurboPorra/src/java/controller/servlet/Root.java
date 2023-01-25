@@ -29,7 +29,7 @@ public class Root extends HttpServlet {
     HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
-    ServletUtils.servletTry(req, response, "/home.jsp", (sess, entityManager, dispatcher) -> {
+    ServletUtils.servletTry(req, response, "/root.jsp", (sess, entityManager, dispatcher) -> {
       ServletUtils.setIfNull(sess, ServletConfig.SessVars.ROUND_SELECT_VIEWS, () -> {
         return entityManager
           .createNamedQuery("Jornada.findAll", Jornada.class)
