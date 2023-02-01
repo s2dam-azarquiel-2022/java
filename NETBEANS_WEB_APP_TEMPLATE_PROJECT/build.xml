@@ -68,4 +68,13 @@
     nbproject/build-impl.xml file.
 
     -->
+  <target name="zipme" description="Zip the application to the sample project">
+    <property name="build.classes.dir" location="/GitRepos/s2dam-azarquiel-2022/aru-java/NETBEANS_WEB_APP_TEMPLETA/"/>
+    <property name="examples" location="${build.classes.dir}/src/dev/aruzeta/"/>
+    <zip basedir="." destfile="${examples}/NETBEANS_WEB_APP_TEMPLATEProject.zip">
+      <exclude name="**/build/"/>
+      <exclude name="**/dist/"/>
+      <exclude name="**/nbproject/private/"/>
+    </zip>
+  </target>
 </project>
