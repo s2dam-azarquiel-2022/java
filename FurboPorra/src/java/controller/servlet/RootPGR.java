@@ -49,7 +49,7 @@ public class RootPGR extends HttpServlet {
     );
     bet.setGoleslocal(Short.valueOf(req.getParameter(ReqVars.SCORE_LOCAL.name())));
     bet.setGolesvisitante(Short.valueOf(req.getParameter(ReqVars.SCORE_VISITANT.name())));
-    try { JPAUtils.add(Porra.class, entityManager, bet); }
+    try { JPAUtils.add(entityManager, bet); }
     catch (Exception e) { sess.setAttribute(ServletConfig.SessVars.STATUS.name(), Root.Status.DUPLICATE_BET); }
   }
 

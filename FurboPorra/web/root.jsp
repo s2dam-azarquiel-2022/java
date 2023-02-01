@@ -55,6 +55,9 @@
         </select>
       </form>
       <div class="d-grid gap-3 mt-4">
+        <% if (matches.size() == 0) { %>
+          <img src="./img/bg.jpg" class="w-100 px-5" />
+        <% } %>
         <% for (Partido match : matches) { %>
           <div class="p-2 bg-dark row text-center align-items-center gap-3 gap-md-0 py-4 py-md-1">
             <div class="col-md-2 col-12">
