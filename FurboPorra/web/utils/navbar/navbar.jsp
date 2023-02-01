@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.RootPGR"%>
 <%@page import="controller.utils.ServletUtils"%>
 <%@page import="view.PageUtils"%>
 <%@page import="controller.utils.ServletConfig"%>
@@ -15,7 +16,7 @@
   <div class="container-fluid">
     <!-- Home link -->
     <form
-      action="/<%=PageUtils.pageName%>/"
+      action="/<%=PageUtils.pageName%>/RootPGR"
       method="post"
       class="navbar-brand p-0 m-0"
       aria-current="page"
@@ -23,6 +24,7 @@
     >
       <!-- Here reset session vars like this: -->
       <!-- <input name="SESS_VAR name here" value="-1" class="d-none" /> -->
+      <input <%=PageUtils.hiddenInputSetup(ReqVars.OPTION, RootPGR.Option.SET_CURRENT_ROUND.name())%> />
       <input <%=PageUtils.hiddenInputSetup(SessVars.SELECTED_ROUND, "-1")%> />
       <img class="d-block" style="height: 2em;" src="img/logo.png" id="logo" />
     </form>

@@ -37,10 +37,10 @@ public class Root extends HttpServlet {
           .map(RoundSelectView::toSelectView)
           .collect(Collectors.toList());
       });
+      String selectedRoundID = ServletUtils.getSess(sess, ServletConfig.SessVars.SELECTED_ROUND);
       Jornada selectedRound;
-      try { selectedRound = entityManager.find(Jornada.class, Short.valueOf(
-          ServletUtils.getSess(sess, ServletConfig.SessVars.SELECTED_ROUND)
-      )); } catch(NumberFormatException e) { selectedRound = null; }
+      if (selectedRoundID == null) selectedRound = null;
+      else selectedRound = entityManager.find(Jornada.class, Short.valueOf(selectedRoundID));
       req.setAttribute(
         ReqVars.MATCH_LIST.name(),
         selectedRound == null ? Collections.emptyList() : selectedRound.getPartidoList()
