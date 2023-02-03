@@ -8,6 +8,8 @@ public class ServletConfig {
 
   public static enum SessVars {
     ENTITY_MANAGER,
+    CCAA_SELECT_VIEWS,
+    SELECTED_CCAA,
   };
 
   public static enum ReqVars {
