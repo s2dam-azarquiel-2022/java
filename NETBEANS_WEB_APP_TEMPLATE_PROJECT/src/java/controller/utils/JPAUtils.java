@@ -46,7 +46,7 @@ public class JPAUtils {
     return entityManager;
   }
 
-  public static <T> T getCheckingNull(
+  public static <T> T getSettingIfNull(
     Object pk,
     Class<T> c,
     EntityManager entityManager,

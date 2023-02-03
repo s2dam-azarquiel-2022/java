@@ -1,26 +1,24 @@
 package controller.utils;
 
+import controller.utils.ServletConfig.ReqVars;
+import controller.utils.ServletConfig.SessVars;
 import java.io.IOException;
 import java.util.concurrent.Callable;
-
+import java.util.function.Function;
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import controller.utils.ServletConfig.ReqVars;
-import controller.utils.ServletConfig.SessVars;
-import javax.persistence.EntityManager;
 import model.utils.ServletTryFunction;
 
 public class ServletUtils {
-  public static <T> T getCheckingNull(
+  public static <T> T getSettingIfNull(
     HttpSession sess,
     SessVars var,
     Callable<T> fDefaultVal
   ) throws Exception {
-    @SuppressWarnings("unchecked")
     T val = (T) sess.getAttribute(var.name());
     if (val == null) {
       val = fDefaultVal.call();
@@ -39,26 +37,23 @@ public class ServletUtils {
     }
   }
 
-  public static <T> T updateIfNotNullAndGet(
+  public static <T> T getUpdatingSessViaReq(
     HttpSession sess,
     HttpServletRequest req,
     SessVars var,
-    Callable<T> fDefaultVal
-  ) throws Exception {
-    @SuppressWarnings("unchecked")
-    T val = (T) req.getParameter(var.name());
-    @SuppressWarnings("unchecked")
-    T sVal = (T) sess.getAttribute(var.name());
-    if (val == null && sVal == null) {
-      val = fDefaultVal.call();
-      sess.setAttribute(var.name(), val);
-    } else if (val == null) {
-      val = sVal;
-    } else {
-      sess.setAttribute(var.name(), val);
-    }
+    Function<String, T> f
+  ) {
+    T val = f.apply(req.getParameter(var.name()));
+    sess.setAttribute(var.name(), val);
     return val;
   }
+
+  public static <T> void updateSessViaReq(
+    HttpSession sess,
+    HttpServletRequest req,
+    SessVars var,
+    Function<String, T> f
+  ) { sess.setAttribute(var.name(), f.apply(req.getParameter(var.name()))); }
 
   public static <T> void setCheckingNull(
     HttpSession sess,
@@ -68,7 +63,7 @@ public class ServletUtils {
     EntityManager entityManager,
     Callable<T> fDefaultVal
   ) throws Exception {
-    sess.setAttribute(var.name(), JPAUtils.getCheckingNull(pk, c, entityManager, fDefaultVal));
+    sess.setAttribute(var.name(), JPAUtils.getSettingIfNull(pk, c, entityManager, fDefaultVal));
   }
 
   public static <T> T getSess(
@@ -76,10 +71,16 @@ public class ServletUtils {
     SessVars var
   ) { return (T) sess.getAttribute(var.name()); }
 
-  public static <T> T getReq(
+  public static <T> T getReqAttr(
     HttpServletRequest req,
     ReqVars var
   ) { return (T) req.getAttribute(var.name()); }
+
+  public static <T> T getReqParam(
+    HttpServletRequest req,
+    ReqVars var,
+    Function<String, T> f
+  ) { return f.apply(req.getParameter(var.name())); }
 
   @SuppressWarnings("CallToPrintStackTrace")
   public static void servletTry(
@@ -91,7 +92,7 @@ public class ServletUtils {
     RequestDispatcher dispatcher = req.getRequestDispatcher(defaultDispatchedFile);
     try {
       HttpSession sess = req.getSession();
-      EntityManager entityManager = getCheckingNull(sess, SessVars.ENTITY_MANAGER, () -> {
+      EntityManager entityManager = getSettingIfNull(sess, SessVars.ENTITY_MANAGER, () -> {
         return JPAUtils.getEntityManagerFactory().createEntityManager();
       });
       f.run(sess, entityManager, dispatcher);
