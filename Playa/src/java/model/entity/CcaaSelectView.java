@@ -16,11 +16,13 @@
  */
 package model.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author aru
  */
-public class CcaaSelectView {
+public class CcaaSelectView implements Serializable {
   public Short id;
   public String name;
 
