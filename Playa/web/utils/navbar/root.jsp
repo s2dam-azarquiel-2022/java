@@ -20,7 +20,7 @@
   Usuario user = ServletUtils.getSess(session, SessVars.LOGIN);
 %>
 
-<div class="d-flex flex-direction-row gap-2">
+<div class="d-flex flex-direction-row gap-3">
   <form <%=PageUtils.mainFormSetup(RootPGR.opt(Option.SET_CURRENT_CCAA))%>>
     <select <%=PageUtils.mainSelectOnlySetup(SessVars.SELECTED_CCAA)%>>
       <% if (selectedCcaa == null || selectedCcaa == -1) { %>
@@ -40,4 +40,12 @@
       <% } %>
     </select>
   </form>
+  <% if (user == null) { %>
+    <button <%=PageUtils.mainModalButtonSetup("loginModal")%>>Login</button>
+  <% } else { %>
+    <p class="p-0 m-0">
+      Welcome <%=user.getNick()%>
+      <a href="/<%=PageUtils.pageName%>/<%=RootPGR.opt(Option.LOGOUT)%>" class="btn btn-danger">Logout</a>
+    </p>
+  <% } %>
 </div>

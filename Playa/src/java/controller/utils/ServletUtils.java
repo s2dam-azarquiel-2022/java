@@ -82,6 +82,11 @@ public class ServletUtils {
     Function<String, T> f
   ) { return f.apply(req.getParameter(var.name())); }
 
+  public static String getReqParam(
+    HttpServletRequest req,
+    ReqVars var
+  ) { return req.getParameter(var.name()); }
+
   @SuppressWarnings("CallToPrintStackTrace")
   public static void servletTry(
     HttpServletRequest req,

@@ -69,4 +69,15 @@ public class JPAUtils {
     entityManager.persist(val);
     t.commit();
   }
+
+  public static <T> void addAndFlush(
+    EntityManager entityManager,
+    T val
+  ) throws DatabaseException, RollbackException {
+    EntityTransaction t = entityManager.getTransaction();
+    t.begin();
+    entityManager.persist(val);
+    entityManager.flush();
+    t.commit();
+  }
 }

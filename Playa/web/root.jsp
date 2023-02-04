@@ -22,5 +22,6 @@
     <div <%=PageUtils.mainDivSetup%>>
     </div>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
+    <jsp:include page="utils/modals/login.jsp"></jsp:include>
   </body>
 </html>
