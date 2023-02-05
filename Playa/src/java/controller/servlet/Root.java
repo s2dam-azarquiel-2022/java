@@ -23,7 +23,8 @@ public class Root extends HttpServlet {
   ) throws ServletException, IOException {
     ServletUtils.servletTry(req, response, "/root.jsp", (sess, entityManager, dispatcher) -> {
       ServletUtils.setIfNull(sess, ServletConfig.SessVars.CCAA_SELECT_VIEWS, () -> {
-        return entityManager.createNamedQuery("Ccaa.findAll", Ccaa.class)
+        return entityManager
+          .createNamedQuery("Ccaa.findAll", Ccaa.class)
           .getResultList()
           .stream()
           .map(CcaaSelectView::toSelectView)

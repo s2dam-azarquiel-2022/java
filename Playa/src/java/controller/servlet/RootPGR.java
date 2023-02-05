@@ -65,8 +65,9 @@ public class RootPGR extends HttpServlet {
             user.setNick(nick);
             user.setPass(password);
             JPAUtils.add(entityManager, user);
-            sess.setAttribute(
-              SessVars.LOGIN.name(),
+            ServletUtils.set(
+              sess,
+              SessVars.LOGIN,
               entityManager
                 .createNamedQuery("Usuario.findByNick", Usuario.class)
                 .setParameter("nick", nick)
@@ -76,19 +77,20 @@ public class RootPGR extends HttpServlet {
           } else {
             Usuario user = users.get(0);
             if (user.getPass().equals(password)) {
-              sess.setAttribute(SessVars.LOGIN.name(), user);
+              ServletUtils.set(sess, SessVars.LOGIN, user);
             }
           }
           break;
 
         case LOGOUT:
-          sess.setAttribute(SessVars.LOGIN.name(), null);
+          ServletUtils.set(sess, SessVars.LOGIN, null);
           break;
 
         case SET_CURRENT_CCAA:
           short selectedCcaa = ServletUtils.getUpdatingSessViaReq(sess, req, SessVars.SELECTED_CCAA, Short::valueOf);
-          sess.setAttribute(
-            SessVars.PROVINCE_SELECT_VIEWS.name(),
+          ServletUtils.set(
+            sess,
+            SessVars.PROVINCE_SELECT_VIEWS,
             selectedCcaa == -1 ? null :
             entityManager.createNamedQuery("Provincia.findByCcaa", Provincia.class)
               .setParameter("ccaaId", selectedCcaa)
@@ -97,14 +99,17 @@ public class RootPGR extends HttpServlet {
               .map(ProvinceSelectView::toSelectView)
               .collect(Collectors.toList())
           );
-          sess.setAttribute(SessVars.TOWN_SELECT_VIEWS.name(), null);
+          ServletUtils.set(sess, SessVars.SELECTED_PROVINCE, null);
+          ServletUtils.set(sess, SessVars.SELECTED_TOWN, null);
+          ServletUtils.set(sess, SessVars.TOWN_SELECT_VIEWS, null);
           ServletUtils.set(sess, SessVars.BEACHES, null);
           break;
 
         case SET_CURRENT_PROVINCE:
           short selectedProvince = ServletUtils.getUpdatingSessViaReq(sess, req, SessVars.SELECTED_PROVINCE, Short::valueOf);
-          sess.setAttribute(
-            SessVars.TOWN_SELECT_VIEWS.name(),
+          ServletUtils.set(
+            sess,
+            SessVars.TOWN_SELECT_VIEWS,
             selectedProvince == -1 ? null :
             entityManager.createNamedQuery("Municipio.findByProvincia", Municipio.class)
               .setParameter("provinciaId", selectedProvince)
@@ -113,6 +118,7 @@ public class RootPGR extends HttpServlet {
               .map(TownSelectView::toSelectView)
               .collect(Collectors.toList())
           );
+          ServletUtils.set(sess, SessVars.SELECTED_TOWN, null);
           ServletUtils.set(sess, SessVars.BEACHES, null);
           break;
 
