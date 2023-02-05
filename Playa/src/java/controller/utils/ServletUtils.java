@@ -37,6 +37,12 @@ public class ServletUtils {
     }
   }
 
+  public static <T> void set(
+    HttpSession sess,
+    SessVars var,
+    T val
+  ) { sess.setAttribute(var.name(), val); }
+
   public static <T> T getUpdatingSessViaReq(
     HttpSession sess,
     HttpServletRequest req,

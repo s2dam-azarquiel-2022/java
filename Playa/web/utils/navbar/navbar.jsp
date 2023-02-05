@@ -1,3 +1,5 @@
+<%@page import="controller.servlet.RootPGR"%>
+<%@page import="controller.servlet.RootPGR.Option"%>
 <%@page import="view.PageUtils"%>
 <%@page import="controller.utils.ServletConfig"%>
 <%@page import="controller.utils.ServletConfig.ReqVars"%>
@@ -10,19 +12,16 @@
      pageEncoding="UTF-8"
 %>
 
-  <nav <%=PageUtils.mainNavSetup%>>
+<nav <%=PageUtils.mainNavSetup%>>
   <div class="container-fluid">
     <!-- Home link -->
     <form
-      action="/<%=PageUtils.pageName%>/RootPGR"
+      action="/<%=PageUtils.pageName%>/<%=RootPGR.opt(Option.RESET)%>"
       method="post"
       class="navbar-brand p-0 m-0"
       aria-current="page"
       id="logo-form"
     >
-      <!-- Here reset session vars like this: -->
-      <!-- <input < %=PageUtils.hiddenInputSetup(SessVars.VAR_NAME, "-1")%> /> -->
-      <!--         ^ obviously remove this space -->
       <img class="d-block" style="height: 2em;" src="img/logo.png" id="logo" />
     </form>
 

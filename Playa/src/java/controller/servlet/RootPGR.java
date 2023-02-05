@@ -26,6 +26,7 @@ public class RootPGR extends HttpServlet {
   public RootPGR() { super(); }
 
   public static enum Option {
+    RESET,
     LOGIN,
     LOGOUT,
     SET_CURRENT_CCAA,
@@ -44,6 +45,14 @@ public class RootPGR extends HttpServlet {
   ) throws ServletException, IOException {
     ServletUtils.servletTry(req, response, null, (sess, entityManager, dispatcher) -> {
       switch (Option.valueOf(req.getParameter(ReqVars.OPTION.name()))) {
+        case RESET:
+          ServletUtils.set(sess, SessVars.SELECTED_CCAA, null);
+          ServletUtils.set(sess, SessVars.SELECTED_PROVINCE, null);
+          ServletUtils.set(sess, SessVars.SELECTED_TOWN, null);
+          ServletUtils.set(sess, SessVars.PROVINCE_SELECT_VIEWS, null);
+          ServletUtils.set(sess, SessVars.TOWN_SELECT_VIEWS, null);
+          break;
+
         case LOGIN:
           String nick = ServletUtils.getReqParam(req, ReqVars.NICK);
           String password = ServletUtils.getReqParam(req, ReqVars.PASSWORD);
