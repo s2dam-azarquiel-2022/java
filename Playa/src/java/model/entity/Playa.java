@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
   @NamedQuery(name = "Playa.findAll", query = "SELECT p FROM Playa p")
   , @NamedQuery(name = "Playa.findById", query = "SELECT p FROM Playa p WHERE p.id = :id")
   , @NamedQuery(name = "Playa.findByNombre", query = "SELECT p FROM Playa p WHERE p.nombre = :nombre")
-  , @NamedQuery(name = "Playa.findByDescripcion", query = "SELECT p FROM Playa p WHERE p.descripcion = :descripcion")})
+  , @NamedQuery(name = "Playa.findByDescripcion", query = "SELECT p FROM Playa p WHERE p.descripcion = :descripcion")
+  , @NamedQuery(name = "Playa.findByMunicipio", query = "SELECT p FROM Playa p WHERE p.municipio.id = :municipioId")})
 public class Playa implements Serializable {
 
   private static final long serialVersionUID = 1L;

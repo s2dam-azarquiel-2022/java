@@ -98,6 +98,7 @@ public class RootPGR extends HttpServlet {
               .collect(Collectors.toList())
           );
           sess.setAttribute(SessVars.TOWN_SELECT_VIEWS.name(), null);
+          ServletUtils.set(sess, SessVars.BEACHES, null);
           break;
 
         case SET_CURRENT_PROVINCE:
@@ -112,10 +113,19 @@ public class RootPGR extends HttpServlet {
               .map(TownSelectView::toSelectView)
               .collect(Collectors.toList())
           );
+          ServletUtils.set(sess, SessVars.BEACHES, null);
           break;
 
         case SET_CURRENT_TOWN:
-          ServletUtils.updateSessViaReq(sess, req, SessVars.SELECTED_TOWN, Integer::valueOf);
+          int selectedMunicipio = ServletUtils.getUpdatingSessViaReq(sess, req, SessVars.SELECTED_TOWN, Integer::valueOf);
+          ServletUtils.set(
+            sess,
+            SessVars.BEACHES,
+            entityManager
+              .createNamedQuery("Playa.findByMunicipio")
+              .setParameter("municipioId", selectedMunicipio)
+              .getResultList()
+          );
           break;
       }
       response.sendRedirect("/" + PageUtils.pageName);

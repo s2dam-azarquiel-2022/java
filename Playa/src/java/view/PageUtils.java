@@ -137,4 +137,8 @@ public class PageUtils {
       "data-bs-target='#%s'"
     , modalName);
   }
+
+  public static String mainCardSetup =
+    "class='card flex-fill text-bg-dark'"
+  ;
 }

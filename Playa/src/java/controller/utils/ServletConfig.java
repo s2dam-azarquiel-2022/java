@@ -15,6 +15,7 @@ public class ServletConfig {
     SELECTED_CCAA,
     SELECTED_PROVINCE,
     SELECTED_TOWN,
+    BEACHES,
   };
 
   public static enum ReqVars {
