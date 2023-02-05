@@ -27,6 +27,7 @@ public class RootPGR extends HttpServlet {
 
   public static enum Option {
     LOGIN,
+    LOGOUT,
     SET_CURRENT_CCAA,
     SET_CURRENT_PROVINCE,
     SET_CURRENT_TOWN,
@@ -69,6 +70,10 @@ public class RootPGR extends HttpServlet {
               sess.setAttribute(SessVars.LOGIN.name(), user);
             }
           }
+          break;
+
+        case LOGOUT:
+          sess.setAttribute(SessVars.LOGIN.name(), null);
           break;
 
         case SET_CURRENT_CCAA:
