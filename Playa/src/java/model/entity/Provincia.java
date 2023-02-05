@@ -41,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
   @NamedQuery(name = "Provincia.findAll", query = "SELECT p FROM Provincia p")
   , @NamedQuery(name = "Provincia.findById", query = "SELECT p FROM Provincia p WHERE p.id = :id")
-  , @NamedQuery(name = "Provincia.findByNombre", query = "SELECT p FROM Provincia p WHERE p.nombre = :nombre")})
+  , @NamedQuery(name = "Provincia.findByNombre", query = "SELECT p FROM Provincia p WHERE p.nombre = :nombre")
+  , @NamedQuery(name = "Provincia.findByCcaa", query = "SELECT p FROM Provincia p WHERE p.ccaa.id = :ccaaId")})
 public class Provincia implements Serializable {
 
   private static final long serialVersionUID = 1L;

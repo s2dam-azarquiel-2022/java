@@ -10,7 +10,11 @@ public class ServletConfig {
     ENTITY_MANAGER,
     LOGIN,
     CCAA_SELECT_VIEWS,
+    PROVINCE_SELECT_VIEWS,
+    TOWN_SELECT_VIEWS,
     SELECTED_CCAA,
+    SELECTED_PROVINCE,
+    SELECTED_TOWN,
   };
 
   public static enum ReqVars {

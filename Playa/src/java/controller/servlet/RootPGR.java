@@ -6,11 +6,16 @@ import controller.utils.ServletConfig.SessVars;
 import controller.utils.ServletUtils;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.entity.Municipio;
+import model.entity.ProvinceSelectView;
+import model.entity.Provincia;
+import model.entity.TownSelectView;
 import model.entity.Usuario;
 import view.PageUtils;
 
@@ -23,6 +28,8 @@ public class RootPGR extends HttpServlet {
   public static enum Option {
     LOGIN,
     SET_CURRENT_CCAA,
+    SET_CURRENT_PROVINCE,
+    SET_CURRENT_TOWN,
   };
 
   public static String opt(Option option) {
@@ -65,7 +72,36 @@ public class RootPGR extends HttpServlet {
           break;
 
         case SET_CURRENT_CCAA:
-          ServletUtils.updateSessViaReq(sess, req, SessVars.SELECTED_CCAA, Short::valueOf);
+          short selectedCcaa = ServletUtils.getUpdatingSessViaReq(sess, req, SessVars.SELECTED_CCAA, Short::valueOf);
+          sess.setAttribute(
+            SessVars.PROVINCE_SELECT_VIEWS.name(),
+            selectedCcaa == -1 ? null :
+            entityManager.createNamedQuery("Provincia.findByCcaa", Provincia.class)
+              .setParameter("ccaaId", selectedCcaa)
+              .getResultList()
+              .stream()
+              .map(ProvinceSelectView::toSelectView)
+              .collect(Collectors.toList())
+          );
+          sess.setAttribute(SessVars.TOWN_SELECT_VIEWS.name(), null);
+          break;
+
+        case SET_CURRENT_PROVINCE:
+          short selectedProvince = ServletUtils.getUpdatingSessViaReq(sess, req, SessVars.SELECTED_PROVINCE, Short::valueOf);
+          sess.setAttribute(
+            SessVars.TOWN_SELECT_VIEWS.name(),
+            selectedProvince == -1 ? null :
+            entityManager.createNamedQuery("Municipio.findByProvincia", Municipio.class)
+              .setParameter("provinciaId", selectedProvince)
+              .getResultList()
+              .stream()
+              .map(TownSelectView::toSelectView)
+              .collect(Collectors.toList())
+          );
+          break;
+
+        case SET_CURRENT_TOWN:
+          ServletUtils.updateSessViaReq(sess, req, SessVars.SELECTED_TOWN, Integer::valueOf);
           break;
       }
       response.sendRedirect("/" + PageUtils.pageName);
