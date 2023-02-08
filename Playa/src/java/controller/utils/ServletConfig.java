@@ -22,6 +22,9 @@ public class ServletConfig {
     NICK,
     PASSWORD,
 
+    CALIFICATIONS,
+    BEACH_ID,
+
     // Errors
     ERR_TITLE,
     ERR_MESSAGE,

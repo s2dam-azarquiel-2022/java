@@ -43,7 +43,7 @@ public class RootPGR extends HttpServlet {
     HttpServletRequest req,
     HttpServletResponse response
   ) throws ServletException, IOException {
-    ServletUtils.servletTry(req, response, null, (sess, entityManager, dispatcher) -> {
+    ServletUtils.servletTry(req, response, (sess, entityManager) -> {
       switch (Option.valueOf(req.getParameter(ReqVars.OPTION.name()))) {
         case RESET:
           ServletUtils.set(sess, SessVars.SELECTED_CCAA, null);
@@ -135,6 +135,7 @@ public class RootPGR extends HttpServlet {
           break;
       }
       response.sendRedirect("/" + PageUtils.pageName);
+      return null;
     });
   }
 

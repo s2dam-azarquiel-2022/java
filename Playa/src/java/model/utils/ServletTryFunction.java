@@ -1,14 +1,12 @@
 package model.utils;
 
 import javax.persistence.EntityManager;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 @FunctionalInterface
 public interface ServletTryFunction {
-  void run(
+  String run(
     HttpSession sess,
-    EntityManager entityManager,
-    RequestDispatcher dispatcher
+    EntityManager entityManager
   ) throws Exception;
 }

@@ -43,6 +43,12 @@ public class ServletUtils {
     T val
   ) { sess.setAttribute(var.name(), val); }
 
+  public static <T> void set(
+    HttpServletRequest req,
+    ReqVars var,
+    T val
+  ) { req.setAttribute(var.name(), val); }
+
   public static <T> T getUpdatingSessViaReq(
     HttpSession sess,
     HttpServletRequest req,
@@ -97,16 +103,15 @@ public class ServletUtils {
   public static void servletTry(
     HttpServletRequest req,
     HttpServletResponse response,
-    String defaultDispatchedFile,
     ServletTryFunction f
   ) throws ServletException, IOException {
-    RequestDispatcher dispatcher = req.getRequestDispatcher(defaultDispatchedFile);
+    RequestDispatcher dispatcher = null;
     try {
       HttpSession sess = req.getSession();
       EntityManager entityManager = getSettingIfNull(sess, SessVars.ENTITY_MANAGER, () -> {
         return JPAUtils.getEntityManagerFactory().createEntityManager();
       });
-      f.run(sess, entityManager, dispatcher);
+      dispatcher = req.getRequestDispatcher(f.run(sess, entityManager));
     } catch (Exception e) {
       req.setAttribute(ReqVars.ERR_TITLE.name(), e.toString());
       req.setAttribute(ReqVars.ERR_MESSAGE.name(), e.getMessage());

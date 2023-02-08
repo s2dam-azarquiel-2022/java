@@ -1,3 +1,4 @@
+<%@page import="model.entity.Usuario"%>
 <%@page import="model.entity.Images"%>
 <%@page import="java.util.List"%>
 <%@page import="controller.utils.ServletUtils"%>
@@ -13,6 +14,7 @@
 
 <%
   List<Playa> beaches = ServletUtils.getSess(session, SessVars.BEACHES);
+  Usuario login = ServletUtils.getSess(session, SessVars.LOGIN);
 %>
 
 <!DOCTYPE html>
@@ -34,9 +36,19 @@
               <% if (imgs != null && !imgs.isEmpty()) { %>
                 <img src="./img/beach/<%=beach.getId()%>_<%=imgs.get(0).getId()%>.jpg" class="card-img-top" />
               <% } %>
-              <div class="card-body">
+              <div class="card-body d-flex flex-column">
                 <h5 class="card-title"><%=beach.getNombre()%></h5>
                 <p class="card-text"><%=beach.getDescripcion()%></p>
+                <% if (login != null) { %>
+                  <div class="d-flex justify-content-between mt-auto">
+                    <button
+                      <%=PageUtils.mainModalButtonSetup("califications")%>
+                      data-beach-id="<%=beach.getId()%>"
+                      data-beach-name="<%=beach.getNombre()%>"
+                    >CALIFICACIONES</button>
+                    <button role="button" class="btn btn-success">CALIFICAR</button>
+                  </div>
+                <% } %>
               </div>
             </div>
           </div>
@@ -45,5 +57,7 @@
     </div>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
     <jsp:include page="utils/modals/login.jsp"></jsp:include>
+    <jsp:include page="utils/modals/califications.jsp"></jsp:include>
+    <script src="js/califications.js"></script>
   </body>
 </html>
