@@ -7,14 +7,18 @@ import controller.utils.ServletUtils;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.entity.Municipio;
+import model.entity.Playa;
 import model.entity.ProvinceSelectView;
 import model.entity.Provincia;
+import model.entity.Punto;
 import model.entity.TownSelectView;
 import model.entity.Usuario;
 import view.PageUtils;
@@ -32,10 +36,28 @@ public class RootPGR extends HttpServlet {
     SET_CURRENT_CCAA,
     SET_CURRENT_PROVINCE,
     SET_CURRENT_TOWN,
+    SET_CURRENT_BEACH,
+    TO_BEACHES,
+    RATE,
   };
 
   public static String opt(Option option) {
     return String.format("RootPGR?OPTION=%s", option.name());
+  }
+
+  private static void setCalification(
+    HttpSession sess,
+    EntityManager entityManager,
+    Integer id
+  ) {
+    ServletUtils.set(
+      sess,
+      SessVars.CALIFICATION,
+      entityManager.createQuery(
+        "SELECT AVG(p.puntos) FROM Punto p WHERE p.playa.id = :id",
+        Double.class
+      ).setParameter("id", id).getSingleResult()
+    );
   }
 
   @Override
@@ -49,8 +71,10 @@ public class RootPGR extends HttpServlet {
           ServletUtils.set(sess, SessVars.SELECTED_CCAA, null);
           ServletUtils.set(sess, SessVars.SELECTED_PROVINCE, null);
           ServletUtils.set(sess, SessVars.SELECTED_TOWN, null);
+          ServletUtils.set(sess, SessVars.SELECTED_BEACH, null);
           ServletUtils.set(sess, SessVars.PROVINCE_SELECT_VIEWS, null);
           ServletUtils.set(sess, SessVars.TOWN_SELECT_VIEWS, null);
+          ServletUtils.set(sess, SessVars.BEACHES, null);
           break;
 
         case LOGIN:
@@ -132,6 +156,30 @@ public class RootPGR extends HttpServlet {
               .setParameter("municipioId", selectedMunicipio)
               .getResultList()
           );
+          break;
+
+        case SET_CURRENT_BEACH:
+          Integer id = ServletUtils.getReqParam(req, ReqVars.BEACH_ID, Integer::valueOf);
+          ServletUtils.set(
+            sess,
+            SessVars.SELECTED_BEACH,
+            entityManager.find(Playa.class, id)
+          );
+          setCalification(sess, entityManager, id);
+          break;
+
+        case TO_BEACHES:
+          ServletUtils.set(sess, SessVars.SELECTED_BEACH, null);
+          break;
+
+        case RATE:
+          Punto point = new Punto();
+          Playa beach = ServletUtils.getSess(sess, SessVars.SELECTED_BEACH);
+          point.setPlaya(beach);
+          point.setUsuario(ServletUtils.getSess(sess, SessVars.LOGIN));
+          point.setPuntos(ServletUtils.getReqParam(req, ReqVars.CALIFIACTION, Short::valueOf));
+          JPAUtils.add(entityManager, point);
+          setCalification(sess, entityManager, beach.getId());
           break;
       }
       response.sendRedirect("/" + PageUtils.pageName);

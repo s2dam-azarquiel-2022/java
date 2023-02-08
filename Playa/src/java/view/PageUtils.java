@@ -6,13 +6,19 @@ import controller.utils.ServletConfig.SessVars;
 public class PageUtils {
   public static final String pageName = "Playa";
 
-  public static final String mainDivSetup =
-   "class='container-fluid flex-grow-1 bg-dark text-white p-4' " +
-   "style='--bs-bg-opacity: .9'"
-  ;
+  public static final String mainDivSetup = mainDivSetup("container-fluid");
+
+  public static String mainDivSetup(String container) {
+    return String.format(
+      "class='%s flex-grow-1 bg-dark text-white p-4' " +
+      "style='--bs-bg-opacity: 0'",
+      container
+    );
+  };
 
   public static final String mainBodySetup =
-    "class='min-vh-100 d-flex flex-column' "
+    "class='min-vh-100 d-flex flex-column bg-dark' " +
+    "style='--bs-bg-opacity: .90'"
   ;
 
   public static final String mainNavSetup =
@@ -139,6 +145,19 @@ public class PageUtils {
   }
 
   public static String mainCardSetup =
-    "class='card flex-fill text-bg-dark'"
+    "class='card flex-fill text-white bg-dark'"
   ;
+
+  public static String mainLinkButton(String href, String clazz) {
+    return String.format(
+      "href='/%s/%s' role='button' class='btn %s'",
+      PageUtils.pageName,
+      href,
+      clazz
+    );
+  }
+
+  public static String mainLinkButton(String href) {
+    return mainLinkButton(href, "btn-success");
+  }
 }

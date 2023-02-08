@@ -15,6 +15,8 @@ public class ServletConfig {
     SELECTED_CCAA,
     SELECTED_PROVINCE,
     SELECTED_TOWN,
+    SELECTED_BEACH,
+    CALIFICATION,
     BEACHES,
   };
 
@@ -23,6 +25,7 @@ public class ServletConfig {
     PASSWORD,
 
     CALIFICATIONS,
+    CALIFIACTION,
     BEACH_ID,
 
     // Errors
