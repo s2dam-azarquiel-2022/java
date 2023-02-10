@@ -2,16 +2,11 @@ package controller.utils;
 
 import controller.utils.ServletConfig.ReqVars;
 import controller.utils.ServletConfig.SessVars;
-import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 import javax.persistence.EntityManager;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.utils.ServletTryFunction;
 
 public class ServletUtils {
   public static <T> T getSettingIfNull(
@@ -36,6 +31,18 @@ public class ServletUtils {
       sess.setAttribute(var.name(), fDefaultVal.call());
     }
   }
+
+  public static <T> void set(
+    HttpSession sess,
+    SessVars var,
+    T val
+  ) { sess.setAttribute(var.name(), val); }
+
+  public static <T> void set(
+    HttpServletRequest req,
+    ReqVars var,
+    T val
+  ) { req.setAttribute(var.name(), val); }
 
   public static <T> T getUpdatingSessViaReq(
     HttpSession sess,
@@ -66,43 +73,24 @@ public class ServletUtils {
     sess.setAttribute(var.name(), JPAUtils.getSettingIfNull(pk, c, entityManager, fDefaultVal));
   }
 
-  public static <T> T getSess(
+  public static <T> T getAttr(
     HttpSession sess,
     SessVars var
   ) { return (T) sess.getAttribute(var.name()); }
 
-  public static <T> T getReqAttr(
+  public static <T> T getAttr(
     HttpServletRequest req,
     ReqVars var
   ) { return (T) req.getAttribute(var.name()); }
 
-  public static <T> T getReqParam(
+  public static <T> T getParam(
     HttpServletRequest req,
     ReqVars var,
     Function<String, T> f
   ) { return f.apply(req.getParameter(var.name())); }
 
-  @SuppressWarnings("CallToPrintStackTrace")
-  public static void servletTry(
+  public static String getParam(
     HttpServletRequest req,
-    HttpServletResponse response,
-    String defaultDispatchedFile,
-    ServletTryFunction f
-  ) throws ServletException, IOException {
-    RequestDispatcher dispatcher = req.getRequestDispatcher(defaultDispatchedFile);
-    try {
-      HttpSession sess = req.getSession();
-      EntityManager entityManager = getSettingIfNull(sess, SessVars.ENTITY_MANAGER, () -> {
-        return JPAUtils.getEntityManagerFactory().createEntityManager();
-      });
-      f.run(sess, entityManager, dispatcher);
-    } catch (Exception e) {
-      req.setAttribute(ReqVars.ERR_TITLE.name(), e.toString());
-      req.setAttribute(ReqVars.ERR_MESSAGE.name(), e.getMessage());
-      dispatcher = req.getRequestDispatcher("/err/500.jsp");
-      e.printStackTrace();
-    } finally {
-      if (dispatcher != null) dispatcher.forward(req, response);
-    }
-  }
+    ReqVars var
+  ) { return req.getParameter(var.name()); }
 }

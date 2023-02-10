@@ -7,6 +7,7 @@ public class ServletConfig {
   };
 
   public static enum SessVars {
+    // Entity manager
     ENTITY_MANAGER,
   };
 

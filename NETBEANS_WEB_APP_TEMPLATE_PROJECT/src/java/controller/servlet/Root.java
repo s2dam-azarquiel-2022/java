@@ -1,30 +1,12 @@
 package controller.servlet;
 
-import controller.utils.ServletUtils;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import controller.utils.ZServlet;
+import controller.utils.ZServletData;
+import model.utils.ZResponse;
 
-public class Root extends HttpServlet {
-  private static final long serialVersionUID = 1L;
-
-  public Root() { super(); }
-
+public class Root extends ZServlet {
   @Override
-  protected void doGet(
-    HttpServletRequest req,
-    HttpServletResponse response
-  ) throws ServletException, IOException {
-    ServletUtils.servletTry(req, response, "/root.jsp", (sess, entityManager, dispatcher) -> {
-    });
-  }
-
-  @Override
-  protected void doPost(
-    HttpServletRequest request, HttpServletResponse response
-  ) throws ServletException, IOException {
-    doGet(request, response);
+  public ZResponse run(ZServletData data) {
+    return new ZResponse("/root.jsp", ZResponse.Type.FORWARD);
   }
 }
