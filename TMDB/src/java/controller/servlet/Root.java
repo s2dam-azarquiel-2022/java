@@ -1,5 +1,6 @@
 package controller.servlet;
 
+import controller.utils.ServletConfig;
 import controller.utils.ServletConfig.ReqVars;
 import controller.utils.ServletConfig.SessVars;
 import controller.utils.ZServlet;
@@ -12,6 +13,7 @@ public final class Root extends ZServlet {
   public static enum Option {
     LOGIN,
     LOGOUT,
+    CHANGE_PAGE,
   };
 
   public static String opt(Root.Option option) {
@@ -22,7 +24,8 @@ public final class Root extends ZServlet {
   public final ZResponse run(ZServletData data) throws Exception {
     String opt = data.getParam(ReqVars.OPTION);
     if (opt == null) {
-      return new ZResponse("/root.jsp", ZResponse.Type.FORWARD);
+      String page = data.getAttr(SessVars.PAGE);
+      return new ZResponse(page == null ? "/person.jsp" : page, ZResponse.Type.FORWARD);
     }
     switch (Option.valueOf(opt)) {
       case LOGIN:
@@ -36,6 +39,21 @@ public final class Root extends ZServlet {
 
       case LOGOUT:
         data.set(SessVars.LOGIN, null);
+        break;
+
+      case CHANGE_PAGE:
+        data.updateSessViaReq(SessVars.PAGE, s -> {
+          String page = "/err/500.jsp";
+          try {
+            int id = Integer.valueOf(s);
+            if (id < ServletConfig.pages.length) {
+              page = ServletConfig.pages[id].file;
+            }
+          } catch (NumberFormatException e) {
+          } finally {
+            return page;
+          }
+        });
         break;
     }
     return new ZResponse("/" + PageUtils.pageName, ZResponse.Type.REDIRECT);

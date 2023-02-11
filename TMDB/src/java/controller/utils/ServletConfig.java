@@ -2,15 +2,20 @@ package controller.utils;
 
 import model.utils.Page;
 
-public class ServletConfig {
-  public static Page[] pages = {
-    new Page("#", "Person"),
-    new Page("#", "Movie"),
+public final class ServletConfig {
+  public static final Page[] pages = {
+    new Page("/person.jsp", "Person"),
+    new Page("/movie.jsp", "Movie"),
   };
 
   public static enum SessVars {
     // Entity manager
     ENTITY_MANAGER,
+
+    // Current page
+    PAGE,
+
+    // User loged in as
     LOGIN,
   };
 
@@ -18,6 +23,9 @@ public class ServletConfig {
     // Login
     DNI,
     NAME,
+
+    // Page changing
+    PAGE,
 
     // Errors
     ERR_TITLE,

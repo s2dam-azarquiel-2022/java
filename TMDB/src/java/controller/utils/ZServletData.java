@@ -102,10 +102,22 @@ public final class ZServletData {
     return val;
   }
 
+  public String getUpdatingSessViaReq(
+    SessVars var
+  ) {
+    String val = req.getParameter(var.name());
+    sess.setAttribute(var.name(), val);
+    return val;
+  }
+
   public <T> void updateSessViaReq(
     SessVars var,
     Function<String, T> f
   ) { sess.setAttribute(var.name(), f.apply(req.getParameter(var.name()))); }
+
+  public void updateSessViaReq(
+    SessVars var
+  ) { sess.setAttribute(var.name(), req.getParameter(var.name())); }
 
   public <T> T getSettingIfNull(
     Object pk,

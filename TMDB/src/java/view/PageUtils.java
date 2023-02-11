@@ -3,8 +3,9 @@ package view;
 import controller.utils.ServletConfig.ReqVars;
 import controller.utils.ServletConfig.SessVars;
 
-public class PageUtils {
+public final class PageUtils {
   public static final String pageName = "TMDB";
+  public static final String path = String.format("/%s/", pageName);
 
   public static final String mainDivSetup = mainDivSetup("container-fluid");
 
@@ -41,8 +42,8 @@ public class PageUtils {
 
   public static String mainFormSetup(String action, String clazz) {
     return String.format(
-      "action='/%s/%s' method='post' class='%s'",
-      PageUtils.pageName,
+      "action='%s%s' method='post' class='%s'",
+      PageUtils.path,
       action,
       clazz
     );
@@ -167,8 +168,8 @@ public class PageUtils {
 
   public static String mainLinkButton(String href, String clazz) {
     return String.format(
-      "href='/%s/%s' role='button' class='btn %s'",
-      PageUtils.pageName,
+      "href='%s%s' role='button' class='btn %s'",
+      PageUtils.path,
       href,
       clazz
     );

@@ -20,6 +20,7 @@
       <jsp:param name="ADDITIONAL_ITEMS_FILE" value="root.jsp" />
     </jsp:include>
     <div <%=PageUtils.mainDivSetup%>>
+      persons
     </div>
     <jsp:include page="utils/setupBodyEnd.html"></jsp:include>
   </body>
