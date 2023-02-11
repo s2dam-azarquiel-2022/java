@@ -39,20 +39,37 @@ public class PageUtils {
     "aria-label='Toggle navigation'"
   ;
 
-  public static String mainFormSetup(String action) {
+  public static String mainFormSetup(String action, String clazz) {
     return String.format(
-      "action='/%s/%s' method='post' class='d-grid gap-3'",
+      "action='/%s/%s' method='post' class='%s'",
       PageUtils.pageName,
-      action
+      action,
+      clazz
     );
   }
 
-  private static String mainSelectOnlySetup(String s) {
+  public static String mainFormSetup(String action) {
+    return mainFormSetup(action, "d-grid gap-3");
+  }
+
+  private static String mainSelectSetup(String s) {
     return String.format(
-      "name='%s' onchange='this.form.submit()' %s",
+      "name='%s' %s",
       s,
       mainFormControlSetup
     );
+  }
+
+  public static String mainSelecSetup(ReqVars var) {
+    return mainSelectSetup(var.name());
+  }
+
+  public static String mainSelectSetup(SessVars var) {
+    return mainSelectSetup(var.name());
+  }
+
+  private static String mainSelectOnlySetup(String s) {
+    return mainSelectSetup(s) + " onchange='this.form.submit()'";
   }
 
   public static String mainSelectOnlySetup(ReqVars var) {
@@ -159,5 +176,16 @@ public class PageUtils {
 
   public static String mainLinkButton(String href) {
     return mainLinkButton(href, "btn-success");
+  }
+
+  public static String mainSubmitButton =
+    "class='btn btn-success' type='submit'"
+  ;
+
+  public static String mainSubmitButton(String clazz) {
+    return String.format(
+      "class='btn %s' type='submit'",
+      clazz
+    );
   }
 }

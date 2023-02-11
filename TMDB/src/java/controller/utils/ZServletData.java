@@ -16,14 +16,15 @@
  */
 package controller.utils;
 
-import controller.utils.JPAUtils;
-import controller.utils.ServletConfig;
 import controller.utils.ServletConfig.SessVars;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
 /**
  *
@@ -105,4 +106,26 @@ public final class ZServletData {
     SessVars var,
     Function<String, T> f
   ) { sess.setAttribute(var.name(), f.apply(req.getParameter(var.name()))); }
+
+  public <T> T getSettingIfNull(
+    Object pk,
+    Class<T> c,
+    Callable<T> fDefaultVal
+  ) throws Exception {
+    T val = em.find(c, pk);
+    if (val == null) {
+      val = fDefaultVal.call();
+      add(val);
+    }
+    return val;
+  }
+
+  public <T> void add(
+    T val
+  ) throws DatabaseException, RollbackException {
+    EntityTransaction t = em.getTransaction();
+    t.begin();
+    em.persist(val);
+    t.commit();
+  }
 }

@@ -16,13 +16,8 @@
  */
 package controller.utils;
 
-import java.util.concurrent.Callable;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.RollbackException;
-import org.eclipse.persistence.exceptions.DatabaseException;
 import view.PageUtils;
 
 /**
@@ -44,29 +39,5 @@ public class JPAUtils {
 
   public static EntityManagerFactory getEntityManagerFactory() {
     return entityManager;
-  }
-
-  public static <T> T getSettingIfNull(
-    Object pk,
-    Class<T> c,
-    EntityManager entityManager,
-    Callable<T> fDefaultVal
-  ) throws Exception {
-    T val = entityManager.find(c, pk);
-    if (val == null) {
-      val = fDefaultVal.call();
-      add(entityManager, val);
-    }
-    return val;
-  }
-
-  public static <T> void add(
-    EntityManager entityManager,
-    T val
-  ) throws DatabaseException, RollbackException {
-    EntityTransaction t = entityManager.getTransaction();
-    t.begin();
-    entityManager.persist(val);
-    t.commit();
   }
 }
