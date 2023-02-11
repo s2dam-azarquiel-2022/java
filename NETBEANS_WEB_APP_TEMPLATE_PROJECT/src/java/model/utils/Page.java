@@ -1,11 +1,11 @@
 package model.utils;
 
-public class Page {
-  public String name;
-  public String displayName;
+public final class Page {
+  public final String href;
+  public final String displayName;
 
   public Page(String name, String displayName) {
-    this.name = name;
+    this.href = name;
     this.displayName = displayName;
   }
 }
