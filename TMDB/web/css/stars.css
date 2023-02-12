@@ -1,0 +1,20 @@
+.stars {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.stars > a {
+	color: #6c757d !important;
+  text-decoration: none;
+	background: none;
+	border: none;
+}
+
+.stars:hover > a {
+	color: gold !important;
+}
+
+.stars a:hover ~ a {
+	color: #6c757d !important;
+}

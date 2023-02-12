@@ -5,6 +5,10 @@ import controller.utils.ServletConfig.ReqVars;
 import controller.utils.ServletConfig.SessVars;
 import controller.utils.ZServlet;
 import controller.utils.ZServletData;
+import java.util.stream.Collectors;
+import model.entity.Person;
+import model.entity.PersonView;
+import model.entity.Rating;
 import model.entity.Usuario;
 import model.utils.ZResponse;
 import view.PageUtils;
@@ -14,6 +18,9 @@ public final class Root extends ZServlet {
     LOGIN,
     LOGOUT,
     CHANGE_PAGE,
+    RATE,
+
+    FETCH_MOVIES,
 
     RESET,
   };
@@ -33,6 +40,29 @@ public final class Root extends ZServlet {
   @Override
   public final ZResponse run(ZServletData data) throws Exception {
     String opt = data.getParam(ReqVars.OPTION);
+    data.setIfNull(SessVars.PERSONS, () -> {
+      return data.em
+        .createNamedQuery("Person.findAll", Person.class)
+        .getResultList()
+        .stream()
+        .map(person -> {
+          return new PersonView(
+            person.getId(),
+            person.getNombre(),
+            person.getFoto(),
+            (int) Math.round(
+              data.em.createNamedQuery("Person.avgPoints", Number.class)
+                .setParameter("id", person.getId())
+                .getSingleResult()
+                .doubleValue()
+            )
+          );
+        })
+        .collect(Collectors.toList());
+    });
+    data.setIfNull(SessVars.MOVIES, () -> {
+      return data.em.createNamedQuery("Movie.findAll").getResultList();
+    });
     if (opt == null) {
       String page = data.getAttr(SessVars.PAGE);
       return page == null
@@ -64,6 +94,23 @@ public final class Root extends ZServlet {
           return "/err/500.jsp";
         });
         break;
+
+      case RATE:
+        Rating rating = new Rating();
+        rating.setDni(data.getAttr(SessVars.LOGIN));
+        rating.setIdperson(data.getParam(ReqVars.PERSON_ID, id -> new Person(Integer.valueOf(id))));
+        rating.setPuntos(data.getParam(ReqVars.RATE, Short::valueOf));
+        data.add(rating);
+        break;
+
+      case FETCH_MOVIES:
+        data.set(
+          ReqVars.MOVIES,
+          data.em
+            .find(Person.class, data.getParam(ReqVars.PERSON_ID, Integer::valueOf))
+            .getMovieList()
+        );
+        return new ZResponse("/utils/fetch/movies.jsp", ZResponse.Type.FORWARD);
 
       case RESET:
         break;

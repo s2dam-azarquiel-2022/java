@@ -43,7 +43,8 @@ import javax.xml.bind.annotation.XmlTransient;
   , @NamedQuery(name = "Person.findById", query = "SELECT p FROM Person p WHERE p.id = :id")
   , @NamedQuery(name = "Person.findByNombre", query = "SELECT p FROM Person p WHERE p.nombre = :nombre")
   , @NamedQuery(name = "Person.findByFoto", query = "SELECT p FROM Person p WHERE p.foto = :foto")
-  , @NamedQuery(name = "Person.findByPopularidad", query = "SELECT p FROM Person p WHERE p.popularidad = :popularidad")})
+  , @NamedQuery(name = "Person.findByPopularidad", query = "SELECT p FROM Person p WHERE p.popularidad = :popularidad")
+  , @NamedQuery(name = "Person.avgPoints", query = "SELECT COALESCE(AVG(r.puntos), 0.0) FROM Rating r WHERE r.idperson.id = :id")})
 public class Person implements Serializable {
 
   private static final long serialVersionUID = 1L;

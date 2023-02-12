@@ -17,12 +17,25 @@ public final class ServletConfig {
 
     // User loged in as
     LOGIN,
+
+    // Displayed data
+    PERSONS,
+    MOVIES,
   };
 
   public static enum ReqVars {
     // Login
     DNI,
     NAME,
+
+    // Selected person
+    PERSON_ID,
+
+    // Movie list
+    MOVIES,
+
+    // Rating
+    RATE,
 
     // Page changing
     PAGE,
