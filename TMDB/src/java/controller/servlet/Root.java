@@ -20,12 +20,22 @@ public final class Root extends ZServlet {
     return String.format(OPT_STR, option.name());
   }
 
+  private static final String nullRedirect = String.format(
+    "%s%s&%s=%d",
+    PageUtils.path,
+    opt(Option.CHANGE_PAGE),
+    ReqVars.PAGE.name(),
+    0
+  );
+
   @Override
   public final ZResponse run(ZServletData data) throws Exception {
     String opt = data.getParam(ReqVars.OPTION);
     if (opt == null) {
       String page = data.getAttr(SessVars.PAGE);
-      return new ZResponse(page == null ? "/person.jsp" : page, ZResponse.Type.FORWARD);
+      return page == null
+        ? new ZResponse(nullRedirect, ZResponse.Type.REDIRECT)
+        : new ZResponse(page, ZResponse.Type.FORWARD);
     }
     switch (Option.valueOf(opt)) {
       case LOGIN:
@@ -43,16 +53,13 @@ public final class Root extends ZServlet {
 
       case CHANGE_PAGE:
         data.updateSessViaReq(SessVars.PAGE, s -> {
-          String page = "/err/500.jsp";
           try {
             int id = Integer.valueOf(s);
             if (id < ServletConfig.pages.length) {
-              page = ServletConfig.pages[id].file;
+              return ServletConfig.pages[id].file;
             }
-          } catch (NumberFormatException e) {
-          } finally {
-            return page;
-          }
+          } catch (NumberFormatException e) { }
+          return "/err/500.jsp";
         });
         break;
     }
