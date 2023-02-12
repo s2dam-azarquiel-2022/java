@@ -1,3 +1,4 @@
+<%@page import="controller.servlet.Root"%>
 <%@page import="view.PageUtils"%>
 <%@page import="controller.utils.ServletConfig"%>
 <%@page import="controller.utils.ServletConfig.ReqVars"%>
@@ -13,18 +14,13 @@
   <nav <%=PageUtils.mainNavSetup%>>
   <div class="container-fluid">
     <!-- Home link -->
-    <form
-      action="/<%=PageUtils.pageName%>/RootPGR"
-      method="post"
+    <a
+      href="<%=PageUtils.path%><%=Root.opt(Root.Option.RESET)%>"
       class="navbar-brand p-0 m-0"
       aria-current="page"
-      id="logo-form"
     >
-      <!-- Here reset session vars like this: -->
-      <!-- <input < %=PageUtils.hiddenInputSetup(SessVars.VAR_NAME, "-1")%> /> -->
-      <!--         ^ obviously remove this space -->
       <img class="d-block" style="height: 2em;" src="img/logo.png" id="logo" />
-    </form>
+    </a>
 
     <!-- Toggler -->
     <button <%=PageUtils.mainNavbarTogglerButtonSetup%>>

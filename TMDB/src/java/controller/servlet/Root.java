@@ -14,6 +14,8 @@ public final class Root extends ZServlet {
     LOGIN,
     LOGOUT,
     CHANGE_PAGE,
+
+    RESET,
   };
 
   public static String opt(Root.Option option) {
@@ -61,6 +63,9 @@ public final class Root extends ZServlet {
           } catch (NumberFormatException e) { }
           return "/err/500.jsp";
         });
+        break;
+
+      case RESET:
         break;
     }
     return new ZResponse("/" + PageUtils.pageName, ZResponse.Type.REDIRECT);
