@@ -31,9 +31,13 @@ import model.utils.ZResponse;
 public abstract class ZServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  public static final String OPT_STR = String.format(
+  "?%s=%%s", ServletConfig.ReqVars.OPTION.name()
+  );
+
   public abstract ZResponse run(
     ZServletData data
-  );
+  ) throws Exception;
 
   @Override
   protected void doGet(

@@ -29,7 +29,7 @@
 
     <div <%=PageUtils.mainNavbarSetup%>>
       <!-- Other pages links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto ms-2 mb-2 mb-lg-0">
         <% for (Page webPage : ServletConfig.pages) { %>
           <li class="nav-item">
             <a class="nav-link text-capitalize" href="<%=webPage.href%>">

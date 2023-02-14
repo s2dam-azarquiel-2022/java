@@ -16,14 +16,16 @@
  */
 package controller.utils;
 
-import controller.utils.JPAUtils;
-import controller.utils.ServletConfig;
+import controller.utils.ServletConfig.ReqVars;
 import controller.utils.ServletConfig.SessVars;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
 /**
  *
@@ -32,7 +34,7 @@ import javax.servlet.http.HttpSession;
 public final class ZServletData {
   private final HttpServletRequest req;
   private final HttpSession sess;
-  private final EntityManager em;
+  public final EntityManager em;
 
   public ZServletData(
     HttpServletRequest req
@@ -49,16 +51,16 @@ public final class ZServletData {
   ) { return (T) sess.getAttribute(var.name()); }
 
   public <T> T getAttr(
-    ServletConfig.ReqVars var
+    ReqVars var
   ) { return (T) req.getAttribute(var.name()); }
 
   public <T> T getParam(
-    ServletConfig.ReqVars var,
+    ReqVars var,
     Function<String, T> f
   ) { return f.apply(req.getParameter(var.name())); }
 
   public String getParam(
-    ServletConfig.ReqVars var
+    ReqVars var
   ) { return req.getParameter(var.name()); }
 
   public <T> void set(
@@ -67,12 +69,12 @@ public final class ZServletData {
   ) { sess.setAttribute(var.name(), val); }
 
   public <T> void set(
-    ServletConfig.ReqVars var,
+    ReqVars var,
     T val
   ) { req.setAttribute(var.name(), val); }
 
   public <T> T getSettingIfNull(
-    ServletConfig.SessVars var,
+    SessVars var,
     Callable<T> fDefaultVal
   ) throws Exception {
     T val = (T) sess.getAttribute(var.name());
@@ -101,8 +103,42 @@ public final class ZServletData {
     return val;
   }
 
+  public String getUpdatingSessViaReq(
+    SessVars var
+  ) {
+    String val = req.getParameter(var.name());
+    sess.setAttribute(var.name(), val);
+    return val;
+  }
+
   public <T> void updateSessViaReq(
     SessVars var,
     Function<String, T> f
   ) { sess.setAttribute(var.name(), f.apply(req.getParameter(var.name()))); }
+
+  public void updateSessViaReq(
+    SessVars var
+  ) { sess.setAttribute(var.name(), req.getParameter(var.name())); }
+
+  public <T> T getSettingIfNull(
+    Object pk,
+    Class<T> c,
+    Callable<T> fDefaultVal
+  ) throws Exception {
+    T val = em.find(c, pk);
+    if (val == null) {
+      val = fDefaultVal.call();
+      add(val);
+    }
+    return val;
+  }
+
+  public <T> void add(
+    T val
+  ) throws DatabaseException, RollbackException {
+    EntityTransaction t = em.getTransaction();
+    t.begin();
+    em.persist(val);
+    t.commit();
+  }
 }

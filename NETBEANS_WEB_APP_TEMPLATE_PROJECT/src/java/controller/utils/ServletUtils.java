@@ -4,7 +4,6 @@ import controller.utils.ServletConfig.ReqVars;
 import controller.utils.ServletConfig.SessVars;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -61,17 +60,6 @@ public class ServletUtils {
     SessVars var,
     Function<String, T> f
   ) { sess.setAttribute(var.name(), f.apply(req.getParameter(var.name()))); }
-
-  public static <T> void setCheckingNull(
-    HttpSession sess,
-    SessVars var,
-    Object pk,
-    Class<T> c,
-    EntityManager entityManager,
-    Callable<T> fDefaultVal
-  ) throws Exception {
-    sess.setAttribute(var.name(), JPAUtils.getSettingIfNull(pk, c, entityManager, fDefaultVal));
-  }
 
   public static <T> T getAttr(
     HttpSession sess,

@@ -3,8 +3,9 @@ package view;
 import controller.utils.ServletConfig.ReqVars;
 import controller.utils.ServletConfig.SessVars;
 
-public class PageUtils {
+public final class PageUtils {
   public static final String pageName = "PLACEHOLDER_PROJECT_NAME";
+  public static final String path = String.format("/%s/", pageName);
 
   public static final String mainDivSetup = mainDivSetup("container-fluid");
 
@@ -39,20 +40,37 @@ public class PageUtils {
     "aria-label='Toggle navigation'"
   ;
 
-  public static String mainFormSetup(String action) {
+  public static String mainFormSetup(String action, String clazz) {
     return String.format(
-      "action='/%s/%s' method='post' class='d-grid gap-3'",
-      PageUtils.pageName,
-      action
+      "action='%s%s' method='post' class='%s'",
+      PageUtils.path,
+      action,
+      clazz
     );
   }
 
-  private static String mainSelectOnlySetup(String s) {
+  public static String mainFormSetup(String action) {
+    return mainFormSetup(action, "d-grid gap-3");
+  }
+
+  private static String mainSelectSetup(String s) {
     return String.format(
-      "name='%s' onchange='this.form.submit()' %s",
+      "name='%s' %s",
       s,
       mainFormControlSetup
     );
+  }
+
+  public static String mainSelecSetup(ReqVars var) {
+    return mainSelectSetup(var.name());
+  }
+
+  public static String mainSelectSetup(SessVars var) {
+    return mainSelectSetup(var.name());
+  }
+
+  private static String mainSelectOnlySetup(String s) {
+    return mainSelectSetup(s) + " onchange='this.form.submit()'";
   }
 
   public static String mainSelectOnlySetup(ReqVars var) {
@@ -150,8 +168,8 @@ public class PageUtils {
 
   public static String mainLinkButton(String href, String clazz) {
     return String.format(
-      "href='/%s/%s' role='button' class='btn %s'",
-      PageUtils.pageName,
+      "href='%s%s' role='button' class='btn %s'",
+      PageUtils.path,
       href,
       clazz
     );
@@ -159,5 +177,16 @@ public class PageUtils {
 
   public static String mainLinkButton(String href) {
     return mainLinkButton(href, "btn-success");
+  }
+
+  public static String mainSubmitButton =
+    "class='btn btn-success' type='submit'"
+  ;
+
+  public static String mainSubmitButton(String clazz) {
+    return String.format(
+      "class='btn %s' type='submit'",
+      clazz
+    );
   }
 }
