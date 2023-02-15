@@ -9,6 +9,8 @@ public final class ServletConfig {
   };
 
   public static enum SessVars {
+    HABITACIONES,
+
     // Entity manager
     ENTITY_MANAGER,
 
@@ -17,6 +19,15 @@ public final class ServletConfig {
   };
 
   public static enum ReqVars {
+    DNI,
+    HABITACION,
+    FECHA_SALIDA,
+    FECHA_ENTRADA,
+
+    N_HABITACION,
+
+    RESERVAS,
+
     // Page changing
     PAGE,
 
