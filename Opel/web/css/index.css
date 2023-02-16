@@ -1,0 +1,11 @@
+.accordion-button {
+  --bs-bg-opacity: .95;
+}
+
+.accordion-button::after {
+  display: none;
+}
+
+.accordion-collapse {
+  --bs-bg-opacity: .90;
+}
