@@ -143,14 +143,18 @@ public final class PageUtils {
     "data-bs-dismiss='modal'"
   ;
 
-  public static String mainModalSetup(String modalName) {
+  public static String mainModalSetup(String modalName, String clazz) {
     return String.format(
-      "class='modal fade' " +
+      "class='modal fade %s' " +
       "tabindex='-1' " +
       "aria-hidden='true' " +
       "id='%s' " +
       "aria-labelledby='%s'"
-    , modalName, modalName);
+    , clazz, modalName, modalName);
+  }
+
+  public static String mainModalSetup(String modalName) {
+    return mainModalSetup(modalName, "");
   }
 
   public static String mainModalButtonSetup(String modalName) {

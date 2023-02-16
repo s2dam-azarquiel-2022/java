@@ -93,7 +93,7 @@ public final class Root extends ZServlet {
         return new ZResponse("/utils/fetch/acabados.jsp", ZResponse.Type.FORWARD);
 
       case PEDIR_CITA:
-        Cita cita = new Cita();
+        Cita cita = new Cita(Short.valueOf("1"));
         cita.setFecha(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
         cita.setModelo(new Modelo(data.getParam(ReqVars.MODEL_ID, Short::valueOf)));
         cita.setUsuario(data.getAttr(SessVars.LOGIN));
